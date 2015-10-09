@@ -30,6 +30,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		cancelButton.enabled = false
+		actionButton.enabled = false
+
+		cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+		photosButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
+		
 		let memeTextAttributes = [
 			NSStrokeColorAttributeName : UIColor.blackColor(),
 			NSForegroundColorAttributeName : UIColor.whiteColor(),
@@ -39,18 +45,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 		topMemeTextField.defaultTextAttributes = memeTextAttributes
 		topMemeTextField.textAlignment = .Center
+		topMemeTextField.enabled = false
+		
 		bottomMemeTextField.defaultTextAttributes	= memeTextAttributes
 		bottomMemeTextField.textAlignment = .Center
+		bottomMemeTextField.enabled = false
 	}
 
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
-
-		actionButton.enabled = false
-		cancelButton.enabled = false
-
-		cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-		photosButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
 
 		subscribeToKeyboardNotifications()
 	}
@@ -63,7 +66,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 	// MARK: - IB Actions
 
-	@IBAction func actionButtonWasClicked(sender: UIBarButtonItem) {
+	@IBAction func actionButtonWasTapped(sender: UIBarButtonItem) {
 
 		if sender == actionButton {
 			// TODO: implement activity view
@@ -73,7 +76,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		}
 	}
 
-	@IBAction func cameraButtonWasClicked(sender: UIBarButtonItem) {
+	@IBAction func cameraButtonWasTapped(sender: UIBarButtonItem) {
 
 		if sender == cameraButton {
 			pickImageFromSource(UIImagePickerControllerSourceType.Camera)
@@ -84,10 +87,17 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 	}
 
-	@IBAction func cancelButtonWasClicked(sender: UIBarButtonItem) {
+	@IBAction func cancelButtonWasTapped(sender: UIBarButtonItem) {
 
 		if sender == cancelButton {
-			// TODO: how to handle this?
+			topMemeTextField.text = "TOP"
+			topMemeTextField.enabled = false
+
+			bottomMemeTextField.text = "BOTTOM"
+			bottomMemeTextField.enabled = false
+
+			pickedImageView.image = nil
+			cancelButton.enabled = false
 		}
 		else {
 			// TODO: how to handle this?
@@ -95,7 +105,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 	}
 
-	@IBAction func photosButtonWasClicked(sender: UIBarButtonItem) {
+	@IBAction func photosButtonWasTapped(sender: UIBarButtonItem) {
 
 		if sender == photosButton {
 			pickImageFromSource(UIImagePickerControllerSourceType.PhotoLibrary)
@@ -122,6 +132,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 		if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
 			pickedImageView.image = image
+			topMemeTextField.enabled = true
+			bottomMemeTextField.enabled = true
+			cancelButton.enabled = true
 			dismissViewControllerAnimated(true, completion: nil)
 		}
 

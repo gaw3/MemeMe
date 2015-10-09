@@ -49,9 +49,6 @@
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="84" width="360" height="30"/>
-                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="XTR-7X-A70" id="pWv-mM-fPA"/>
                                 </connections>
@@ -61,9 +58,6 @@
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="506" width="360" height="30"/>
-                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="XTR-7X-A70" id="s0z-6W-pwf"/>
                                 </connections>
@@ -90,16 +84,16 @@
                                 <exclude reference="gQj-Rf-Rxm"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="fID-1x-ihh"/>
-                                <exclude reference="w0z-JD-j0G"/>
-                                <exclude reference="xUx-sG-ABD"/>
+                                <exclude reference="QyX-RE-Z6O"/>
+                                <exclude reference="Rzm-pi-EEi"/>
+                                <exclude reference="Fy0-Zm-jA8"/>
+                                <exclude reference="GCD-xP-0Mt"/>
                                 <exclude reference="QnY-Ir-gqS"/>
                                 <exclude reference="W55-gW-Rw6"/>
                                 <exclude reference="agq-xL-0tl"/>
-                                <exclude reference="Fy0-Zm-jA8"/>
-                                <exclude reference="GCD-xP-0Mt"/>
-                                <exclude reference="QyX-RE-Z6O"/>
-                                <exclude reference="Rzm-pi-EEi"/>
+                                <exclude reference="fID-1x-ihh"/>
+                                <exclude reference="w0z-JD-j0G"/>
+                                <exclude reference="xUx-sG-ABD"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -109,16 +103,16 @@
                                 <include reference="gQj-Rf-Rxm"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="fID-1x-ihh"/>
-                                <include reference="w0z-JD-j0G"/>
-                                <include reference="xUx-sG-ABD"/>
+                                <include reference="QyX-RE-Z6O"/>
+                                <include reference="Rzm-pi-EEi"/>
+                                <include reference="Fy0-Zm-jA8"/>
+                                <include reference="GCD-xP-0Mt"/>
                                 <include reference="QnY-Ir-gqS"/>
                                 <include reference="W55-gW-Rw6"/>
                                 <include reference="agq-xL-0tl"/>
-                                <include reference="Fy0-Zm-jA8"/>
-                                <include reference="GCD-xP-0Mt"/>
-                                <include reference="QyX-RE-Z6O"/>
-                                <include reference="Rzm-pi-EEi"/>
+                                <include reference="fID-1x-ihh"/>
+                                <include reference="w0z-JD-j0G"/>
+                                <include reference="xUx-sG-ABD"/>
                             </mask>
                         </variation>
                     </view>
@@ -126,13 +120,13 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="orO-sL-FF9"/>
                         <barButtonItem systemItem="camera" id="97S-Lq-oJN">
                             <connections>
-                                <action selector="cameraButtonWasClicked:" destination="XTR-7X-A70" id="Tsg-Yo-uAW"/>
+                                <action selector="cameraButtonWasTapped:" destination="XTR-7X-A70" id="HVD-d1-ekA"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="byQ-gx-8EK"/>
                         <barButtonItem title="Photos" id="Bz3-GE-5kI">
                             <connections>
-                                <action selector="photosButtonWasClicked:" destination="XTR-7X-A70" id="67R-bA-goi"/>
+                                <action selector="photosButtonWasTapped:" destination="XTR-7X-A70" id="S1g-UF-lJO"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="yZT-DR-qfs"/>
@@ -140,12 +134,12 @@
                     <navigationItem key="navigationItem" title="MemeMe" id="Uea-Yf-IV8">
                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="y0k-MW-fRY">
                             <connections>
-                                <action selector="actionButtonWasClicked:" destination="XTR-7X-A70" id="K5r-Q7-cwP"/>
+                                <action selector="actionButtonWasTapped:" destination="XTR-7X-A70" id="Nps-oD-W9a"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="UPI-SI-WnR">
                             <connections>
-                                <action selector="cancelButtonWasClicked:" destination="XTR-7X-A70" id="n7f-95-GID"/>
+                                <action selector="cancelButtonWasTapped:" destination="XTR-7X-A70" id="LVa-ZO-pYw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
