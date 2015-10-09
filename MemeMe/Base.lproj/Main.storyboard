@@ -2,6 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UbI-rQ-uE5">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--MemeMe Navigation Controller-->
@@ -34,26 +36,89 @@
                         <viewControllerLayoutGuide type="bottom" id="rQT-AV-kOS"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qoT-tO-eD2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNP-Fp-6hb">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PnC-Pq-xYd">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
-                                </variation>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="vPU-jv-tQt">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="84" width="360" height="30"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="XTR-7X-A70" id="pWv-mM-fPA"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="gQj-Rf-Rxm">
+                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="506" width="360" height="30"/>
+                                </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="XTR-7X-A70" id="s0z-6W-pwf"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gQj-Rf-Rxm" firstAttribute="leading" secondItem="qoT-tO-eD2" secondAttribute="leadingMargin" id="Fy0-Zm-jA8"/>
+                            <constraint firstItem="gQj-Rf-Rxm" firstAttribute="trailing" secondItem="qoT-tO-eD2" secondAttribute="trailingMargin" id="GCD-xP-0Mt"/>
+                            <constraint firstItem="vPU-jv-tQt" firstAttribute="trailing" secondItem="qoT-tO-eD2" secondAttribute="trailingMargin" id="QnY-Ir-gqS"/>
+                            <constraint firstItem="rQT-AV-kOS" firstAttribute="top" secondItem="PnC-Pq-xYd" secondAttribute="bottom" id="QyX-RE-Z6O"/>
+                            <constraint firstItem="rQT-AV-kOS" firstAttribute="top" secondItem="gQj-Rf-Rxm" secondAttribute="bottom" constant="20" id="Rzm-pi-EEi"/>
+                            <constraint firstItem="vPU-jv-tQt" firstAttribute="leading" secondItem="qoT-tO-eD2" secondAttribute="leadingMargin" id="W55-gW-Rw6"/>
+                            <constraint firstItem="vPU-jv-tQt" firstAttribute="top" secondItem="rFe-2q-GZa" secondAttribute="bottom" constant="20" id="agq-xL-0tl"/>
+                            <constraint firstItem="PnC-Pq-xYd" firstAttribute="top" secondItem="rFe-2q-GZa" secondAttribute="bottom" id="fID-1x-ihh"/>
+                            <constraint firstItem="PnC-Pq-xYd" firstAttribute="leading" secondItem="qoT-tO-eD2" secondAttribute="leadingMargin" constant="-20" id="w0z-JD-j0G"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PnC-Pq-xYd" secondAttribute="trailing" constant="-20" id="xUx-sG-ABD"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="eNP-Fp-6hb"/>
+                                <exclude reference="PnC-Pq-xYd"/>
+                                <exclude reference="vPU-jv-tQt"/>
+                                <exclude reference="gQj-Rf-Rxm"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="fID-1x-ihh"/>
+                                <exclude reference="w0z-JD-j0G"/>
+                                <exclude reference="xUx-sG-ABD"/>
+                                <exclude reference="QnY-Ir-gqS"/>
+                                <exclude reference="W55-gW-Rw6"/>
+                                <exclude reference="agq-xL-0tl"/>
+                                <exclude reference="Fy0-Zm-jA8"/>
+                                <exclude reference="GCD-xP-0Mt"/>
+                                <exclude reference="QyX-RE-Z6O"/>
+                                <exclude reference="Rzm-pi-EEi"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="eNP-Fp-6hb"/>
+                                <include reference="PnC-Pq-xYd"/>
+                                <include reference="vPU-jv-tQt"/>
+                                <include reference="gQj-Rf-Rxm"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="fID-1x-ihh"/>
+                                <include reference="w0z-JD-j0G"/>
+                                <include reference="xUx-sG-ABD"/>
+                                <include reference="QnY-Ir-gqS"/>
+                                <include reference="W55-gW-Rw6"/>
+                                <include reference="agq-xL-0tl"/>
+                                <include reference="Fy0-Zm-jA8"/>
+                                <include reference="GCD-xP-0Mt"/>
+                                <include reference="QyX-RE-Z6O"/>
+                                <include reference="Rzm-pi-EEi"/>
                             </mask>
                         </variation>
                     </view>
@@ -86,10 +151,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="actionButton" destination="y0k-MW-fRY" id="IQ7-pg-QSH"/>
+                        <outlet property="bottomMemeTextField" destination="gQj-Rf-Rxm" id="Up6-9x-6nC"/>
                         <outlet property="cameraButton" destination="97S-Lq-oJN" id="HDW-bI-vWV"/>
                         <outlet property="cancelButton" destination="UPI-SI-WnR" id="5Uu-mg-xl6"/>
                         <outlet property="photosButton" destination="Bz3-GE-5kI" id="Sq6-TY-yJS"/>
-                        <outlet property="pickedImageView" destination="eNP-Fp-6hb" id="33E-LK-Bhr"/>
+                        <outlet property="pickedImageView" destination="PnC-Pq-xYd" id="kYH-b9-ISX"/>
+                        <outlet property="topMemeTextField" destination="vPU-jv-tQt" id="KZ2-RS-tNr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nRO-Xz-3I9" userLabel="First Responder" sceneMemberID="firstResponder"/>
