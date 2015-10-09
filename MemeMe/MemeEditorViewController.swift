@@ -25,6 +25,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 	// MARK: - Class Variables
 
+	var meme: Meme!
+
 	// MARK: - View Lifecycle
 
 	override func viewDidLoad() {
@@ -46,7 +48,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		topMemeTextField.defaultTextAttributes = memeTextAttributes
 		topMemeTextField.textAlignment = .Center
 		topMemeTextField.enabled = false
-		
+
 		bottomMemeTextField.defaultTextAttributes	= memeTextAttributes
 		bottomMemeTextField.textAlignment = .Center
 		bottomMemeTextField.enabled = false
@@ -67,62 +69,66 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	// MARK: - IB Actions
 
 	@IBAction func actionButtonWasTapped(sender: UIBarButtonItem) {
+		assert(sender == actionButton, "received action from unexpected UIBarButtonItem")
 
-		if sender == actionButton {
-			// TODO: implement activity view
-		}
-		else {
-			// TODO: how to handle this?
-		}
+		let memedImage = generateMemedImage()
+		self.meme = Meme(originalImage: pickedImageView.image!, topPhrase: topMemeTextField.text!,
+							  bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
+		let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+
+		activityVC.excludedActivityTypes = [UIActivityTypePostToFacebook,
+														UIActivityTypePostToTwitter,
+														UIActivityTypePostToWeibo,
+														UIActivityTypePrint,
+														UIActivityTypeCopyToPasteboard,
+														UIActivityTypeAssignToContact,
+														UIActivityTypeSaveToCameraRoll,
+														UIActivityTypeAddToReadingList,
+														UIActivityTypePostToFlickr,
+														UIActivityTypePostToVimeo,
+														UIActivityTypePostToTencentWeibo,
+														UIActivityTypeAirDrop]
+		
+		presentViewController(activityVC, animated: true, completion: nil)
 	}
 
 	@IBAction func cameraButtonWasTapped(sender: UIBarButtonItem) {
+		assert(sender == cameraButton, "received action from unexpected UIBarButtonItem")
 
-		if sender == cameraButton {
-			pickImageFromSource(UIImagePickerControllerSourceType.Camera)
-		}
-		else {
-			// TODO: how to handle this?
-		}
-
+		pickImageFromSource(UIImagePickerControllerSourceType.Camera)
 	}
 
 	@IBAction func cancelButtonWasTapped(sender: UIBarButtonItem) {
+		assert(sender == cancelButton, "received action from unexpected UIBarButtonItem")
 
-		if sender == cancelButton {
-			topMemeTextField.text = "TOP"
-			topMemeTextField.enabled = false
+		topMemeTextField.text = "TOP"
+		topMemeTextField.enabled = false
 
-			bottomMemeTextField.text = "BOTTOM"
-			bottomMemeTextField.enabled = false
+		bottomMemeTextField.text = "BOTTOM"
+		bottomMemeTextField.enabled = false
 
-			pickedImageView.image = nil
-			cancelButton.enabled = false
-		}
-		else {
-			// TODO: how to handle this?
-		}
-
+		pickedImageView.image = nil
+		cancelButton.enabled = false
+		actionButton.enabled = false
 	}
 
 	@IBAction func photosButtonWasTapped(sender: UIBarButtonItem) {
+		assert(sender == photosButton, "received action from unexpected UIBarButtonItem")
 
-		if sender == photosButton {
-			pickImageFromSource(UIImagePickerControllerSourceType.PhotoLibrary)
-		}
-		else {
-			// TODO: how to handle this?
-		}
-
+		pickImageFromSource(UIImagePickerControllerSourceType.PhotoLibrary)
 	}
 
 	// MARK: - NSNotifications
 
 	func keyboardWillHide(notification: NSNotification) {
+		assert(notification.name == UIKeyboardWillHideNotification, "received unexpected NSNotification")
+
 		self.view.frame.origin.y += getKeyboardHeight(notification)
 	}
 
 	func keyboardWillShow(notification: NSNotification) {
+		assert(notification.name == UIKeyboardWillShowNotification, "received unexpected NSNotification")
+
 		self.view.frame.origin.y -= getKeyboardHeight(notification)
 	}
 
@@ -132,9 +138,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 		if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
 			pickedImageView.image = image
+
 			topMemeTextField.enabled = true
 			bottomMemeTextField.enabled = true
+
 			cancelButton.enabled = true
+			actionButton.enabled = true
+
 			dismissViewControllerAnimated(true, completion: nil)
 		}
 
@@ -147,6 +157,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	// MARK: - UITextFieldDelegate
 
 	func textFieldShouldReturn(textField: UITextField) -> Bool {
+		assert(textField == topMemeTextField || textField == bottomMemeTextField,
+				 "received notification from unexpected UITextField")
+
 		var doDefault: Bool = true
 
 		textField.resignFirstResponder()
@@ -157,11 +170,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 			if textField == topMemeTextField {
 				textField.text = "TOP"
 			}
-			else if textField == bottomMemeTextField {
-				textField.text = "BOTTOM"
-			}
 			else {
-				print("unrecognized text field")
+				textField.text = "BOTTOM"
 			}
 
 		}
@@ -194,6 +204,16 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	}
 	
 	// MARK: - Private
+
+	private func generateMemedImage() -> UIImage {
+		UIGraphicsBeginImageContext(self.view.frame.size)
+
+		self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+		let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+
+		UIGraphicsEndImageContext()
+		return memedImage
+	}
 
 	private func pickImageFromSource(sourceType: UIImagePickerControllerSourceType) {
 		let imagePicker = UIImagePickerController()
