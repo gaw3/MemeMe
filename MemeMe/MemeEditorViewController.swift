@@ -160,23 +160,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		assert(textField == topMemeTextField || textField == bottomMemeTextField,
 				 "received notification from unexpected UITextField")
 
-		var doDefault: Bool = true
-
 		textField.resignFirstResponder()
-
-		if textField.text == "" {
-			doDefault = false
-
-			if textField == topMemeTextField {
-				textField.text = "TOP"
-			}
-			else {
-				textField.text = "BOTTOM"
-			}
-
-		}
-
-      return doDefault
+      return true
 	}
 
 	// MARK: - Private:  Keyboards
