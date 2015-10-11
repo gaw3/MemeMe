@@ -31,6 +31,7 @@
 /* Begin PBXFileReference section */
 		7A805C591BCACFC700EA3682 /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		7A805C5B1BCAD1B400EA3682 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
+		7A805C5F1BCAE3F500EA3682 /* Paperwork */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Paperwork; sourceTree = "<group>"; };
 		7AE4F6B61BC462D200ABDA8C /* MemeEditorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeEditorViewController.swift; sourceTree = "<group>"; };
 		7AE683071BC37B97001D7244 /* MemeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AE6830A1BC37B98001D7244 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -91,9 +92,10 @@
 		7AE682FE1BC37B97001D7244 = {
 			isa = PBXGroup;
 			children = (
-				7AE6831C1BC37BE0001D7244 /* README.md */,
 				7AE683091BC37B97001D7244 /* MemeMe */,
 				7AE683081BC37B97001D7244 /* Products */,
+				7AE6831C1BC37BE0001D7244 /* README.md */,
+				7A805C5F1BCAE3F500EA3682 /* Paperwork */,
 			);
 			sourceTree = "<group>";
 		};
