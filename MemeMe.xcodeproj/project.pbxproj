@@ -9,14 +9,24 @@
 /* Begin PBXBuildFile section */
 		7A805C5A1BCACFC700EA3682 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A805C591BCACFC700EA3682 /* Meme.swift */; settings = {ASSET_TAGS = (); }; };
 		7A805C5C1BCAD1B400EA3682 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A805C5B1BCAD1B400EA3682 /* Impact.ttf */; settings = {ASSET_TAGS = (); }; };
-		7A805C5D1BCAD28F00EA3682 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7AE683161BC37B98001D7244 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
 		7AE4F6B71BC462D200ABDA8C /* MemeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE4F6B61BC462D200ABDA8C /* MemeEditorViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7AE6830B1BC37B98001D7244 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6830A1BC37B98001D7244 /* AppDelegate.swift */; };
 		7AE683101BC37B98001D7244 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AE6830E1BC37B98001D7244 /* Main.storyboard */; };
 		7AE683121BC37B98001D7244 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AE683111BC37B98001D7244 /* Assets.xcassets */; };
 		7AE683151BC37B98001D7244 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AE683131BC37B98001D7244 /* LaunchScreen.storyboard */; };
-		7AE6831D1BC37BE0001D7244 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6831C1BC37BE0001D7244 /* README.md */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		7A805C5E1BCAD5A100EA3682 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
 		7A805C591BCACFC700EA3682 /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
@@ -118,6 +128,7 @@
 				7AE683051BC37B97001D7244 /* Resources */,
 			);
 			buildRules = (
+				7A805C5E1BCAD5A100EA3682 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -166,7 +177,6 @@
 				7A805C5C1BCAD1B400EA3682 /* Impact.ttf in Resources */,
 				7AE683151BC37B98001D7244 /* LaunchScreen.storyboard in Resources */,
 				7AE683121BC37B98001D7244 /* Assets.xcassets in Resources */,
-				7A805C5D1BCAD28F00EA3682 /* Info.plist in Resources */,
 				7AE683101BC37B98001D7244 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,7 +188,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AE6831D1BC37BE0001D7244 /* README.md in Sources */,
 				7AE6830B1BC37B98001D7244 /* AppDelegate.swift in Sources */,
 				7AE4F6B71BC462D200ABDA8C /* MemeEditorViewController.swift in Sources */,
 				7A805C5A1BCACFC700EA3682 /* Meme.swift in Sources */,
