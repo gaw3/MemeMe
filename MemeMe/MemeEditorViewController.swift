@@ -72,8 +72,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		assert(sender == actionButton, "received action from unexpected UIBarButtonItem")
 
 		let memedImage = generateMemedImage()
-		self.meme = Meme(originalImage: pickedImageView.image!, topPhrase: topMemeTextField.text!,
-							  bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
+		meme = Meme(originalImage: pickedImageView.image!, topPhrase: topMemeTextField.text!,
+						bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
 		let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
 
 		activityVC.excludedActivityTypes = [UIActivityTypePostToFacebook,
@@ -123,13 +123,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	func keyboardWillHide(notification: NSNotification) {
 		assert(notification.name == UIKeyboardWillHideNotification, "received unexpected NSNotification")
 
-		self.view.frame.origin.y += getKeyboardHeight(notification)
+		view.frame.origin.y += getKeyboardHeight(notification)
 	}
 
 	func keyboardWillShow(notification: NSNotification) {
 		assert(notification.name == UIKeyboardWillShowNotification, "received unexpected NSNotification")
 
-		self.view.frame.origin.y -= getKeyboardHeight(notification)
+		view.frame.origin.y -= getKeyboardHeight(notification)
 	}
 
 	// MARK: - UIImagePickerControllerDelegate
@@ -191,9 +191,9 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	// MARK: - Private
 
 	private func generateMemedImage() -> UIImage {
-		UIGraphicsBeginImageContext(self.view.frame.size)
+		UIGraphicsBeginImageContext(view.frame.size)
 
-		self.view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+		view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
 		let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
 
 		UIGraphicsEndImageContext()
@@ -204,7 +204,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		let imagePicker = UIImagePickerController()
 		imagePicker.delegate = self
 		imagePicker.sourceType = sourceType
-		self.presentViewController(imagePicker, animated: true, completion: nil)
+		presentViewController(imagePicker, animated: true, completion: nil)
 	}
 
 }
