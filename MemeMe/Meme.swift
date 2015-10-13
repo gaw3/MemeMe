@@ -14,12 +14,4 @@ struct Meme {
 	let topPhrase: String!
 	let bottomPhrase: String!
 	let memedImage: UIImage!
-
-	init(originalImage: UIImage, topPhrase: String, bottomPhrase: String, memedImage: UIImage) {
-		self.originalImage = originalImage
-		self.topPhrase = topPhrase
-		self.bottomPhrase = bottomPhrase
-		self.memedImage = memedImage
-	}
-
 }
