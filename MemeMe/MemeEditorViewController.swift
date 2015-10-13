@@ -123,14 +123,20 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	func keyboardWillHide(notification: NSNotification) {
 		assert(notification.name == UIKeyboardWillHideNotification, "received unexpected NSNotification")
 
-		view.frame.origin.y = 0
+		if (bottomMemeTextField.isFirstResponder()) {
+			view.frame.origin.y = 0
+		}
+
 	}
 
 	func keyboardWillShow(notification: NSNotification) {
 		assert(notification.name == UIKeyboardWillShowNotification, "received unexpected NSNotification")
 
-		let keyboardSize = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-		view.frame.origin.y -= keyboardSize.CGRectValue().height
+		if (bottomMemeTextField.isFirstResponder()) {
+			let keyboardSize = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+			view.frame.origin.y -= keyboardSize.CGRectValue().height
+		}
+
 	}
 
 	// MARK: - UIImagePickerControllerDelegate
