@@ -32,6 +32,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		view.backgroundColor = UIColor.blackColor()
+
 		cancelButton.enabled = false
 		actionButton.enabled = false
 
