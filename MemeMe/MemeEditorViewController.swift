@@ -32,14 +32,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		view.backgroundColor = UIColor.blackColor()
+		view.backgroundColor = UIColor.redColor()
 
-		cancelButton.enabled = false
+		cancelButton.enabled = true
 		actionButton.enabled = false
 
 		cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
 		photosButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
-		
+
 		let memeTextAttributes = [
 			NSStrokeColorAttributeName : UIColor.blackColor(),
 			NSForegroundColorAttributeName : UIColor.whiteColor(),
@@ -102,16 +102,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 	@IBAction func cancelButtonWasTapped(sender: UIBarButtonItem) {
 		assert(sender == cancelButton, "received action from unexpected UIBarButtonItem")
-
-		topMemeTextField.text = "TOP"
-		topMemeTextField.enabled = false
-
-		bottomMemeTextField.text = "BOTTOM"
-		bottomMemeTextField.enabled = false
-
-		pickedImageView.image = nil
-		cancelButton.enabled = false
-		actionButton.enabled = false
+		dismissViewControllerAnimated(true, completion: nil)
 	}
 
 	@IBAction func photosButtonWasTapped(sender: UIBarButtonItem) {
@@ -151,7 +142,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 			topMemeTextField.enabled = true
 			bottomMemeTextField.enabled = true
 
-			cancelButton.enabled = true
 			actionButton.enabled = true
 
 			dismissViewControllerAnimated(true, completion: nil)
