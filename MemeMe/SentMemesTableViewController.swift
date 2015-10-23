@@ -15,6 +15,8 @@ class SentMemesTableViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		subscribeToDataStoreNotifications()
+
 		// Uncomment the following line to preserve selection between presentations
 		// self.clearsSelectionOnViewWillAppear = false
 
@@ -29,27 +31,34 @@ class SentMemesTableViewController: UITableViewController {
 		presentViewController(memeEditor, animated: true, completion: nil)
 	}
 
-	// MARK: - Table view data sources
+	// MARK: - NSNotifications
+
+	func dataStoreWasModified(notification: NSNotification) {
+		tableView.reloadData()
+	}
+
+	// MARK: - UITableViewDataSource
 
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		// #warning Incomplete implementation, return the number of sections
-		return 0
+		return 1
 	}
 
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		// #warning Incomplete implementation, return the number of rows
-		return 0
+		return MemesManager.sharedInstance.count()
 	}
 
-	/*
+	// MARK: - UITableViewDelegate
+
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-	let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
+		let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell", forIndexPath: indexPath)
 
-	// Configure the cell...
+      cell.textLabel!.text = meme.topPhrase
+      cell.detailTextLabel!.text = meme.bottomPhrase
+		cell.imageView!.image = meme.memedImage
 
-	return cell
+		return cell
 	}
-	*/
 
 	/*
 	// Override to support conditional editing of the table view.
@@ -85,5 +94,12 @@ class SentMemesTableViewController: UITableViewController {
 	return true
 	}
 	*/
+
+	// MARK: - Private
+
+	private func subscribeToDataStoreNotifications() {
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:", name: MemeAdded, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:", name: MemeDeleted, object: nil)
+	}
 
 }

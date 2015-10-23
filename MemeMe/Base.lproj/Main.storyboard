@@ -9,33 +9,34 @@
             <objects>
                 <tableViewController title="Sent Memes Table View Controller" id="7m3-Bp-nWC" customClass="SentMemesTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fg5-7Z-tua">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="eb3-Kc-x69" detailTextLabel="fBe-FN-VH4" style="IBUITableViewCellStyleSubtitle" id="ge3-s3-T8q">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MemeTableCell" textLabel="eb3-Kc-x69" detailTextLabel="EhH-XO-FKd" style="IBUITableViewCellStyleSubtitle" id="ge3-s3-T8q">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ge3-s3-T8q" id="FGc-4O-abF">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eb3-Kc-x69">
+                                            <rect key="frame" x="15" y="1" width="34" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="widthClass=compact">
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             </variation>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fBe-FN-VH4">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EhH-XO-FKd">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="widthClass=compact">
                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -79,6 +80,7 @@
                         <viewControllerLayoutGuide type="bottom" id="60f-iS-Zpu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="moT-m4-a8h">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" borderStyle="line" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="1oP-1e-MN1">
@@ -127,18 +129,18 @@
                                 <exclude reference="SAY-jp-hri"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="2d2-nS-pZN"/>
-                                <exclude reference="P05-e0-czi"/>
-                                <exclude reference="f1o-kW-tMg"/>
-                                <exclude reference="kvF-B8-NFQ"/>
-                                <exclude reference="qCQ-BV-baF"/>
+                                <exclude reference="YKf-Pj-IrK"/>
+                                <exclude reference="sDJ-pX-40S"/>
                                 <exclude reference="D5q-nT-IDj"/>
                                 <exclude reference="gEV-If-Xrb"/>
                                 <exclude reference="nta-Ku-Koj"/>
                                 <exclude reference="2jg-bb-9dx"/>
                                 <exclude reference="koJ-dl-5GN"/>
-                                <exclude reference="YKf-Pj-IrK"/>
-                                <exclude reference="sDJ-pX-40S"/>
+                                <exclude reference="2d2-nS-pZN"/>
+                                <exclude reference="P05-e0-czi"/>
+                                <exclude reference="f1o-kW-tMg"/>
+                                <exclude reference="kvF-B8-NFQ"/>
+                                <exclude reference="qCQ-BV-baF"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -148,18 +150,18 @@
                                 <include reference="SAY-jp-hri"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="2d2-nS-pZN"/>
-                                <include reference="P05-e0-czi"/>
-                                <include reference="f1o-kW-tMg"/>
-                                <include reference="kvF-B8-NFQ"/>
-                                <include reference="qCQ-BV-baF"/>
+                                <include reference="YKf-Pj-IrK"/>
+                                <include reference="sDJ-pX-40S"/>
                                 <include reference="D5q-nT-IDj"/>
                                 <include reference="gEV-If-Xrb"/>
                                 <include reference="nta-Ku-Koj"/>
                                 <include reference="2jg-bb-9dx"/>
                                 <include reference="koJ-dl-5GN"/>
-                                <include reference="YKf-Pj-IrK"/>
-                                <include reference="sDJ-pX-40S"/>
+                                <include reference="2d2-nS-pZN"/>
+                                <include reference="P05-e0-czi"/>
+                                <include reference="f1o-kW-tMg"/>
+                                <include reference="kvF-B8-NFQ"/>
+                                <include reference="qCQ-BV-baF"/>
                             </mask>
                         </variation>
                     </view>
@@ -236,7 +238,7 @@
             <objects>
                 <collectionViewController title="Sent Memes Collection View Controller" id="GoO-jN-1yU" customClass="SentMemesCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="POn-ip-Mi1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="j5Y-j4-Pk9">
@@ -247,7 +249,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="xjI-19-vLx">
-                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -349,6 +351,6 @@
         <image name="Table Button" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pQb-qI-uQk"/>
+        <segue reference="6bz-dO-xJf"/>
     </inferredMetricsTieBreakers>
 </document>

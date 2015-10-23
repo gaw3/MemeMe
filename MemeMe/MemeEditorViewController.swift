@@ -23,10 +23,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	@IBOutlet weak var topMemeTextField: UITextField!
 	@IBOutlet weak var bottomMemeTextField: UITextField!
 
-	// MARK: - Class Variables
-
-	var meme: Meme!
-
 	// MARK: - View Lifecycle
 
 	override func viewDidLoad() {
@@ -74,8 +70,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		assert(sender == actionButton, "received action from unexpected UIBarButtonItem")
 
 		let memedImage = generateMemedImage()
-		meme = Meme(originalImage: pickedImageView.image!, topPhrase: topMemeTextField.text!,
-						bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
+
 		let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
 
 		activityVC.excludedActivityTypes = [UIActivityTypePostToFacebook,
@@ -91,7 +86,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 														UIActivityTypePostToTencentWeibo,
 														UIActivityTypeAirDrop]
 		
-		presentViewController(activityVC, animated: true, completion: nil)
+		let meme = Meme(originalImage: pickedImageView.image!, topPhrase: topMemeTextField.text!,
+			             bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
+
+		presentViewController(activityVC, animated: true, completion: {() -> Void in
+			MemesManager.sharedInstance.add(meme)})
 	}
 
 	@IBAction func cameraButtonWasTapped(sender: UIBarButtonItem) {
