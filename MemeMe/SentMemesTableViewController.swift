@@ -15,7 +15,7 @@ class SentMemesTableViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		subscribeToDataStoreNotifications()
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:", name: MemeAdded, object: nil)
 
 		// Uncomment the following line to preserve selection between presentations
 		// self.clearsSelectionOnViewWillAppear = false
@@ -49,6 +49,10 @@ class SentMemesTableViewController: UITableViewController {
 
 	// MARK: - UITableViewDelegate
 
+	override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+		return true
+	}
+
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
 		let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell", forIndexPath: indexPath)
@@ -60,46 +64,12 @@ class SentMemesTableViewController: UITableViewController {
 		return cell
 	}
 
-	/*
-	// Override to support conditional editing of the table view.
-	override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-	// Return false if you do not want the specified item to be editable.
-	return true
-	}
-	*/
-
-	/*
-	// Override to support editing the table view.
 	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-	if editingStyle == .Delete {
-	// Delete the row from the data source
-	tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-	} else if editingStyle == .Insert {
-	// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-	}
-	}
-	*/
+		if editingStyle == .Delete {
+			MemesManager.sharedInstance.removeAtIndexPath(indexPath)
+			tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+		}
 
-	/*
-	// Override to support rearranging the table view.
-	override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-	}
-	*/
-
-	/*
-	// Override to support conditional rearranging of the table view.
-	override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-	// Return false if you do not want the item to be re-orderable.
-	return true
-	}
-	*/
-
-	// MARK: - Private
-
-	private func subscribeToDataStoreNotifications() {
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:", name: MemeAdded, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:", name: MemeDeleted, object: nil)
 	}
 
 }
