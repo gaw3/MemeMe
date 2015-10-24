@@ -65,11 +65,62 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
                         <segue destination="mcC-TW-9BR" kind="show" identifier="addMemeSegue" id="6bz-dO-xJf"/>
+                        <segue destination="QHB-iN-37c" kind="show" identifier="MemeDetailSeque" id="vWA-u7-LTD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sAF-Ac-jRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="243" y="127"/>
+        </scene>
+        <!--Meme Detail View Controller-->
+        <scene sceneID="tFH-EJ-gxe">
+            <objects>
+                <viewController storyboardIdentifier="MemeDetailViewController" title="Meme Detail View Controller" id="QHB-iN-37c" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bAE-vw-7MR"/>
+                        <viewControllerLayoutGuide type="bottom" id="84Y-Gm-DnR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SEV-cs-1Im">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meme Detail View Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n13-ze-G04">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="n13-ze-G04" firstAttribute="centerX" secondItem="SEV-cs-1Im" secondAttribute="centerX" id="8LE-jx-G94"/>
+                            <constraint firstItem="n13-ze-G04" firstAttribute="centerY" secondItem="SEV-cs-1Im" secondAttribute="centerY" id="i8O-vF-XyA"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="n13-ze-G04"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="8LE-jx-G94"/>
+                                <exclude reference="i8O-vF-XyA"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="n13-ze-G04"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="8LE-jx-G94"/>
+                                <include reference="i8O-vF-XyA"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Meme" id="CWJ-Rg-qRY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="or2-1f-cPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1071" y="-213"/>
         </scene>
         <!--Meme Editor View Controller-->
         <scene sceneID="mA7-dU-d9d">

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A02314F1BDB00D900544403 /* MemeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02314E1BDB00D900544403 /* MemeDetailViewController.swift */; };
 		7A56DFCF1BDAB36800C787E6 /* MemesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A56DFCE1BDAB36800C787E6 /* MemesManager.swift */; };
 		7A805C5A1BCACFC700EA3682 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A805C591BCACFC700EA3682 /* Meme.swift */; };
 		7A805C5C1BCAD1B400EA3682 /* Impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A805C5B1BCAD1B400EA3682 /* Impact.ttf */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildRule section */
 
 /* Begin PBXFileReference section */
+		7A02314E1BDB00D900544403 /* MemeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeDetailViewController.swift; sourceTree = "<group>"; };
 		7A56DFCE1BDAB36800C787E6 /* MemesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemesManager.swift; sourceTree = "<group>"; };
 		7A805C591BCACFC700EA3682 /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		7A805C5B1BCAD1B400EA3682 /* Impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact.ttf; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				7AE4F6B61BC462D200ABDA8C /* MemeEditorViewController.swift */,
 				7AF2ECEC1BD5C95700CDE5F8 /* SentMemesTableViewController.swift */,
 				7AF2ECEE1BD5C9AD00CDE5F8 /* SentMemesCollectionViewController.swift */,
+				7A02314E1BDB00D900544403 /* MemeDetailViewController.swift */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				7A56DFCF1BDAB36800C787E6 /* MemesManager.swift in Sources */,
 				7AF2ECED1BD5C95700CDE5F8 /* SentMemesTableViewController.swift in Sources */,
 				7AF2ECEF1BD5C9AD00CDE5F8 /* SentMemesCollectionViewController.swift in Sources */,
+				7A02314F1BDB00D900544403 /* MemeDetailViewController.swift in Sources */,
 				7AE4F6B71BC462D200ABDA8C /* MemeEditorViewController.swift in Sources */,
 				7A805C5A1BCACFC700EA3682 /* Meme.swift in Sources */,
 			);
