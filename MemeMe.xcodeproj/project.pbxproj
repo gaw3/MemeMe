@@ -93,10 +93,10 @@
 			isa = PBXGroup;
 			children = (
 				7AE6830A1BC37B98001D7244 /* AppDelegate.swift */,
-				7AE4F6B61BC462D200ABDA8C /* MemeEditorViewController.swift */,
-				7AF2ECEC1BD5C95700CDE5F8 /* SentMemesTableViewController.swift */,
-				7AF2ECEE1BD5C9AD00CDE5F8 /* SentMemesCollectionViewController.swift */,
 				7A02314E1BDB00D900544403 /* MemeDetailViewController.swift */,
+				7AE4F6B61BC462D200ABDA8C /* MemeEditorViewController.swift */,
+				7AF2ECEE1BD5C9AD00CDE5F8 /* SentMemesCollectionViewController.swift */,
+				7AF2ECEC1BD5C95700CDE5F8 /* SentMemesTableViewController.swift */,
 			);
 			name = App;
 			sourceTree = "<group>";

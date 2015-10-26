@@ -73,9 +73,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 		let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
 
-		activityVC.excludedActivityTypes = [UIActivityTypePostToFacebook,
-														UIActivityTypePostToTwitter,
-														UIActivityTypePostToWeibo,
+		activityVC.excludedActivityTypes = [UIActivityTypePostToWeibo,
 														UIActivityTypePrint,
 														UIActivityTypeCopyToPasteboard,
 														UIActivityTypeAssignToContact,

@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let TableCellReuseID = "SentMemeTableViewCell"
+
 class SentMemesTableViewController: UITableViewController {
 
 	// MARK: - View Lifecycle
@@ -16,6 +18,7 @@ class SentMemesTableViewController: UITableViewController {
 		super.viewDidLoad()
 
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:", name: MemeAdded, object: nil)
+		tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: TableCellReuseID)
 
 		// Uncomment the following line to preserve selection between presentations
 		// self.clearsSelectionOnViewWillAppear = false
@@ -43,22 +46,16 @@ class SentMemesTableViewController: UITableViewController {
 		return 1
 	}
 
-	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return MemesManager.sharedInstance.count()
-	}
-
-	// MARK: - UITableViewDelegate
-
 	override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
 		return true
 	}
 
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
-		let cell = tableView.dequeueReusableCellWithIdentifier("MemeTableCell", forIndexPath: indexPath)
+		let cell = tableView.dequeueReusableCellWithIdentifier(TableCellReuseID, forIndexPath: indexPath)
 
-      cell.textLabel!.text = meme.topPhrase
-      cell.detailTextLabel!.text = meme.bottomPhrase
+		cell.textLabel!.text = meme.topPhrase
+//		cell.detailTextLabel!.text = meme.bottomPhrase
 		cell.imageView!.image = meme.memedImage
 
 		return cell
@@ -71,9 +68,15 @@ class SentMemesTableViewController: UITableViewController {
 		}
 
 	}
+	
+	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return MemesManager.sharedInstance.count()
+	}
+
+	// MARK: - UITableViewDelegate
 
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		let memeDetailVC = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
+		let memeDetailVC = storyboard!.instantiateViewControllerWithIdentifier(NSStringFromClass(MemeDetailViewController)) as! MemeDetailViewController
 		navigationController!.pushViewController(memeDetailVC, animated: true)
 	}
 

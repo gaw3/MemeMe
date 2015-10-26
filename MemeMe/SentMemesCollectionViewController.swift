@@ -8,22 +8,32 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let CollectionCellReuseID = "SentMemeCollectionViewCell"
 
 class SentMemesCollectionViewController: UICollectionViewController {
+
+	// MARK: - IB Outlets
+
+	@IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
 
 	// MARK: - View Lifecycle
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:", name: MemeAdded, object: nil)
+		collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: CollectionCellReuseID)
+
+		let minimumSpacing: CGFloat = 3.0
+		flowLayout.minimumInteritemSpacing = minimumSpacing
+		flowLayout.minimumLineSpacing = minimumSpacing
+
+		let itemWidth = (view.frame.size.width - (minimumSpacing * 2.0)) / 3.0
+		flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth) // yes, a square on purpose
+
 		// Uncomment the following line to preserve selection between presentations
 		// self.clearsSelectionOnViewWillAppear = false
 
-		// Register cell classes
-		self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-		// Do any additional setup after loading the view.
 	}
 
 	// MARK: - IB Actions
@@ -33,66 +43,38 @@ class SentMemesCollectionViewController: UICollectionViewController {
 		presentViewController(memeEditor, animated: true, completion: nil)
 	}
 
-	/*
-	// MARK: - Navigation
+	// MARK: - NSNotifications
 
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-	// Get the new view controller using [segue destinationViewController].
-	// Pass the selected object to the new view controller.
+	func dataStoreWasModified(notification: NSNotification) {
+		collectionView!.reloadData()
 	}
-	*/
-
-	// MARK: UICollectionViewDataSource
-
-	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-		// #warning Incomplete implementation, return the number of sections
-		return 0
-	}
-
-
-	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		// #warning Incomplete implementation, return the number of items
-		return 0
-	}
+	
+	// MARK: - UICollectionViewDataSource
 
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
+		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CollectionCellReuseID, forIndexPath: indexPath)
+      let imageView = UIImageView(image: meme.memedImage)
 
-		// Configure the cell
+      cell.backgroundView = imageView
 
 		return cell
 	}
-
-	// MARK: UICollectionViewDelegate
-
-	/*
-	// Uncomment this method to specify if the specified item should be highlighted during tracking
-	override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-	return true
-	}
-	*/
-
-	/*
-	// Uncomment this method to specify if the specified item should be selected
-	override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-	return true
-	}
-	*/
-
-	/*
-	// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-	override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-	return false
+	
+	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		return MemesManager.sharedInstance.count()
 	}
 
-	override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-	return false
+	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+		return 1
 	}
 
-	override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+	// MARK: - UICollectionViewDelegate
+
+	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		let memeDetailVC = storyboard!.instantiateViewControllerWithIdentifier(NSStringFromClass(MemeDetailViewController)) as! MemeDetailViewController
+		navigationController!.pushViewController(memeDetailVC, animated: true)
 
 	}
-	*/
 
 }
