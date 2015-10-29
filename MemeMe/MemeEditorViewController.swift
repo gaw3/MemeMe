@@ -21,9 +21,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	// MARK: - Class Variables
 
 	var bottomMemeTextField: UITextField!
-	var topMemeTextField:    UITextField!
 	var memeImageView:       UIImageView!
 	var originalImage:       UIImage!
+	var topMemeTextField:    UITextField!
+	var amountToShiftMainViewOnYAxis: CGFloat = 0.0
 
 	// MARK: - View Lifecycle
 
@@ -38,6 +39,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 		memeImageView = initMemeImageView()
 		view.addSubview(memeImageView)
+
 
 		topMemeTextField = initMemeTextField("TOP")
 		view.addSubview(topMemeTextField)
@@ -110,20 +112,27 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	func keyboardWillHide(notification: NSNotification) {
 		assert(notification.name == UIKeyboardWillHideNotification, "received unexpected NSNotification")
 
-//		if (bottomMemeTextField.isFirstResponder()) {
-//			view.frame.origin.y = 0
-//		}
-
+		view.frame.origin.y += amountToShiftMainViewOnYAxis
 	}
 
 	func keyboardWillShow(notification: NSNotification) {
 		assert(notification.name == UIKeyboardWillShowNotification, "received unexpected NSNotification")
 
-//		if (bottomMemeTextField.isFirstResponder()) {
-//			let keyboardSize = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-//			view.frame.origin.y -= keyboardSize.CGRectValue().height
-//		}
+		amountToShiftMainViewOnYAxis = 0.0
 
+		if (bottomMemeTextField.isFirstResponder()) {
+			let keyboardSize                           = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+			let topLeftCornerOfKeyboardInWindow        = CGPointMake(0, view.window!.frame.size.height - keyboardSize.CGRectValue().height)
+			let topLeftCornerOfKeyboardInMemeImageView = memeImageView.convertPoint(topLeftCornerOfKeyboardInWindow, fromView: view.window!)
+			let amountOfKeyboardOverlap                = memeImageView.bounds.size.height - topLeftCornerOfKeyboardInMemeImageView.y
+
+			if amountOfKeyboardOverlap > 0 {
+				amountToShiftMainViewOnYAxis = amountOfKeyboardOverlap
+			}
+
+		}
+
+		view.frame.origin.y -= amountToShiftMainViewOnYAxis
 	}
 
 	// MARK: - UIImagePickerControllerDelegate
@@ -133,8 +142,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
 			originalImage = image
 			dismissViewControllerAnimated(true, completion: nil)
-		} else {
-			// TODO: error condition ?
 		}
 
 	}
@@ -259,6 +266,19 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		bottomMemeTextField.frame.origin     = CGPointMake(memeImageView.frame.origin.x + xInset,
 																			memeImageView.frame.origin.y + memeImageView.frame.size.height -
 																			yInset - bottomMemeTextField.frame.height)
+	}
+
+	private func logBoxExtents() {
+		print("\nview.window.bounds = \(view.window!.bounds)")
+		print("view.window.frame  = \(view.window!.frame)")
+		print("\nview.bounds = \(view.bounds)")
+		print("view.frame  = \(view.frame)")
+		print("\nmemeImageView.bounds = \(memeImageView.bounds)")
+		print("memeImageView.frame  = \(memeImageView.frame)")
+		print("\ntopMemeTextField.bounds = \(topMemeTextField.bounds)")
+		print("topMemeTextField.frame  = \(topMemeTextField.frame)")
+		print("\nbottomMemeTextField.bounds = \(bottomMemeTextField.bounds)")
+		print("bottomMemeTextField.frame  = \(bottomMemeTextField.frame)")
 	}
 
 }
