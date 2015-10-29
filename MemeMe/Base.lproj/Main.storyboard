@@ -22,7 +22,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eb3-Kc-x69">
-                                            <rect key="frame" x="15" y="1" width="34" height="21"/>
+                                            <rect key="frame" x="15" y="0.0" width="550" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -128,85 +128,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="TOP" borderStyle="line" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="1oP-1e-MN1">
-                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Uf5-U3-BQc" id="aIe-3k-73r"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" borderStyle="line" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fk6-cb-rn5">
-                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Uf5-U3-BQc" id="bKB-lQ-GS1"/>
-                                </connections>
-                            </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SAY-jp-hri">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gah-wQ-ejN">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="-21" y="-71" width="38" height="43"/>
+                                </variation>
                             </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="SAY-jp-hri" firstAttribute="top" secondItem="ytV-Pd-8OJ" secondAttribute="bottom" id="2d2-nS-pZN"/>
-                            <constraint firstAttribute="trailing" secondItem="fk6-cb-rn5" secondAttribute="trailing" constant="10" id="2jg-bb-9dx"/>
-                            <constraint firstItem="1oP-1e-MN1" firstAttribute="top" secondItem="ytV-Pd-8OJ" secondAttribute="bottom" constant="20" id="D5q-nT-IDj"/>
-                            <constraint firstAttribute="trailing" secondItem="SAY-jp-hri" secondAttribute="trailing" id="P05-e0-czi"/>
-                            <constraint firstItem="60f-iS-Zpu" firstAttribute="top" secondItem="fk6-cb-rn5" secondAttribute="bottom" constant="20" id="YKf-Pj-IrK"/>
-                            <constraint firstItem="SAY-jp-hri" firstAttribute="top" secondItem="ytV-Pd-8OJ" secondAttribute="bottom" id="f1o-kW-tMg"/>
-                            <constraint firstItem="1oP-1e-MN1" firstAttribute="leading" secondItem="moT-m4-a8h" secondAttribute="leading" constant="10" id="gEV-If-Xrb"/>
-                            <constraint firstItem="fk6-cb-rn5" firstAttribute="leading" secondItem="moT-m4-a8h" secondAttribute="leading" constant="10" id="koJ-dl-5GN"/>
-                            <constraint firstItem="SAY-jp-hri" firstAttribute="leading" secondItem="moT-m4-a8h" secondAttribute="leading" id="kvF-B8-NFQ"/>
-                            <constraint firstAttribute="trailing" secondItem="1oP-1e-MN1" secondAttribute="trailing" constant="10" id="nta-Ku-Koj"/>
-                            <constraint firstItem="SAY-jp-hri" firstAttribute="leading" secondItem="moT-m4-a8h" secondAttribute="leading" id="qCQ-BV-baF"/>
-                            <constraint firstItem="60f-iS-Zpu" firstAttribute="top" secondItem="SAY-jp-hri" secondAttribute="bottom" id="sDJ-pX-40S"/>
-                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="1oP-1e-MN1"/>
-                                <exclude reference="fk6-cb-rn5"/>
-                                <exclude reference="SAY-jp-hri"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="YKf-Pj-IrK"/>
-                                <exclude reference="sDJ-pX-40S"/>
-                                <exclude reference="D5q-nT-IDj"/>
-                                <exclude reference="gEV-If-Xrb"/>
-                                <exclude reference="nta-Ku-Koj"/>
-                                <exclude reference="2jg-bb-9dx"/>
-                                <exclude reference="koJ-dl-5GN"/>
-                                <exclude reference="2d2-nS-pZN"/>
-                                <exclude reference="P05-e0-czi"/>
-                                <exclude reference="f1o-kW-tMg"/>
-                                <exclude reference="kvF-B8-NFQ"/>
-                                <exclude reference="qCQ-BV-baF"/>
+                                <exclude reference="Gah-wQ-ejN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="1oP-1e-MN1"/>
-                                <include reference="fk6-cb-rn5"/>
-                                <include reference="SAY-jp-hri"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="YKf-Pj-IrK"/>
-                                <include reference="sDJ-pX-40S"/>
-                                <include reference="D5q-nT-IDj"/>
-                                <include reference="gEV-If-Xrb"/>
-                                <include reference="nta-Ku-Koj"/>
-                                <include reference="2jg-bb-9dx"/>
-                                <include reference="koJ-dl-5GN"/>
-                                <include reference="2d2-nS-pZN"/>
-                                <include reference="P05-e0-czi"/>
-                                <include reference="f1o-kW-tMg"/>
-                                <include reference="kvF-B8-NFQ"/>
-                                <include reference="qCQ-BV-baF"/>
+                                <include reference="Gah-wQ-ejN"/>
                             </mask>
                         </variation>
                     </view>
@@ -242,12 +181,9 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
                         <outlet property="actionButton" destination="S4c-k4-xZy" id="TpM-sO-Mr7"/>
-                        <outlet property="bottomMemeTextField" destination="fk6-cb-rn5" id="IBU-Ca-hl8"/>
                         <outlet property="cameraButton" destination="anR-4T-Ko2" id="ckF-Aj-xew"/>
                         <outlet property="cancelButton" destination="i6M-cl-U5V" id="jRn-bl-bwx"/>
                         <outlet property="photosButton" destination="tv2-ZJ-MAO" id="t1Q-fi-bvF"/>
-                        <outlet property="pickedImageView" destination="SAY-jp-hri" id="vr1-K7-qgG"/>
-                        <outlet property="topMemeTextField" destination="1oP-1e-MN1" id="3Qz-v2-qMT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7B-WW-Qj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -294,7 +230,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SentMemeCollectionViewCell" id="xjI-19-vLx">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="167" height="121"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="167" height="121"/>
