@@ -32,6 +32,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		super.viewDidLoad()
 
 		view.backgroundColor = UIColor.redColor()
+		view.layer.borderColor = UIColor.greenColor().CGColor
+		view.layer.borderWidth = 5.0
 
 		cancelButton.enabled = true
 		cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
@@ -39,7 +41,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 		memeImageView = initMemeImageView()
 		view.addSubview(memeImageView)
-
 
 		topMemeTextField = initMemeTextField("TOP")
 		view.addSubview(topMemeTextField)
@@ -82,11 +83,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 														UIActivityTypePostToTencentWeibo,
 														UIActivityTypeAirDrop]
 		
-//		let meme = Meme(originalImage: pickedImageView.image!, topPhrase: topMemeTextField.text!,
-//			             bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
+		let meme = Meme(originalImage: originalImage, topPhrase: topMemeTextField.text!,
+			             bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
 
-//		presentViewController(activityVC, animated: true, completion: {() -> Void in
-//			MemesManager.sharedInstance.add(meme)})
+		presentViewController(activityVC, animated: true, completion: {() -> Void in
+			MemesManager.sharedInstance.add(meme)})
 	}
 
 	@IBAction func cameraButtonWasTapped(sender: UIBarButtonItem) {
@@ -163,12 +164,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	// MARK: - Private:  Images
 
 	private func generateMemedImage() -> UIImage {
-		UIGraphicsBeginImageContext(view.frame.size)
+		UIGraphicsBeginImageContext(memeImageView.frame.size)
 
-		view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
+		view.drawViewHierarchyInRect(memeImageView.frame, afterScreenUpdates: true)
 		let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
 
 		UIGraphicsEndImageContext()
+
 		return memedImage
 	}
 
@@ -189,6 +191,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		imageView.backgroundColor = UIColor.blackColor()
 		imageView.contentMode     = .ScaleAspectFit
 		imageView.hidden          = false
+		imageView.layer.borderColor = UIColor.yellowColor().CGColor
+		imageView.layer.borderWidth = 5.0
 
 		return imageView
 	}
@@ -232,23 +236,22 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	// MARK: - Private:  Resetting Views
 
 	private func resetMemeImageView() {
-		
+		memeImageView.frame = view.bounds
+
 		if let originalImage = originalImage {
-			let widthScale  = view.frame.size.width / originalImage.size.width
-			let heightScale = view.frame.size.height / originalImage.size.height
-			let scaleToUse  = min(widthScale, heightScale)
-			let scaledSize  = CGSizeMake(originalImage.size.width * scaleToUse,
-												  originalImage.size.height * scaleToUse)
+			let widthScale         = view.frame.size.width / originalImage.size.width
+			let heightScale        = view.frame.size.height / originalImage.size.height
+			let scaleToUse         = min(widthScale, heightScale)
+			let widthAfterScaling  = originalImage.size.width * scaleToUse
+			let heightAfterScaling = originalImage.size.height * scaleToUse
+
 
 			memeImageView.image        = originalImage
-			memeImageView.frame.size   = scaledSize
-			memeImageView.frame.origin = CGPointMake((view.frame.size.width - scaledSize.width) / 2,
-															     (view.frame.size.height - scaledSize.height) / 2)
-
-		} else {
-			memeImageView.frame = view.bounds
+			memeImageView.frame.size   = CGSizeMake(widthAfterScaling, heightAfterScaling)
+			memeImageView.frame.origin = CGPointMake((view.frame.size.width - widthAfterScaling) / 2,
+															     (view.frame.size.height - heightAfterScaling) / 2)
 		}
-
+		
 	}
 
 	private func resetMemeTextFields() {
@@ -271,8 +274,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	private func logBoxExtents() {
 		print("\nview.window.bounds = \(view.window!.bounds)")
 		print("view.window.frame  = \(view.window!.frame)")
-		print("\nview.bounds = \(view.bounds)")
-		print("view.frame  = \(view.frame)")
+		print("\nmain view.bounds = \(view.bounds)")
+		print("main view.frame  = \(view.frame)")
 		print("\nmemeImageView.bounds = \(memeImageView.bounds)")
 		print("memeImageView.frame  = \(memeImageView.frame)")
 		print("\ntopMemeTextField.bounds = \(topMemeTextField.bounds)")
