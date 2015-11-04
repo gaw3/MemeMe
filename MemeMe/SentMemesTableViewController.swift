@@ -12,7 +12,7 @@ private let TableCellReuseID = "SentMemeTableViewCell"
 
 class SentMemesTableViewController: UITableViewController {
 
-	// MARK: - View Lifecycle
+	// MARK: - View Events
 
 	override func viewDidLoad() {
 		super.viewDidLoad()

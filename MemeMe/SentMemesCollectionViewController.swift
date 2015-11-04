@@ -16,7 +16,7 @@ class SentMemesCollectionViewController: UICollectionViewController {
 
 	@IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
 
-	// MARK: - View Lifecycle
+	// MARK: - View Events
 
 	override func viewDidLoad() {
 		super.viewDidLoad()

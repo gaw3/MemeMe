@@ -22,11 +22,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 	var memeToEdit: Meme!
 
-	private var amountToShiftMainViewOnYAxis: CGFloat = 0.0
-	private var bottomMemeTextField:				UITextField!
-	private var memeImageView:						UIImageView!
-	private var originalImage:						UIImage!
-	private var topMemeTextField:					UITextField!
+	private var bottomMemeTextField: UITextField!
+	private var memeImageView:			UIImageView!
+	private var originalImage:			UIImage!
+	private var topMemeTextField:		UITextField!
+
+	private var amountToShiftMainViewOnYAxis:             CGFloat = 0.0
+	private var originTopMemeTextFieldInMainViewSpace:    CGPoint = CGPointMake(0, 0)
+	private var originBottomMemeTextFieldInMainViewSpace: CGPoint = CGPointMake(0, 0)
 
 	// MARK: - View Events
 
@@ -50,8 +53,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 			bottomMemeTextField = initMemeTextField("BOTTOM")
 		}
 
-		memeImageView.addSubview(topMemeTextField)
-		memeImageView.addSubview(bottomMemeTextField)
+		view.addSubview(topMemeTextField)
+		view.addSubview(bottomMemeTextField)
 	}
 
 	override func viewWillAppear(animated: Bool) {
@@ -127,13 +130,13 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		amountToShiftMainViewOnYAxis = 0.0
 
 		if (bottomMemeTextField.isFirstResponder()) {
-			let keyboardSize                           = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-			let topLeftCornerOfKeyboardInWindow        = CGPointMake(0, view.window!.frame.size.height - keyboardSize.CGRectValue().height)
-			let topLeftCornerOfKeyboardInMemeImageView = memeImageView.convertPoint(topLeftCornerOfKeyboardInWindow, fromView: view.window!)
-			let amountOfKeyboardOverlap                = memeImageView.bounds.size.height - topLeftCornerOfKeyboardInMemeImageView.y
+			let keyboardSize                    = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+			let originOfKeyboardInWindow        = CGPointMake(0, view.window!.frame.size.height - keyboardSize.CGRectValue().height)
+			let originOfKeyboardInMemeImageView = memeImageView.convertPoint(originOfKeyboardInWindow, fromView: view.window!)
+			let amountOfKeyboardOverlapInYDim   = memeImageView.bounds.size.height - originOfKeyboardInMemeImageView.y
 
-			if amountOfKeyboardOverlap > 0 {
-				amountToShiftMainViewOnYAxis = amountOfKeyboardOverlap
+			if amountOfKeyboardOverlapInYDim > 0 {
+				amountToShiftMainViewOnYAxis = amountOfKeyboardOverlapInYDim
 			}
 
 		}
@@ -169,12 +172,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	// MARK: - Private:  Images
 
 	private func generateMemedImage() -> UIImage {
-		UIGraphicsBeginImageContextWithOptions(memeImageView.frame.size, true, 0.0)
+		prepareViewHierarchyForGraphicsImageContext()
 
+		UIGraphicsBeginImageContextWithOptions(memeImageView.frame.size, true, 0.0)
 		memeImageView.drawViewHierarchyInRect(memeImageView.bounds, afterScreenUpdates: true)
 		let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
-
 		UIGraphicsEndImageContext()
+
+      restoreViewHierarchyFromGraphicsImageContext()
 
 		return memedImage
 	}
@@ -186,6 +191,34 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		imagePicker.sourceType = sourceType
 
 		presentViewController(imagePicker, animated: true, completion: nil)
+	}
+	
+	private func prepareViewHierarchyForGraphicsImageContext() {
+		topMemeTextField.removeFromSuperview()
+		bottomMemeTextField.removeFromSuperview()
+
+		memeImageView.addSubview(topMemeTextField)
+		memeImageView.addSubview(bottomMemeTextField)
+
+		originTopMemeTextFieldInMainViewSpace    = topMemeTextField.frame.origin
+		originBottomMemeTextFieldInMainViewSpace = bottomMemeTextField.frame.origin
+
+		topMemeTextField.frame.origin    = view.convertPoint(originTopMemeTextFieldInMainViewSpace, toView: memeImageView)
+		bottomMemeTextField.frame.origin = view.convertPoint(originBottomMemeTextFieldInMainViewSpace, toView: memeImageView)
+	}
+
+	private func restoreViewHierarchyFromGraphicsImageContext() {
+		topMemeTextField.removeFromSuperview()
+		bottomMemeTextField.removeFromSuperview()
+
+		view.addSubview(topMemeTextField)
+		view.addSubview(bottomMemeTextField)
+
+		topMemeTextField.frame.origin    = originTopMemeTextFieldInMainViewSpace
+		bottomMemeTextField.frame.origin = originBottomMemeTextFieldInMainViewSpace
+
+		originTopMemeTextFieldInMainViewSpace    = CGPointMake(0, 0)
+		originBottomMemeTextFieldInMainViewSpace = CGPointMake(0, 0)
 	}
 	
 	// MARK: - Private:  Initialization
@@ -263,14 +296,14 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 		topMemeTextField.enabled          = (originalImage != nil)
 		topMemeTextField.frame.size.width = textFieldWidth
-		topMemeTextField.frame.origin     = CGPointMake(memeImageView.bounds.origin.x + xInset,
-																		memeImageView.bounds.origin.y + yInset)
+		topMemeTextField.frame.origin     = CGPointMake(memeImageView.frame.origin.x + xInset,
+																		memeImageView.frame.origin.y + yInset)
 
 		bottomMemeTextField.enabled          = (originalImage != nil)
 		bottomMemeTextField.frame.size.width = textFieldWidth
-		bottomMemeTextField.frame.origin     = CGPointMake(memeImageView.bounds.origin.x + xInset,
-																			memeImageView.bounds.origin.y + memeImageView.bounds.size.height -
-																			yInset - bottomMemeTextField.bounds.height)
+		bottomMemeTextField.frame.origin     = CGPointMake(memeImageView.frame.origin.x + xInset,
+																			memeImageView.frame.origin.y + memeImageView.frame.size.height -
+																			yInset - bottomMemeTextField.frame.height)
 	}
 
 }
