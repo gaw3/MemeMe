@@ -65,49 +65,26 @@
         <!--Meme Detail View Controller-->
         <scene sceneID="tFH-EJ-gxe">
             <objects>
-                <viewController storyboardIdentifier="MemeDetailViewController" title="Meme Detail View Controller" id="QHB-iN-37c" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeDetailViewController" title="Meme Detail View Controller" hidesBottomBarWhenPushed="YES" id="QHB-iN-37c" customClass="MemeDetailViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bAE-vw-7MR"/>
                         <viewControllerLayoutGuide type="bottom" id="84Y-Gm-DnR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SEV-cs-1Im">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meme Detail View Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n13-ze-G04">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="n13-ze-G04" firstAttribute="centerX" secondItem="SEV-cs-1Im" secondAttribute="centerX" id="8LE-jx-G94"/>
-                            <constraint firstItem="n13-ze-G04" firstAttribute="centerY" secondItem="SEV-cs-1Im" secondAttribute="centerY" id="i8O-vF-XyA"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="n13-ze-G04"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="8LE-jx-G94"/>
-                                <exclude reference="i8O-vF-XyA"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="n13-ze-G04"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="8LE-jx-G94"/>
-                                <include reference="i8O-vF-XyA"/>
-                            </mask>
-                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Meme" id="CWJ-Rg-qRY"/>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Meme" id="CWJ-Rg-qRY">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="AOt-Bw-lo7">
+                            <connections>
+                                <action selector="editButtonWasTapped:" destination="QHB-iN-37c" id="2iJ-pk-Wh2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="mcC-TW-9BR" kind="show" identifier="SegueFromMemeDetailToMemeEditor" id="lYm-ve-58p"/>
                     </connections>
@@ -137,7 +114,7 @@
                             </imageView>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="Gah-wQ-ejN"/>
@@ -335,6 +312,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vWA-u7-LTD"/>
-        <segue reference="6bz-dO-xJf"/>
+        <segue reference="lYm-ve-58p"/>
     </inferredMetricsTieBreakers>
 </document>

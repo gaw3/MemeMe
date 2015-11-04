@@ -72,9 +72,10 @@ class SentMemesCollectionViewController: UICollectionViewController {
 	// MARK: - UICollectionViewDelegate
 
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		let memeDetailVC = storyboard!.instantiateViewControllerWithIdentifier(NSStringFromClass(MemeDetailViewController)) as! MemeDetailViewController
-		navigationController!.pushViewController(memeDetailVC, animated: true)
+		let memeDetailVC = storyboard!.instantiateViewControllerWithIdentifier(MemeDetailVCStoryboardID) as! MemeDetailViewController
+		memeDetailVC.memeToDisplay = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
 
+		navigationController!.pushViewController(memeDetailVC, animated: true)
 	}
 
 }
