@@ -8,8 +8,6 @@
 
 import UIKit
 
-private let TableCellReuseID = "SentMemeTableViewCell"
-
 class SentMemesTableViewController: UITableViewController {
 
 	// MARK: - View Events
@@ -18,7 +16,6 @@ class SentMemesTableViewController: UITableViewController {
 		super.viewDidLoad()
 
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:", name: MemeAdded, object: nil)
-		tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: TableCellReuseID)
 
 		// Uncomment the following line to preserve selection between presentations
 		// self.clearsSelectionOnViewWillAppear = false
@@ -52,11 +49,11 @@ class SentMemesTableViewController: UITableViewController {
 
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
-		let cell = tableView.dequeueReusableCellWithIdentifier(TableCellReuseID, forIndexPath: indexPath)
+		let cell = tableView.dequeueReusableCellWithIdentifier(SentMemesTableViewCellReuseID, forIndexPath: indexPath) as! SentMemesTableViewCell
 
-		cell.textLabel!.text = meme.topPhrase
-//		cell.detailTextLabel!.text = meme.bottomPhrase
-		cell.imageView!.image = meme.memedImage
+		cell.topPhrase!.text   = meme.topPhrase
+		cell.bottomPhrase.text = meme.bottomPhrase
+		cell.memeView!.image   = meme.memedImage
 
 		return cell
 	}
