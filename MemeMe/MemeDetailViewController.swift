@@ -23,17 +23,19 @@ class MemeDetailViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		memeDetailView = UIImageView(image: memeToDisplay.memedImage)
-		memeDetailView.backgroundColor = UIColor.orangeColor()
-		memeDetailView.contentMode     = .ScaleAspectFit
-		memeDetailView.hidden          = false
+		memeDetailView = UIImageView()
+		memeDetailView.contentMode = .ScaleAspectFit
+		memeDetailView.hidden      = false
 
 		view.addSubview(memeDetailView)
 	}
 
-	override func viewDidLayoutSubviews() {
-		memeDetailView.frame.origin = CGPointMake((view.frame.size.width - memeDetailView.frame.size.width) / 2,
-																(view.frame.size.height - memeDetailView.frame.size.height) / 2)
+	// MARK: - View Layout
+
+	override func updateViewConstraints() {
+		super.updateViewConstraints()
+
+		resetMemeDetailView()
 	}
 
 	// MARK: - IB Actions
@@ -44,6 +46,21 @@ class MemeDetailViewController: UIViewController {
 
 		memeEditorVC.memeToEdit = memeToDisplay
 		presentViewController(memeEditorNavCtlr, animated: true, completion: nil)
+	}
+
+	private func resetMemeDetailView() {
+		memeDetailView.frame = view.bounds
+
+		let widthScale         = view.frame.size.width / memeToDisplay.memedImage.size.width
+		let heightScale        = view.frame.size.height / memeToDisplay.memedImage.size.height
+		let scaleToUse         = min(widthScale, heightScale)
+		let widthAfterScaling  = memeToDisplay.memedImage.size.width * scaleToUse
+		let heightAfterScaling = memeToDisplay.memedImage.size.height * scaleToUse
+
+		memeDetailView.image        = memeToDisplay.memedImage
+		memeDetailView.frame.size   = CGSizeMake(widthAfterScaling, heightAfterScaling)
+		memeDetailView.frame.origin = CGPointMake((view.frame.size.width - widthAfterScaling) / 2,
+																(view.frame.size.height - heightAfterScaling) / 2)
 	}
 
 }

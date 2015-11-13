@@ -72,6 +72,15 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		unsubscribeFromKeyboardNotifications()
 	}
 
+	// MARK: - View Layout
+
+	override func updateViewConstraints() {
+		super.updateViewConstraints()
+
+		resetMemeImageView()
+		resetMemeTextFields()
+	}
+
 	// MARK: - IB Actions
 
 	@IBAction func actionButtonWasTapped(sender: UIBarButtonItem) {
@@ -272,7 +281,6 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	// MARK: - Private:  Resetting Views
 
 	private func resetMemeImageView() {
-		memeImageView.frame = view.bounds
 
 		if let originalImage = originalImage {
 			let widthScale         = view.frame.size.width / originalImage.size.width
@@ -285,6 +293,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 			memeImageView.frame.size   = CGSizeMake(widthAfterScaling, heightAfterScaling)
 			memeImageView.frame.origin = CGPointMake((view.frame.size.width - widthAfterScaling) / 2,
 															     (view.frame.size.height - heightAfterScaling) / 2)
+		} else {
+			memeImageView.frame = view.bounds
 		}
 		
 	}

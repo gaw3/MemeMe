@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let CollectionCellReuseID = "SentMemeCollectionViewCell"
+private let CollectionCellReuseID = "SentMemesCollectionViewCell"
 
 class SentMemesCollectionViewController: UICollectionViewController {
 
@@ -22,13 +22,19 @@ class SentMemesCollectionViewController: UICollectionViewController {
 		super.viewDidLoad()
 
 		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:", name: MemeAdded, object: nil)
-		collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: CollectionCellReuseID)
+
+		collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: CollectionCellReuseID)
+		collectionView?.backgroundColor = UIColor.whiteColor()
 
 		let minimumSpacing: CGFloat = 3.0
 		flowLayout.minimumInteritemSpacing = minimumSpacing
-		flowLayout.minimumLineSpacing = minimumSpacing
+		flowLayout.minimumLineSpacing      = minimumSpacing
+	}
 
-		let itemWidth = (view.frame.size.width - (minimumSpacing * 2.0)) / 3.0
+	override func viewWillLayoutSubviews() {
+		let numOfCellsAcross: CGFloat = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? 3.0 : 5.0
+		let itemWidth: CGFloat = (view.frame.size.width - (flowLayout.minimumInteritemSpacing * (numOfCellsAcross - 1))) / numOfCellsAcross
+
 		flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth) // yes, a square on purpose
 
 		// Uncomment the following line to preserve selection between presentations
@@ -46,7 +52,7 @@ class SentMemesCollectionViewController: UICollectionViewController {
 	// MARK: - NSNotifications
 
 	func dataStoreWasModified(notification: NSNotification) {
-		collectionView!.reloadData()
+		collectionView?.reloadData()
 	}
 	
 	// MARK: - UICollectionViewDataSource
@@ -54,9 +60,8 @@ class SentMemesCollectionViewController: UICollectionViewController {
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CollectionCellReuseID, forIndexPath: indexPath)
-      let imageView = UIImageView(image: meme.memedImage)
 
-      cell.backgroundView = imageView
+      cell.backgroundView = UIImageView(image: meme.memedImage)
 
 		return cell
 	}
@@ -72,10 +77,10 @@ class SentMemesCollectionViewController: UICollectionViewController {
 	// MARK: - UICollectionViewDelegate
 
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		let memeDetailVC = storyboard!.instantiateViewControllerWithIdentifier(MemeDetailVCStoryboardID) as! MemeDetailViewController
+		let memeDetailVC = storyboard?.instantiateViewControllerWithIdentifier(MemeDetailVCStoryboardID) as! MemeDetailViewController
 		memeDetailVC.memeToDisplay = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
 
-		navigationController!.pushViewController(memeDetailVC, animated: true)
+		navigationController?.pushViewController(memeDetailVC, animated: true)
 	}
 
 }
