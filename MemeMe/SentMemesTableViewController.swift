@@ -15,10 +15,9 @@ class SentMemesTableViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:", name: MemeAdded, object: nil)
-
-		// Uncomment the following line to preserve selection between presentations
-		// self.clearsSelectionOnViewWillAppear = false
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:",
+																					  name: MemesManagerMemeWasAddedNotification,
+																					object: nil)
 
 		// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 		// self.navigationItem.rightBarButtonItem = self.editButtonItem()
@@ -49,7 +48,7 @@ class SentMemesTableViewController: UITableViewController {
 
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
-		let cell = tableView.dequeueReusableCellWithIdentifier(SentMemesTableViewCellReuseID, forIndexPath: indexPath) as! SentMemesTableViewCell
+		let cell = tableView.dequeueReusableCellWithIdentifier(SentMemesTableViewCellReuseID, forIndexPath: indexPath) as!SentMemesTableViewCell
 
 		cell.topPhrase.text    = meme.topPhrase
 		cell.bottomPhrase.text = meme.bottomPhrase

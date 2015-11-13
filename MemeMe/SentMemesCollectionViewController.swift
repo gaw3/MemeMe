@@ -31,16 +31,26 @@ class SentMemesCollectionViewController: UICollectionViewController {
 		flowLayout.minimumLineSpacing      = minimumSpacing
 	}
 
-	override func viewWillLayoutSubviews() {
+	// MARK: - View Layout
+
+	override func updateViewConstraints() {
+		super.updateViewConstraints()
+
 		let numOfCellsAcross: CGFloat = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? 3.0 : 5.0
 		let itemWidth: CGFloat = (view.frame.size.width - (flowLayout.minimumInteritemSpacing * (numOfCellsAcross - 1))) / numOfCellsAcross
 
 		flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth) // yes, a square on purpose
-
-		// Uncomment the following line to preserve selection between presentations
-		// self.clearsSelectionOnViewWillAppear = false
-
 	}
+//	override func viewWillLayoutSubviews() {
+//		let numOfCellsAcross: CGFloat = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? 3.0 : 5.0
+//		let itemWidth: CGFloat = (view.frame.size.width - (flowLayout.minimumInteritemSpacing * (numOfCellsAcross - 1))) / numOfCellsAcross
+//
+//		flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth) // yes, a square on purpose
+//
+//		// Uncomment the following line to preserve selection between presentations
+//		// self.clearsSelectionOnViewWillAppear = false
+//
+//	}
 
 	// MARK: - IB Actions
 

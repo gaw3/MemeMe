@@ -48,6 +48,8 @@ class MemeDetailViewController: UIViewController {
 		presentViewController(memeEditorNavCtlr, animated: true, completion: nil)
 	}
 
+	// MARK: - Private
+
 	private func resetMemeDetailView() {
 		memeDetailView.frame = view.bounds
 

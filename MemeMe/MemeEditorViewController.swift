@@ -88,20 +88,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 
 		let memedImage = generateMemedImage()
 		let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-
-		activityVC.excludedActivityTypes = [UIActivityTypePostToWeibo,
-														UIActivityTypePrint,
-														UIActivityTypeCopyToPasteboard,
-														UIActivityTypeAssignToContact,
-														UIActivityTypeSaveToCameraRoll,
-														UIActivityTypeAddToReadingList,
-														UIActivityTypePostToFlickr,
-														UIActivityTypePostToVimeo,
-														UIActivityTypePostToTencentWeibo,
-														UIActivityTypeAirDrop]
-		
-		let meme = Meme(originalImage: originalImage, topPhrase: topMemeTextField.text!,
-			             bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
+		let meme       = Meme(originalImage: originalImage, topPhrase: topMemeTextField.text!,
+			                   bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
 
 		presentViewController(activityVC, animated: true, completion: {() -> Void in
 			MemesManager.sharedInstance.add(meme)})

@@ -11,7 +11,7 @@ import UIKit
 
 private let _sharedInstance = MemesManager()
 
-let MemeAdded = "MemeAddedToDataStore"
+let MemesManagerMemeWasAddedNotification = "MemesManagerMemeWasAddedNotification"
 
 class MemesManager: NSObject {
 
@@ -27,7 +27,7 @@ class MemesManager: NSObject {
 
 	func add(newMeme: Meme) {
 		memes.append(newMeme)
-		postNotification(MemeAdded)
+		postNotification(MemesManagerMemeWasAddedNotification)
 	}
 
 	func count() -> Int {
