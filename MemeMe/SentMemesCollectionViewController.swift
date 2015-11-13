@@ -21,7 +21,9 @@ class SentMemesCollectionViewController: UICollectionViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:", name: MemeAdded, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:",
+																					  name: MemesManagerMemeWasAddedNotification,
+																					object: nil)
 
 		collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: CollectionCellReuseID)
 		collectionView?.backgroundColor = UIColor.whiteColor()
@@ -41,16 +43,6 @@ class SentMemesCollectionViewController: UICollectionViewController {
 
 		flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth) // yes, a square on purpose
 	}
-//	override func viewWillLayoutSubviews() {
-//		let numOfCellsAcross: CGFloat = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? 3.0 : 5.0
-//		let itemWidth: CGFloat = (view.frame.size.width - (flowLayout.minimumInteritemSpacing * (numOfCellsAcross - 1))) / numOfCellsAcross
-//
-//		flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth) // yes, a square on purpose
-//
-//		// Uncomment the following line to preserve selection between presentations
-//		// self.clearsSelectionOnViewWillAppear = false
-//
-//	}
 
 	// MARK: - IB Actions
 
