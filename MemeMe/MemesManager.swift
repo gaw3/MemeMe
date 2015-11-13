@@ -34,12 +34,18 @@ class MemesManager: NSObject {
 		return memes.count
 	}
 
+	func deleteMemeAtIndexPath(indexPath: NSIndexPath) {
+		memes.removeAtIndex(indexPath.row)
+	}
+
 	func memeAtIndexPath(indexPath: NSIndexPath) -> Meme {
 		return memes[indexPath.row]
 	}
 
-	func removeAtIndexPath(indexPath: NSIndexPath) {
-		memes.removeAtIndex(indexPath.row)
+	func moveMemeAtIndexPath(indexPath: NSIndexPath, toIndexPath: NSIndexPath)
+	{
+		let meme = memes.removeAtIndex(indexPath.row)
+		memes.insert(meme, atIndex: toIndexPath.row)
 	}
 
 	// MARK: - Private

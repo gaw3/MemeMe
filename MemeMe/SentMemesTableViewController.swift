@@ -19,8 +19,7 @@ class SentMemesTableViewController: UITableViewController {
 																					  name: MemesManagerMemeWasAddedNotification,
 																					object: nil)
 
-		// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-		// self.navigationItem.rightBarButtonItem = self.editButtonItem()
+		navigationItem.leftBarButtonItem = self.editButtonItem()
 	}
 
 	// MARK: - IB Actions
@@ -59,12 +58,19 @@ class SentMemesTableViewController: UITableViewController {
 
 	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
 		if editingStyle == .Delete {
-			MemesManager.sharedInstance.removeAtIndexPath(indexPath)
+			MemesManager.sharedInstance.deleteMemeAtIndexPath(indexPath)
 			tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 		}
 
 	}
 	
+	override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+		assert(tableView == self.tableView)
+
+		MemesManager.sharedInstance.moveMemeAtIndexPath(sourceIndexPath, toIndexPath: destinationIndexPath)
+      tableView.moveRowAtIndexPath(sourceIndexPath, toIndexPath: destinationIndexPath)
+	}
+
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return MemesManager.sharedInstance.count()
 	}
