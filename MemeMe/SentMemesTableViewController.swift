@@ -63,6 +63,22 @@ class SentMemesTableViewController: UITableViewController {
 		}
 
 	}
+
+	override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+		let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
+			MemesManager.sharedInstance.deleteMemeAtIndexPath(indexPath)
+			tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+			self.editing = false
+		}
+
+		let cancelAction = UITableViewRowAction(style: .Default, title: "Cancel") { (action, indexPath) -> Void in
+			self.editing = false
+		}
+
+		cancelAction.backgroundColor = UIColor.blueColor()
+
+		return [cancelAction, deleteAction]
+	}
 	
 	override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
 		assert(tableView == self.tableView)
