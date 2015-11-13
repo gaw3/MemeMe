@@ -33,10 +33,8 @@ class SentMemesCollectionViewController: UICollectionViewController {
 		flowLayout.minimumLineSpacing      = minimumSpacing
 	}
 
-	// MARK: - View Layout
-
-	override func updateViewConstraints() {
-		super.updateViewConstraints()
+	override func viewWillLayoutSubviews() {
+		super.viewWillLayoutSubviews()
 
 		let numOfCellsAcross: CGFloat = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? 3.0 : 5.0
 		let itemWidth: CGFloat = (view.frame.size.width - (flowLayout.minimumInteritemSpacing * (numOfCellsAcross - 1))) / numOfCellsAcross
