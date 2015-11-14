@@ -29,6 +29,13 @@ class SentMemesTableViewController: UITableViewController {
 		presentViewController(memeEditor, animated: true, completion: nil)
 	}
 
+	// MARK: - Environment Changes
+
+	override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+		super.willTransitionToTraitCollection(newCollection, withTransitionCoordinator: coordinator)
+		tableView.reloadData()
+	}
+	
 	// MARK: - NSNotifications
 
 	func dataStoreWasModified(notification: NSNotification) {
@@ -47,11 +54,17 @@ class SentMemesTableViewController: UITableViewController {
 
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
-		let cell = tableView.dequeueReusableCellWithIdentifier(SentMemesTableViewCellReuseID, forIndexPath: indexPath) as!SentMemesTableViewCell
+		let cell = tableView.dequeueReusableCellWithIdentifier(SentMemesTableViewCellReuseID, forIndexPath: indexPath) as! SentMemesTableViewCell
 
-		cell.topPhrase.text    = meme.topPhrase
-		cell.bottomPhrase.text = meme.bottomPhrase
-		cell.memeView!.image   = meme.memedImage
+		cell.topPhraseRegularCompact!.text    = meme.topPhrase
+		cell.bottomPhraseRegularCompact!.text = meme.bottomPhrase
+		cell.memeViewRegularCompact!.image    = meme.memedImage
+
+		if view.traitCollection.horizontalSizeClass == .Regular && view.traitCollection.verticalSizeClass == .Compact {
+			cell.topPhraseCompactRegular!.text    = meme.topPhrase
+			cell.bottomPhraseCompactRegular!.text = meme.bottomPhrase
+			cell.memeViewCompactRegular!.image    = meme.memedImage
+		}
 
 		return cell
 	}
