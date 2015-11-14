@@ -15,7 +15,7 @@ class SentMemesTableViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:",
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "memeWasAdded:",
 																					  name: MemesManagerMemeWasAddedNotification,
 																					object: nil)
 
@@ -38,21 +38,29 @@ class SentMemesTableViewController: UITableViewController {
 	
 	// MARK: - NSNotifications
 
-	func dataStoreWasModified(notification: NSNotification) {
+	func memeWasAdded(notification: NSNotification) {
+		assert(notification.name == MemesManagerMemeWasAddedNotification, "received unexpected NSNotification")
+
 		tableView.reloadData()
 	}
 
 	// MARK: - UITableViewDataSource
 
 	override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+		assert(tableView == self.tableView, "Unexpected table view requesting number of sections in table view")
+		
 		return 1
 	}
 
 	override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+		assert(tableView == self.tableView, "Unexpected table view requesting cell can be edited")
+
 		return true
 	}
 
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+		assert(tableView == self.tableView, "Unexpected table view requesting cell for row at index path")
+
 		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
 		let cell = tableView.dequeueReusableCellWithIdentifier(SentMemesTableViewCellReuseID, forIndexPath: indexPath) as! SentMemesTableViewCell
 
@@ -70,6 +78,8 @@ class SentMemesTableViewController: UITableViewController {
 	}
 
 	override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+		assert(tableView == self.tableView, "Unexpected table view committing editing style")
+
 		if editingStyle == .Delete {
 			MemesManager.sharedInstance.deleteMemeAtIndexPath(indexPath)
 			tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -78,6 +88,8 @@ class SentMemesTableViewController: UITableViewController {
 	}
 
 	override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+		assert(tableView == self.tableView, "Unexpected table view requesting edit actions")
+
 		let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
 			MemesManager.sharedInstance.deleteMemeAtIndexPath(indexPath)
 			tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -94,19 +106,23 @@ class SentMemesTableViewController: UITableViewController {
 	}
 	
 	override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-		assert(tableView == self.tableView)
+		assert(tableView == self.tableView, "Unexpected table view commanding move row")
 
 		MemesManager.sharedInstance.moveMemeAtIndexPath(sourceIndexPath, toIndexPath: destinationIndexPath)
       tableView.moveRowAtIndexPath(sourceIndexPath, toIndexPath: destinationIndexPath)
 	}
 
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		assert(tableView == self.tableView, "Unexpected table view requesting number of rows in section")
+
 		return MemesManager.sharedInstance.count()
 	}
 
 	// MARK: - UITableViewDelegate
 
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		assert(tableView == self.tableView, "Unexpected table view selected a row")
+
 		let memeDetailVC = storyboard?.instantiateViewControllerWithIdentifier(MemeDetailVCStoryboardID) as! MemeDetailViewController
 		memeDetailVC.memeToDisplay = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
 

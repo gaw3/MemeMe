@@ -21,7 +21,7 @@ class SentMemesCollectionViewController: UICollectionViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "dataStoreWasModified:",
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "memeWasAdded:",
 																					  name: MemesManagerMemeWasAddedNotification,
 																					object: nil)
 
@@ -51,13 +51,17 @@ class SentMemesCollectionViewController: UICollectionViewController {
 
 	// MARK: - NSNotifications
 
-	func dataStoreWasModified(notification: NSNotification) {
+	func memeWasAdded(notification: NSNotification) {
+		assert(notification.name == MemesManagerMemeWasAddedNotification, "received unexpected NSNotification")
+
 		collectionView?.reloadData()
 	}
-	
+
 	// MARK: - UICollectionViewDataSource
 
 	override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+		assert(collectionView == self.collectionView, "Unexpected collection view reqesting cell of item at index path")
+
 		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CollectionCellReuseID, forIndexPath: indexPath)
 
@@ -67,16 +71,22 @@ class SentMemesCollectionViewController: UICollectionViewController {
 	}
 	
 	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+		assert(collectionView == self.collectionView, "Unexpected collection view reqesting number of items in section")
+
 		return MemesManager.sharedInstance.count()
 	}
 
 	override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+		assert(collectionView == self.collectionView, "Unexpected collection view reqesting number of sections in view")
+
 		return 1
 	}
 
 	// MARK: - UICollectionViewDelegate
 
 	override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		assert(collectionView == self.collectionView, "Unexpected collection view selected an item")
+
 		let memeDetailVC = storyboard?.instantiateViewControllerWithIdentifier(MemeDetailVCStoryboardID) as! MemeDetailViewController
 		memeDetailVC.memeToDisplay = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
 
