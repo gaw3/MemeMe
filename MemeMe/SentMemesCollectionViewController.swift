@@ -10,6 +10,10 @@ import UIKit
 
 private let CollectionCellReuseID = "SentMemesCollectionViewCell"
 
+private let NumberOfCellsAcrossInPortrait:  CGFloat = 3.0
+private let NumberOfCellsAcrossInLandscape: CGFloat = 5.0
+private let MinimumInteritemSpacing:        CGFloat = 3.0
+
 class SentMemesCollectionViewController: UICollectionViewController {
 
 	// MARK: - IB Outlets
@@ -21,22 +25,28 @@ class SentMemesCollectionViewController: UICollectionViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "memeWasAdded:",
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "memesWereModified:",
 																					  name: MemesManagerMemeWasAddedNotification,
+																					object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "memesWereModified:",
+																					  name: MemesManagerMemeWasDeletedNotification,
+																					object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "memesWereModified:",
+																					  name: MemesManagerMemeWasMovedNotification,
 																					object: nil)
 
 		collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: CollectionCellReuseID)
 		collectionView?.backgroundColor = UIColor.whiteColor()
 
-		let minimumSpacing: CGFloat = 3.0
-		flowLayout.minimumInteritemSpacing = minimumSpacing
-		flowLayout.minimumLineSpacing      = minimumSpacing
+		flowLayout.minimumInteritemSpacing = MinimumInteritemSpacing
+		flowLayout.minimumLineSpacing      = MinimumInteritemSpacing
 	}
 
 	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 
-		let numOfCellsAcross: CGFloat = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation) ? 3.0 : 5.0
+		let numOfCellsAcross: CGFloat = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)
+			                           ? NumberOfCellsAcrossInPortrait : NumberOfCellsAcrossInLandscape
 		let itemWidth: CGFloat = (view.frame.size.width - (flowLayout.minimumInteritemSpacing * (numOfCellsAcross - 1))) / numOfCellsAcross
 
 		flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth) // yes, a square on purpose
@@ -51,8 +61,10 @@ class SentMemesCollectionViewController: UICollectionViewController {
 
 	// MARK: - NSNotifications
 
-	func memeWasAdded(notification: NSNotification) {
-		assert(notification.name == MemesManagerMemeWasAddedNotification, "received unexpected NSNotification")
+	func memesWereModified(notification: NSNotification) {
+		assert(notification.name == MemesManagerMemeWasAddedNotification ||
+			    notification.name == MemesManagerMemeWasDeletedNotification ||
+			    notification.name == MemesManagerMemeWasMovedNotification, "received unexpected NSNotification")
 
 		collectionView?.reloadData()
 	}

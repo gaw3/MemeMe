@@ -63,6 +63,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A1858AF1BFB17FC00ABB456 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7AF4F5DC1BEAC63100566E33 /* SentMemesTableViewCell.swift */,
+				7AE683131BC37B98001D7244 /* LaunchScreen.storyboard */,
+				7AE6830E1BC37B98001D7244 /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		7A805C551BCACC9F00EA3682 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -73,25 +83,16 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		7A805C561BCACCB400EA3682 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				7AE683131BC37B98001D7244 /* LaunchScreen.storyboard */,
-				7AE6830E1BC37B98001D7244 /* Main.storyboard */,
-			);
-			name = Storyboards;
-			sourceTree = "<group>";
-		};
-		7A805C571BCACCC600EA3682 /* Data Model */ = {
+		7A805C571BCACCC600EA3682 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				7A805C591BCACFC700EA3682 /* Meme.swift */,
 				7A56DFCE1BDAB36800C787E6 /* MemesManager.swift */,
 			);
-			name = "Data Model";
+			name = Model;
 			sourceTree = "<group>";
 		};
-		7A805C581BCACD2A00EA3682 /* App */ = {
+		7A805C581BCACD2A00EA3682 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				7AE6830A1BC37B98001D7244 /* AppDelegate.swift */,
@@ -99,9 +100,8 @@
 				7AE4F6B61BC462D200ABDA8C /* MemeEditorViewController.swift */,
 				7AF2ECEE1BD5C9AD00CDE5F8 /* SentMemesCollectionViewController.swift */,
 				7AF2ECEC1BD5C95700CDE5F8 /* SentMemesTableViewController.swift */,
-				7AF4F5DC1BEAC63100566E33 /* SentMemesTableViewCell.swift */,
 			);
-			name = App;
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		7AE682FE1BC37B97001D7244 = {
@@ -125,10 +125,10 @@
 		7AE683091BC37B97001D7244 /* MemeMe */ = {
 			isa = PBXGroup;
 			children = (
-				7A805C581BCACD2A00EA3682 /* App */,
-				7A805C571BCACCC600EA3682 /* Data Model */,
+				7A805C581BCACD2A00EA3682 /* Controller */,
+				7A805C571BCACCC600EA3682 /* Model */,
 				7A805C551BCACC9F00EA3682 /* Resources */,
-				7A805C561BCACCB400EA3682 /* Storyboards */,
+				7A1858AF1BFB17FC00ABB456 /* View */,
 			);
 			path = MemeMe;
 			sourceTree = "<group>";

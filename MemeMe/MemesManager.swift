@@ -11,7 +11,9 @@ import UIKit
 
 private let _sharedInstance = MemesManager()
 
-let MemesManagerMemeWasAddedNotification = "MemesManagerMemeWasAddedNotification"
+let MemesManagerMemeWasAddedNotification   = "MemesManagerMemeWasAddedNotification"
+let MemesManagerMemeWasDeletedNotification = "MemesManagerMemeWadDeletedNotification"
+let MemesManagerMemeWasMovedNotification   = "MemesManagerMemeWasMovedNotification"
 
 class MemesManager: NSObject {
 
@@ -36,6 +38,7 @@ class MemesManager: NSObject {
 
 	func deleteMemeAtIndexPath(indexPath: NSIndexPath) {
 		memes.removeAtIndex(indexPath.row)
+		postNotification(MemesManagerMemeWasDeletedNotification)
 	}
 
 	func memeAtIndexPath(indexPath: NSIndexPath) -> Meme {
@@ -46,6 +49,7 @@ class MemesManager: NSObject {
 	{
 		let meme = memes.removeAtIndex(indexPath.row)
 		memes.insert(meme, atIndex: toIndexPath.row)
+		postNotification(MemesManagerMemeWasMovedNotification)
 	}
 
 	// MARK: - Private
