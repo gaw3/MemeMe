@@ -123,7 +123,7 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 			                   bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
 
 		presentViewController(activityVC, animated: true, completion: {() -> Void in
-			MemesManager.sharedInstance.add(meme)})
+			self.memesMgr.add(meme)})
 	}
 
 	@IBAction internal func cameraButtonWasTapped(sender: UIBarButtonItem) {

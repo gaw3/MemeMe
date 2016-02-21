@@ -29,15 +29,17 @@ final internal class MemesManager: NSObject {
 
 	private var memes: [Meme]
 
+	// MARK: - Internal Computed Variables
+
+	internal var count: Int {
+		return memes.count
+	}
+
 	// MARK: - API
 
 	internal func add(newMeme: Meme) {
 		memes.append(newMeme)
 		postNotification(Notification.MemeWasAdded)
-	}
-
-	internal func count() -> Int {
-		return memes.count
 	}
 
 	internal func deleteMemeAtIndexPath(indexPath: NSIndexPath) {

@@ -80,7 +80,7 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 	override internal func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
 		assert(collectionView == self.collectionView, "Unexpected collection view reqesting cell of item at index path")
 
-		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
+		let meme = memesMgr.memeAtIndexPath(indexPath)
 		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(UI.CollectionCellReuseID, forIndexPath: indexPath)
 
       cell.backgroundView = UIImageView(image: meme.memedImage)
@@ -91,7 +91,7 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 	override internal func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		assert(collectionView == self.collectionView, "Unexpected collection view reqesting number of items in section")
 
-		return MemesManager.sharedInstance.count()
+		return memesMgr.count
 	}
 
 	override internal func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -106,7 +106,7 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 		assert(collectionView == self.collectionView, "Unexpected collection view selected an item")
 
 		let memeDetailVC = storyboard?.instantiateViewControllerWithIdentifier(MemeDetailViewController.UI.StoryboardID) as! MemeDetailViewController
-		memeDetailVC.memeToDisplay = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
+		memeDetailVC.memeToDisplay = memesMgr.memeAtIndexPath(indexPath)
 
 		navigationController?.pushViewController(memeDetailVC, animated: true)
 	}

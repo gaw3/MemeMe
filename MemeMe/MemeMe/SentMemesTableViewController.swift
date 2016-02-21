@@ -70,7 +70,7 @@ final internal class SentMemesTableViewController: UITableViewController {
 	override internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		assert(tableView == self.tableView, "Unexpected table view requesting cell for row at index path")
 
-		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
+		let meme = memesMgr.memeAtIndexPath(indexPath)
 		let cell = tableView.dequeueReusableCellWithIdentifier(SentMemesTableViewCell.UI.ReuseID, forIndexPath: indexPath) as! SentMemesTableViewCell
 
 		cell.topPhraseRegularCompact!.text    = meme.topPhrase
@@ -90,7 +90,7 @@ final internal class SentMemesTableViewController: UITableViewController {
 		assert(tableView == self.tableView, "Unexpected table view committing editing style")
 
 		if editingStyle == .Delete {
-			MemesManager.sharedInstance.deleteMemeAtIndexPath(indexPath)
+			memesMgr.deleteMemeAtIndexPath(indexPath)
 			tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 		}
 
@@ -100,7 +100,7 @@ final internal class SentMemesTableViewController: UITableViewController {
 		assert(tableView == self.tableView, "Unexpected table view requesting edit actions")
 
 		let deleteAction = UITableViewRowAction(style: .Default, title: ActionTitle.Delete) { (action, indexPath) -> Void in
-			MemesManager.sharedInstance.deleteMemeAtIndexPath(indexPath)
+			self.memesMgr.deleteMemeAtIndexPath(indexPath)
 			tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 			self.editing = false
 		}
@@ -117,14 +117,14 @@ final internal class SentMemesTableViewController: UITableViewController {
 	override internal func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
 		assert(tableView == self.tableView, "Unexpected table view commanding move row")
 
-		MemesManager.sharedInstance.moveMemeAtIndexPath(sourceIndexPath, toIndexPath: destinationIndexPath)
+		memesMgr.moveMemeAtIndexPath(sourceIndexPath, toIndexPath: destinationIndexPath)
       tableView.moveRowAtIndexPath(sourceIndexPath, toIndexPath: destinationIndexPath)
 	}
 
 	override internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		assert(tableView == self.tableView, "Unexpected table view requesting number of rows in section")
 
-		return MemesManager.sharedInstance.count()
+		return memesMgr.count
 	}
 
 	// MARK: - UITableViewDelegate
@@ -133,7 +133,7 @@ final internal class SentMemesTableViewController: UITableViewController {
 		assert(tableView == self.tableView, "Unexpected table view selected a row")
 
 		let memeDetailVC = storyboard?.instantiateViewControllerWithIdentifier(MemeDetailViewController.UI.StoryboardID) as! MemeDetailViewController
-		memeDetailVC.memeToDisplay = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
+		memeDetailVC.memeToDisplay = memesMgr.memeAtIndexPath(indexPath)
 
 		navigationController?.pushViewController(memeDetailVC, animated: true)
 	}
