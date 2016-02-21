@@ -6,6 +6,7 @@
 //  Copyright © 2015 Gregory White. All rights reserved.
 //
 
+import CoreGraphics
 import UIKit
 
 final internal class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate,
