@@ -10,7 +10,7 @@ import UIKit
 
 // let MemeDetailVCStoryboardID = "MemeDetailViewController"
 
-final class MemeDetailViewController: UIViewController {
+final internal class MemeDetailViewController: UIViewController {
 
 	// MARK: - Internal Constants
 
@@ -20,13 +20,13 @@ final class MemeDetailViewController: UIViewController {
 
 	// MARK: - Class Variables
 
-	var memeToDisplay: Meme!
+	internal var memeToDisplay: Meme!
 	
 	private var memeDetailView: UIImageView!
 
 	// MARK: - View Events
 
-	override func viewDidLoad() {
+	override internal func viewDidLoad() {
 		super.viewDidLoad()
 
 		memeDetailView = UIImageView()
@@ -38,7 +38,7 @@ final class MemeDetailViewController: UIViewController {
 
 	// MARK: - View Layout
 
-	override func updateViewConstraints() {
+	override internal func updateViewConstraints() {
 		super.updateViewConstraints()
 
 		resetMemeDetailView()
@@ -46,7 +46,7 @@ final class MemeDetailViewController: UIViewController {
 
 	// MARK: - IB Actions
 
-	@IBAction func editButtonWasTapped(sender: UIBarButtonItem) {
+	@IBAction internal func editButtonWasTapped(sender: UIBarButtonItem) {
 		let memeEditorNavCtlr = storyboard?.instantiateViewControllerWithIdentifier(StoryboardID.MemeEditorNavCtlr)
 										as! UINavigationController
       let memeEditorVC      = memeEditorNavCtlr.viewControllers[0] as! MemeEditorViewController

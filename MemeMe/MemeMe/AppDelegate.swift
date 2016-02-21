@@ -9,11 +9,12 @@
 import UIKit
 
 @UIApplicationMain
-final class AppDelegate: UIResponder, UIApplicationDelegate {
 
-	var window: UIWindow?
+final internal class AppDelegate: UIResponder, UIApplicationDelegate {
 
-	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+	internal var window: UIWindow?
+
+	internal func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		return true
 	}
 
