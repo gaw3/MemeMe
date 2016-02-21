@@ -37,16 +37,8 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 	override internal func viewDidLoad() {
 		super.viewDidLoad()
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.MemesWereModified,
-																					  name: MemesManager.Notification.MemeWasAdded,
-																					object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.MemesWereModified,
-																					  name: MemesManager.Notification.MemeWasDeleted,
-																					object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.MemesWereModified,
-																					  name: MemesManager.Notification.MemeWasMoved,
-																					object: nil)
-
+      addNotificationObservers()
+		
 		collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: UI.CollectionCellReuseID)
 		collectionView?.backgroundColor = UIColor.whiteColor()
 
@@ -117,6 +109,20 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 		memeDetailVC.memeToDisplay = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
 
 		navigationController?.pushViewController(memeDetailVC, animated: true)
+	}
+
+	// MARK: - Private Helpers
+
+	private func addNotificationObservers() {
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.MemesWereModified,
+																		           name: MemesManager.Notification.MemeWasAdded,
+																					object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.MemesWereModified,
+																				     name: MemesManager.Notification.MemeWasDeleted,
+																					object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.MemesWereModified,
+																				     name: MemesManager.Notification.MemeWasMoved,
+																					object: nil)
 	}
 
 }

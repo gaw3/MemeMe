@@ -27,9 +27,6 @@ final internal class SentMemesTableViewController: UITableViewController {
 	override internal func viewDidLoad() {
 		super.viewDidLoad()
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.MemeWasAdded,
-																					  name: MemesManager.Notification.MemeWasAdded,
-																					object: nil)
 
 		navigationItem.leftBarButtonItem = self.editButtonItem()
 	}
@@ -139,6 +136,12 @@ final internal class SentMemesTableViewController: UITableViewController {
 		memeDetailVC.memeToDisplay = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
 
 		navigationController?.pushViewController(memeDetailVC, animated: true)
+	}
+
+	private func addNotificationObservers() {
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.MemeWasAdded,
+																					  name: MemesManager.Notification.MemeWasAdded,
+																					object: nil)
 	}
 
 }
