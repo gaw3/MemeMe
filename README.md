@@ -1,7 +1,12 @@
 # ![App Icon](./Paperwork/READMEFiles/MemeMe_80.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MemeMe
 
 MemeMe allows the user to affix captions to the top and bottom of a
-selected photo, thereby creating a [meme](./Paperwork/READMEFiles/Meme.md).
+selected photo, thereby creating a
+[meme](./Paperwork/READMEFiles/Meme.md).
+The user may then choose to distribute the meme to others via email or
+text.  As memes are sent, they are collected & held until the app
+terminates.  Previously-sent memes are presented in a table or a
+collection, and may be edited & resent.  
 
 MemeMe is Portfolio Project #2 of the Udacity iOS Developer Nanodegree
 Program.  The following list contains pertinent course documents:
