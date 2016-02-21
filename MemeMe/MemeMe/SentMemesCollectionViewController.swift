@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SentMemesCollectionViewController: UICollectionViewController {
+final class SentMemesCollectionViewController: UICollectionViewController {
 
 	// MARK: - Private Constants
 

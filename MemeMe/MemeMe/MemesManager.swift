@@ -11,7 +11,7 @@ import UIKit
 
 private let _sharedInstance = MemesManager()
 
-class MemesManager: NSObject {
+final class MemesManager: NSObject {
 
 	// MARK: - Internal Constants
 

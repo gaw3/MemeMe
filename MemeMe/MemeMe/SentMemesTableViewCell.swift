@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SentMemesTableViewCell: UITableViewCell {
+final class SentMemesTableViewCell: UITableViewCell {
 
 	// MARK: - Internal Constants
 

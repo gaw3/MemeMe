@@ -8,8 +8,8 @@
 
 import UIKit
 
-class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate,
-										  UINavigationControllerDelegate, UITextFieldDelegate {
+final class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate,
+										        UINavigationControllerDelegate, UITextFieldDelegate {
 
 	// MARK: - Private Constants
 

@@ -10,7 +10,7 @@ import UIKit
 
 // let MemeDetailVCStoryboardID = "MemeDetailViewController"
 
-class MemeDetailViewController: UIViewController {
+final class MemeDetailViewController: UIViewController {
 
 	// MARK: - Internal Constants
 

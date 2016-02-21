@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SentMemesTableViewController: UITableViewController {
+final class SentMemesTableViewController: UITableViewController {
 
 	// MARK: - Private Constants
 
