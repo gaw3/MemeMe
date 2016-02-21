@@ -14,7 +14,7 @@ Program.  The following list contains pertinent course documents:
 * [Udacity Grading Rubric](./Paperwork/Udacity/UdacityGradingRubric.pdf)  
 * [GitHub Swift Style Guide](./Paperwork/Udacity/GitHubSwiftStyleGuide.pdf)  
 * [Udacity Git Commit Message Style Guide](./Paperwork/Udacity/UdacityGitCommitMessageStyleGuide.pdf)  
-* [Udacity Project & Code Reviews](https://review.udacity.com/#!/reviews/48019)
+* [Udacity Project & Code Reviews](https://review.udacity.com/#!/reviews/72996)
 
 Project Grade:  **Exceeds Expectations**  
 Project Build:  Xcode 7.1 / iOS 9.1, iPhone only,
