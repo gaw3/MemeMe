@@ -8,9 +8,15 @@
 
 import UIKit
 
-let MemeDetailVCStoryboardID = "MemeDetailViewController"
+// let MemeDetailVCStoryboardID = "MemeDetailViewController"
 
 class MemeDetailViewController: UIViewController {
+
+	// MARK: - Internal Constants
+
+	internal struct UI {
+		static let StoryboardID = "MemeDetailViewController"
+	}
 
 	// MARK: - Class Variables
 
@@ -41,7 +47,8 @@ class MemeDetailViewController: UIViewController {
 	// MARK: - IB Actions
 
 	@IBAction func editButtonWasTapped(sender: UIBarButtonItem) {
-		let memeEditorNavCtlr = storyboard?.instantiateViewControllerWithIdentifier("MemeEditorNavigationController") as! UINavigationController
+		let memeEditorNavCtlr = storyboard?.instantiateViewControllerWithIdentifier(StoryboardID.MemeEditorNavCtlr)
+										as! UINavigationController
       let memeEditorVC      = memeEditorNavCtlr.viewControllers[0] as! MemeEditorViewController
 
 		memeEditorVC.memeToEdit = memeToDisplay

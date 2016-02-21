@@ -10,13 +10,24 @@ import UIKit
 
 class SentMemesTableViewController: UITableViewController {
 
+	// MARK: - Private Constants
+
+	private struct ActionTitle {
+		static let Cancel = "Cancel"
+		static let Delete = "Delete"
+	}
+
+	private struct SEL {
+		static let MemeWasAdded: Selector = "memeWasAdded:"
+	}
+
 	// MARK: - View Events
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "memeWasAdded:",
-																					  name: MemesManagerMemeWasAddedNotification,
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.MemeWasAdded,
+																					  name: MemesManager.Notification.MemeWasAdded,
 																					object: nil)
 
 		navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -25,7 +36,7 @@ class SentMemesTableViewController: UITableViewController {
 	// MARK: - IB Actions
 
 	@IBAction func addButtonWasTapped(sender: UIBarButtonItem) {
-		let memeEditor = storyboard?.instantiateViewControllerWithIdentifier("MemeEditorNavigationController") as! UINavigationController
+		let memeEditor = storyboard?.instantiateViewControllerWithIdentifier(StoryboardID.MemeEditorNavCtlr) as! UINavigationController
 		presentViewController(memeEditor, animated: true, completion: nil)
 	}
 
@@ -39,7 +50,7 @@ class SentMemesTableViewController: UITableViewController {
 	// MARK: - NSNotifications
 
 	func memeWasAdded(notification: NSNotification) {
-		assert(notification.name == MemesManagerMemeWasAddedNotification, "received unexpected NSNotification")
+		assert(notification.name == MemesManager.Notification.MemeWasAdded, "received unexpected NSNotification")
 
 		tableView.reloadData()
 	}
@@ -62,7 +73,7 @@ class SentMemesTableViewController: UITableViewController {
 		assert(tableView == self.tableView, "Unexpected table view requesting cell for row at index path")
 
 		let meme = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
-		let cell = tableView.dequeueReusableCellWithIdentifier(SentMemesTableViewCellReuseID, forIndexPath: indexPath) as! SentMemesTableViewCell
+		let cell = tableView.dequeueReusableCellWithIdentifier(SentMemesTableViewCell.UI.ReuseID, forIndexPath: indexPath) as! SentMemesTableViewCell
 
 		cell.topPhraseRegularCompact!.text    = meme.topPhrase
 		cell.bottomPhraseRegularCompact!.text = meme.bottomPhrase
@@ -90,13 +101,13 @@ class SentMemesTableViewController: UITableViewController {
 	override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
 		assert(tableView == self.tableView, "Unexpected table view requesting edit actions")
 
-		let deleteAction = UITableViewRowAction(style: .Default, title: "Delete") { (action, indexPath) -> Void in
+		let deleteAction = UITableViewRowAction(style: .Default, title: ActionTitle.Delete) { (action, indexPath) -> Void in
 			MemesManager.sharedInstance.deleteMemeAtIndexPath(indexPath)
 			tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
 			self.editing = false
 		}
 
-		let cancelAction = UITableViewRowAction(style: .Default, title: "Cancel") { (action, indexPath) -> Void in
+		let cancelAction = UITableViewRowAction(style: .Default, title: ActionTitle.Cancel) { (action, indexPath) -> Void in
 			self.editing = false
 		}
 
@@ -123,7 +134,7 @@ class SentMemesTableViewController: UITableViewController {
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		assert(tableView == self.tableView, "Unexpected table view selected a row")
 
-		let memeDetailVC = storyboard?.instantiateViewControllerWithIdentifier(MemeDetailVCStoryboardID) as! MemeDetailViewController
+		let memeDetailVC = storyboard?.instantiateViewControllerWithIdentifier(MemeDetailViewController.UI.StoryboardID) as! MemeDetailViewController
 		memeDetailVC.memeToDisplay = MemesManager.sharedInstance.memeAtIndexPath(indexPath)
 
 		navigationController?.pushViewController(memeDetailVC, animated: true)

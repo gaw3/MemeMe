@@ -11,6 +11,34 @@ import UIKit
 class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate,
 										  UINavigationControllerDelegate, UITextFieldDelegate {
 
+	// MARK: - Private Constants
+
+	private struct ImpactFont {
+		static let Name = "Impact"
+
+		static let Size:        CGFloat = 40.0
+		static let StrokeWidth: CGFloat = -3.0
+	}
+
+	private struct Scale {
+		static let DefaultToMainScreen: CGFloat = 0.0
+	}
+
+	private struct SEL {
+		static let KeyboardWillHide: Selector = "keyboardWillHide:"
+		static let KeyboardWillShow: Selector = "keyboardWillShow:"
+	}
+
+	private struct TextField {
+		static let PlaceholderTextTop    = "TOP"
+		static let PlaceholderTextBottom = "BOTTOM"
+
+		static let Height:      CGFloat = 50.0
+		static let MinSizeFont: CGFloat = 12.0
+		static let InsetX:      CGFloat = 5.0 // dist(x) between leading edges or trailing edges of meme image view & text fields
+		static let InsetY:      CGFloat = 5.0 // dist(y) between top edges or bottom edges of meme image view & text fields
+	}
+
 	// MARK: - IB Outlets
 
 	@IBOutlet weak var actionButton: UIBarButtonItem!
@@ -28,8 +56,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	private var topMemeTextField:		UITextField!
 
 	private var amountToShiftMainViewOnYAxis:             CGFloat = 0.0
-	private var originTopMemeTextFieldInMainViewSpace:    CGPoint = CGPointMake(0, 0)
-	private var originBottomMemeTextFieldInMainViewSpace: CGPoint = CGPointMake(0, 0)
+	private var originTopMemeTextFieldInMainViewSpace:    CGPoint = CGPointZero
+	private var originBottomMemeTextFieldInMainViewSpace: CGPoint = CGPointZero
 
 	// MARK: - View Events
 
@@ -49,8 +77,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 			bottomMemeTextField = initMemeTextField(memeToEdit.bottomPhrase)
 		} else {
 			originalImage       = nil
-			topMemeTextField    = initMemeTextField("TOP")
-			bottomMemeTextField = initMemeTextField("BOTTOM")
+			topMemeTextField    = initMemeTextField(TextField.PlaceholderTextTop)
+			bottomMemeTextField = initMemeTextField(TextField.PlaceholderTextBottom)
 		}
 
 		view.addSubview(topMemeTextField)
@@ -173,7 +201,7 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	private func generateMemedImage() -> UIImage {
 		prepareViewHierarchyForGraphicsImageContext()
 
-		UIGraphicsBeginImageContextWithOptions(memeImageView.frame.size, true, 0.0)
+		UIGraphicsBeginImageContextWithOptions(memeImageView.frame.size, true, Scale.DefaultToMainScreen)
 		memeImageView.drawViewHierarchyInRect(memeImageView.bounds, afterScreenUpdates: true)
 		let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
 		UIGraphicsEndImageContext()
@@ -216,8 +244,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		topMemeTextField.frame.origin    = originTopMemeTextFieldInMainViewSpace
 		bottomMemeTextField.frame.origin = originBottomMemeTextFieldInMainViewSpace
 
-		originTopMemeTextFieldInMainViewSpace    = CGPointMake(0, 0)
-		originBottomMemeTextFieldInMainViewSpace = CGPointMake(0, 0)
+		originTopMemeTextFieldInMainViewSpace    = CGPointZero
+		originBottomMemeTextFieldInMainViewSpace = CGPointZero
 	}
 	
 	// MARK: - Private:  Initialization
@@ -236,8 +264,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		let textField          = UITextField()
 		let memeTextAttributes = [NSStrokeColorAttributeName     : UIColor.blackColor(),
 			                       NSForegroundColorAttributeName : UIColor.whiteColor(),
-			                       NSFontAttributeName            : UIFont(name: "Impact", size: 40)!,
-			                       NSStrokeWidthAttributeName     : -3.0]
+			                       NSFontAttributeName            : UIFont(name: ImpactFont.Name, size: ImpactFont.Size)!,
+			                       NSStrokeWidthAttributeName     : ImpactFont.StrokeWidth]
 
 		textField.adjustsFontSizeToFitWidth = true
 		textField.autocapitalizationType    = .AllCharacters
@@ -246,10 +274,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 		textField.clearsOnBeginEditing      = true
 		textField.defaultTextAttributes     = memeTextAttributes
 		textField.delegate                  = self
-		textField.frame.size.height         = 50.0
+		textField.frame.size.height         = TextField.Height
 		textField.hidden                    = false
 		textField.keyboardType              = .Default
-		textField.minimumFontSize           = 12.0
+		textField.minimumFontSize           = TextField.MinSizeFont
 		textField.text                      = text
 		textField.textAlignment             = .Center
 
@@ -259,8 +287,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	// MARK: - Private:  Keyboards
 
 	private func subscribeToKeyboardNotifications() {
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.KeyboardWillHide, name: UIKeyboardWillHideNotification, object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.KeyboardWillShow, name: UIKeyboardWillShowNotification, object: nil)
 	}
 
 	private func unsubscribeFromKeyboardNotifications() {
@@ -290,20 +318,18 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
 	}
 
 	private func resetMemeTextFields() {
-		let xInset: CGFloat = 5.0 // dist(x) between leading edges or trailing edges of meme image view & text fields
-		let yInset: CGFloat = 5.0 // dist(y) between top edges or bottom edges of meme image view & text fields
-		let textFieldWidth: CGFloat = memeImageView.frame.size.width - (2 * xInset)
+		let textFieldWidth: CGFloat = memeImageView.frame.size.width - (2 * TextField.InsetX)
 
 		topMemeTextField.enabled          = (originalImage != nil)
 		topMemeTextField.frame.size.width = textFieldWidth
-		topMemeTextField.frame.origin     = CGPointMake(memeImageView.frame.origin.x + xInset,
-																		memeImageView.frame.origin.y + yInset)
+		topMemeTextField.frame.origin     = CGPointMake(memeImageView.frame.origin.x + TextField.InsetX,
+																		memeImageView.frame.origin.y + TextField.InsetY)
 
 		bottomMemeTextField.enabled          = (originalImage != nil)
 		bottomMemeTextField.frame.size.width = textFieldWidth
-		bottomMemeTextField.frame.origin     = CGPointMake(memeImageView.frame.origin.x + xInset,
+		bottomMemeTextField.frame.origin     = CGPointMake(memeImageView.frame.origin.x + TextField.InsetX,
 																			memeImageView.frame.origin.y + memeImageView.frame.size.height -
-																			yInset - bottomMemeTextField.frame.height)
+																			TextField.InsetY - bottomMemeTextField.frame.height)
 	}
 
 }

@@ -8,9 +8,13 @@
 
 import UIKit
 
-let SentMemesTableViewCellReuseID = "SentMemesTableViewCell"
-
 class SentMemesTableViewCell: UITableViewCell {
+
+	// MARK: - Internal Constants
+
+	internal struct UI {
+		static let ReuseID = "SentMemesTableViewCell"
+	}
 
    // for vertSizeClass = Regular && horizSizeClass = Compact
 	// iPhone 6+ / 6s+ in Portrait
