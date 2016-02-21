@@ -52,6 +52,8 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 		flowLayout.minimumLineSpacing      = Layout.MinimumInteritemSpacing
 	}
 
+	// MARK: - View Layout
+
 	override internal func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 

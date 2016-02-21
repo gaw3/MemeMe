@@ -13,6 +13,10 @@ private let _sharedInstance = MemesManager()
 
 final internal class MemesManager: NSObject {
 
+	class internal var sharedInstance: MemesManager {
+		return _sharedInstance
+	}
+
 	// MARK: - Internal Constants
 
 	internal struct Notification {
@@ -21,13 +25,9 @@ final internal class MemesManager: NSObject {
 		static let MemeWasMoved   = "MemesManagerMemeWasMovedNotification"
 	}
 
-	// MARK: - Class variables
+	// MARK: - Private Stored Variables
 
 	private var memes: [Meme]
-
-	class internal var sharedInstance: MemesManager {
-		return _sharedInstance
-	}
 
 	// MARK: - API
 

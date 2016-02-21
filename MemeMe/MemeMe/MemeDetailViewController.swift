@@ -8,8 +8,6 @@
 
 import UIKit
 
-// let MemeDetailVCStoryboardID = "MemeDetailViewController"
-
 final internal class MemeDetailViewController: UIViewController {
 
 	// MARK: - Internal Constants
@@ -18,10 +16,12 @@ final internal class MemeDetailViewController: UIViewController {
 		static let StoryboardID = "MemeDetailViewController"
 	}
 
-	// MARK: - Class Variables
+	// MARK: - Internal Stored Variables
 
 	internal var memeToDisplay: Meme!
 	
+	// MARK: - Private Stored Variables
+
 	private var memeDetailView: UIImageView!
 
 	// MARK: - View Events

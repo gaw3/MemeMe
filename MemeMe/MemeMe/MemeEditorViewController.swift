@@ -39,16 +39,11 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 		static let InsetY:      CGFloat = 5.0 // dist(y) between top edges or bottom edges of meme image view & text fields
 	}
 
-	// MARK: - IB Outlets
-
-	@IBOutlet weak internal var actionButton: UIBarButtonItem!
-	@IBOutlet weak internal var cameraButton: UIBarButtonItem!
-	@IBOutlet weak internal var cancelButton: UIBarButtonItem!
-	@IBOutlet weak internal var photosButton: UIBarButtonItem!
-
-	// MARK: - Class Variables
+	// MARK: - Internal Stored Variables
 
 	internal var memeToEdit: Meme!
+
+	// MARK: - Private Stored Variables
 
 	private var bottomMemeTextField: UITextField!
 	private var memeImageView:			UIImageView!
@@ -59,6 +54,13 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 	private var originTopMemeTextFieldInMainViewSpace:    CGPoint = CGPointZero
 	private var originBottomMemeTextFieldInMainViewSpace: CGPoint = CGPointZero
 
+	// MARK: - IB Outlets
+
+	@IBOutlet weak internal var actionButton: UIBarButtonItem!
+	@IBOutlet weak internal var cameraButton: UIBarButtonItem!
+	@IBOutlet weak internal var cancelButton: UIBarButtonItem!
+	@IBOutlet weak internal var photosButton: UIBarButtonItem!
+	
 	// MARK: - View Events
 
 	override internal func viewDidLoad() {
