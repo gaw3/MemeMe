@@ -262,10 +262,10 @@ final class MemeEditorViewController: UIViewController, UIImagePickerControllerD
 
 	private func initMemeTextField(text: String) -> UITextField {
 		let textField          = UITextField()
-		let memeTextAttributes = [NSStrokeColorAttributeName     : UIColor.blackColor(),
-			                       NSForegroundColorAttributeName : UIColor.whiteColor(),
-			                       NSFontAttributeName            : UIFont(name: ImpactFont.Name, size: ImpactFont.Size)!,
-			                       NSStrokeWidthAttributeName     : ImpactFont.StrokeWidth]
+		let memeTextAttributes = [NSStrokeColorAttributeName:     UIColor.blackColor(),
+			                       NSForegroundColorAttributeName: UIColor.whiteColor(),
+			                       NSFontAttributeName:            UIFont(name: ImpactFont.Name, size: ImpactFont.Size)!,
+			                       NSStrokeWidthAttributeName:     ImpactFont.StrokeWidth]
 
 		textField.adjustsFontSizeToFitWidth = true
 		textField.autocapitalizationType    = .AllCharacters
