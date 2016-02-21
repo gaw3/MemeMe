@@ -1,10 +1,10 @@
 # Foundation
 
-NSFontAttributeName
-NSForegroundColorAttributeName
-NSNotification
-NSNotificationCenter
-NSStrokeColorAttributeName
-NSStrokeWidthAttributeName
-NSObject
-NSIndexPath
+* NSFontAttributeName
+* NSForegroundColorAttributeName
+* NSNotification
+* NSNotificationCenter
+* NSStrokeColorAttributeName
+* NSStrokeWidthAttributeName
+* NSObject
+* NSIndexPath

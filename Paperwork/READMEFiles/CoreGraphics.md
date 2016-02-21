@@ -1,7 +1,7 @@
 # CoreGraphics
 
-CGFloat
-CGPoint
-CGPointMake
-CGSize
-CGSizeMake
+* CGFloat
+* CGPoint
+* CGPointMake
+* CGSize
+* CGSizeMake

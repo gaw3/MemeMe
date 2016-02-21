@@ -1,4 +1,4 @@
-# ![App Icon](./Paperwork/READMEFiles/PitchPerfect_80.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MemeMe
+# ![App Icon](./Paperwork/READMEFiles/MemeMe_80.png)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MemeMe
 
 MemeMe allows the user to affix captions to the top and bottom of a
 selected photo, thereby creating a [meme](./Paperwork/READMEFiles/Meme.md).
