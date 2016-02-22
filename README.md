@@ -18,8 +18,6 @@ Program.  The following list contains pertinent course documents:
 * [Udacity Git Commit Message Style Guide](./Paperwork/Udacity/UdacityGitCommitMessageStyleGuide.pdf)  
 * [Udacity Project & Code Reviews](https://review.udacity.com/#!/reviews/72996)  
 
-##     
-
 |               | Project Submission             | Currently
 | :----------   | :-------------             | :----------------- |
 | Grade:        |  ***Exceeds Expectations*** | |  
