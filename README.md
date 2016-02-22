@@ -16,21 +16,13 @@ Program.  The following list contains pertinent course documents:
 * [Udacity Git Commit Message Style Guide](./Paperwork/Udacity/UdacityGitCommitMessageStyleGuide.pdf)  
 * [Udacity Project & Code Reviews](https://review.udacity.com/#!/reviews/72996)
 
-
-| Project Submission |            |
-| :----------   | :------------- |
-| Grade:        | ***Exceeds Expectations*** |
-| App Version:  | 2.0 |
-| Environment:  | Xcode 7.1 / iOS 9.1 |
-| Devices:      | iPhone only |
-| Orientations: | All except Upside Down|
-
-| Currently    |            |
-| :----------   | :------------- |
-| App Version:  | 2.1&nbsp;&nbsp;(GH tag v2.1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[changelog](./Paperwork/READMEFiles/ChangeLog.md)|
-| Environment:  | Xcode 7.2.1 / iOS 9.2 |
-| Devices:      | iPhone only |
-| Orientations: | All except Upside Down|
+|               | Project Submission             | Currently
+| :----------   | :-------------             | :----------------- |
+| Grade:        |  ***Exceeds Expectations*** | |  
+| App Version:  | 2.0                        |2.1&nbsp;&nbsp;(GH tag v2.1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[changelog](./Paperwork/READMEFiles/ChangeLog.md)|
+| Environment:  | Xcode 7.1 / iOS 9.1        | Xcode 7.2.1 / iOS 9.2 |
+| Devices:      | iPhone only                | No Change |
+| Orientations: | All except Upside Down     | No Change |
 
 ## Design
 
