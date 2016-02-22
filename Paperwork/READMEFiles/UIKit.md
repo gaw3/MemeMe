@@ -1,32 +1,52 @@
 # UIKit
 
-* UIActivityViewController
+
 * UIApplication
 * UIApplicationDelegate
+* UIResponder
+* UIWindow
+
+---
+* UIDevice
+* UIDeviceOrientationIsPortrait
+* UITraitCollection
+* UIViewControllerTransitionCoordinator
+
+---
+* UIActivityViewController
 * UIBarButtonItem
+* UIColor
+* UILabel
+
+---
 * UICollectionView
 * UICollectionViewCell
 * UICollectionViewController
 * UICollectionViewDataSource
 * UICollectionViewDelegate
-* UIColor
-* UIDevice
-* UIDeviceOrientationIsPortrait
+
+---
 * UIGraphicsBeginImageContextWithOptions
 * UIGraphicsEndImageContext
 * UIGraphicsGetImageFromCurrentImageContext
+
+---
 * UIImage
 * UIImagePickerController
 * UIImagePickerControllerDelegate
 * UIImagePickerControllerOriginalImage
 * UIImagePickerControllerSourceType
 * UIImageView
+
+---
 * UIKeyboardWillHideNotification
 * UIKeyboardWillShowNotification
-* UILabel
+
+---
 * UINavigationController
 * UINavigationControllerDelegate
-* UIResponder
+
+---
 * UITableView
 * UITableViewCell
 * UITableViewCellEditingStyle
@@ -34,7 +54,7 @@
 * UITableViewDataSource
 * UITableViewDelegate
 * UITableViewRowAction
+---
+
+* UITextField
 * UITextFieldDelegate
-* UITraitCollection
-* UIViewControllerTransitionCoordinator
-* UIWindow
