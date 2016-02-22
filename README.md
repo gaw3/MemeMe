@@ -8,15 +8,17 @@ text.  As memes are sent, they are collected & held until the app
 terminates.  Previously-sent memes are presented in a table or a
 collection, and may be edited & resent.  
 
+## Project
+
 MemeMe is Portfolio Project #2 of the Udacity iOS Developer Nanodegree
 Program.  The following list contains pertinent course documents:
 * [Udacity App Specification](./Paperwork/Udacity/UdacityAppSpecification.pdf)  
 * [Udacity Grading Rubric](./Paperwork/Udacity/UdacityGradingRubric.pdf)  
 * [GitHub Swift Style Guide](./Paperwork/Udacity/GitHubSwiftStyleGuide.pdf)  
 * [Udacity Git Commit Message Style Guide](./Paperwork/Udacity/UdacityGitCommitMessageStyleGuide.pdf)  
-* [Udacity Project & Code Reviews](https://review.udacity.com/#!/reviews/72996)
+* [Udacity Project & Code Reviews](https://review.udacity.com/#!/reviews/72996)  
 
-## Project
+##     
 
 |               | Project Submission             | Currently
 | :----------   | :-------------             | :----------------- |
