@@ -27,7 +27,7 @@ final internal class SentMemesTableViewController: UITableViewController {
 	override internal func viewDidLoad() {
 		super.viewDidLoad()
 
-
+		addNotificationObservers()
 		navigationItem.leftBarButtonItem = self.editButtonItem()
 	}
 
