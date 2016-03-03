@@ -1,9 +1,11 @@
 # CoreGraphics
 
-* CGFloat
-* CGPoint
-* CGPointMake
-* CGPointZero
-* CGSize
-* CGSizeMake
-* CGSizeZero
+```
+CGFloat
+CGPoint
+CGPointMake
+CGPointZero
+CGRectValue
+CGSize
+CGSizeMake
+```
