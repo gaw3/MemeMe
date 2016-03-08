@@ -1,5 +1,14 @@
 # Change Log
 
-### Version 2.1
-* Cleanup before recruiters and such start looking at my projects.
-* Get the README to a point where it is usable.
+### v2.2
+* Finish the README.
+
+### v2.1
+* Update to Xcode 7.2.1 / iOS 9.2
+* Comply with GitHub Swift Style Guide
+* Comply with Udacity Git Commit Message Style Guide
+* Refactor the repo properly
+* Use Swift.gitignore as starting point for local .gitignore
+* Start the README.
+
+### v2.0 - Final Project Submission
