@@ -25,7 +25,7 @@ MemeMe is Portfolio Project #2 of the Udacity iOS Developer Nanodegree Program. 
 Upon app launch, the initial view is the Sent Memes Tabbed View  with the **Table** tab activated.  There is no persistence in this app, so there are [no sent memes to display](./Paperwork/READMEFiles/SentMemesEmpty.md).  As memes are created and distributed, a memory store keeps track of these [memes for appropriate presentation](./Paperwork/READMEFiles/SentMemesFull.md). However, upon app termination, all these memes are lost.
 
   * The **Table** tab is the default tab, and presents the memes in a table view.  Each row contains a sent meme, with the top & bottom legends appearing to the side.
-    - Tap a roow to present the meme in the [Meme Detail View](./Paperwork/READMEFiles/MemeDetailView.md).
+    - Tap a row to present the meme in the [Meme Detail View](./Paperwork/READMEFiles/MemeDetailView.md).
     - Left-Swipe a row to present the option to [delete](./Paperwork/READMEFiles/SwipeLeftOnRow.md) the associated meme from the memory store.<br/><br/>
   * The **Collection** tab presents the memes in a collection view.  Each cell contains only a sent meme.
     - Tap a cell to present the meme in the [Meme Detail View](./Paperwork/READMEFiles/MemeDetailView.md).<br/><br/>
