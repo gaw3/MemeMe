@@ -1,7 +1,8 @@
 # Change Log
 
-### v2.2
+### v2.3
 * Update to Xcode 7.3 / iOS 9.3
+* Fix the deprecated code
 
 ### v2.2
 * Finish the README.
