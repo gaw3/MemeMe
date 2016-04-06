@@ -21,7 +21,7 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 	}
 
 	private struct SEL {
-		static let MemesWereModified: Selector = "memesWereModified:"
+		static let MemesWereModified = #selector(memesWereModified(_:))
 	}
 
 	private struct UI {

@@ -26,8 +26,8 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 	}
 
 	private struct SEL {
-		static let KeyboardWillHide: Selector = "keyboardWillHide:"
-		static let KeyboardWillShow: Selector = "keyboardWillShow:"
+		static let KeyboardWillHide = #selector(keyboardWillHide(_:))
+		static let KeyboardWillShow = #selector(keyboardWillShow(_:))
 	}
 
 	private struct TextField {

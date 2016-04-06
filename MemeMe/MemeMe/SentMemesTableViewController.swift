@@ -19,7 +19,7 @@ final internal class SentMemesTableViewController: UITableViewController {
 	}
 
 	private struct SEL {
-		static let MemeWasAdded: Selector = "memeWasAdded:"
+		static let MemeWasAdded = #selector(memeWasAdded(_:))
 	}
 
 	// MARK: - View Events
