@@ -10,7 +10,7 @@ MemeMe is Portfolio Project #2 of the Udacity iOS Developer Nanodegree Program. 
 * [Udacity Grading Rubric](./Paperwork/Udacity/UdacityGradingRubric.pdf)  
 * [GitHub Swift Style Guide](./Paperwork/Udacity/GitHubSwiftStyleGuide.pdf)  
 * [Udacity Git Commit Message Style Guide](./Paperwork/Udacity/UdacityGitCommitMessageStyleGuide.pdf)  
-* [Udacity Project Review](./Paperwork/Udacity/ProjectReview.pdf)<br/><br/>
+* [Udacity Project Review](./Paperwork/Udacity/UdacityProjectReview.pdf)<br/><br/>
 
 |               | Project Submission         | Current State
 | :----------   | :-------------             | :-----------------  |
