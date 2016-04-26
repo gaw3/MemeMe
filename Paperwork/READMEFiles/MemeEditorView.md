@@ -14,7 +14,7 @@
 * **TOP** & **BOTTOM** fields cannot be edited until an image has been chosen for the meme.
 * The **Share** button is unavailable until an image has been chosen for the meme.
 * Tap the **Camera** button to activate the device camera and acquire image.
-* Tap the **Photos** button to present the Photo Libary and select the desired image.
+* Tap the **Photos** button to present the Photo Library and select the desired image.
 
 ##### Editor has Selected Image
 | | |
@@ -38,7 +38,7 @@
 
 * When editing the **TOP** text field, the **BOTTOM** text field is obscured by the keyboard.
 * When editing the **BOTTOM** text field, the editor view slides up so that the field is not obscured.
-* Font size shrinks (up to a point) to accomodate longer text entries.
+* Font size shrinks (up to a point) to accommodate longer text entries.
 
 ##### Completed Meme
 | | |
