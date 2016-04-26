@@ -5,7 +5,6 @@ MemeMe allows the user to affix captions to the top and bottom of a selected pho
 ## Project
 
 MemeMe is Portfolio Project #2 of the Udacity iOS Developer Nanodegree Program.  The following list contains pertinent course documents:
-
 * [Udacity App Specification](./Paperwork/Udacity/UdacityAppSpecification.pdf)  
 * [Udacity Grading Rubric](./Paperwork/Udacity/UdacityGradingRubric.pdf)  
 * [GitHub Swift Style Guide](./Paperwork/Udacity/GitHubSwiftStyleGuide.pdf)  
