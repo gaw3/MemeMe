@@ -2,7 +2,7 @@
 
 ```
 UIApplication
-UIApplicationDelegate
+UIApplicationDelegate - protocol
 UIResponder
 UIView
 UIViewController
@@ -28,8 +28,8 @@ UILabel
 UICollectionView
 UICollectionViewCell
 UICollectionViewController
-UICollectionViewDataSource
-UICollectionViewDelegate
+UICollectionViewDataSource - protocol
+UICollectionViewDelegate - protocol
 UICollectionViewFlowLayout
 ```
 
@@ -42,7 +42,7 @@ UIGraphicsGetImageFromCurrentImageContext
 ```
 UIImage
 UIImagePickerController
-UIImagePickerControllerDelegate
+UIImagePickerControllerDelegate - protocol
 UIImageView
 ```
 
@@ -53,7 +53,7 @@ UIKeyboardWillShowNotification
 
 ```
 UINavigationController
-UINavigationControllerDelegate
+UINavigationControllerDelegate - protocol
 ```
 
 ```
@@ -61,12 +61,12 @@ UITableView
 UITableViewCell
 UITableViewCellEditingStyle
 UITableViewController
-UITableViewDataSource
-UITableViewDelegate
+UITableViewDataSource - protocol
+UITableViewDelegate - protocol
 UITableViewRowAction
 ```
 
 ```
 UITextField
-UITextFieldDelegate
+UITextFieldDelegate - protocol
 ```

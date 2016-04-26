@@ -10,15 +10,16 @@ MemeMe is Portfolio Project #2 of the Udacity iOS Developer Nanodegree Program. 
 * [Udacity Grading Rubric](./Paperwork/Udacity/UdacityGradingRubric.pdf)  
 * [GitHub Swift Style Guide](./Paperwork/Udacity/GitHubSwiftStyleGuide.pdf)  
 * [Udacity Git Commit Message Style Guide](./Paperwork/Udacity/UdacityGitCommitMessageStyleGuide.pdf)  
-* [Udacity Project & Code Reviews](https://review.udacity.com/#!/reviews/72996)<br/><br/>
+* [Udacity Project Review](./Paperwork/Udacity/ProjectReview.pdf)<br/><br/>
 
-|               | Project Submission         | Currently
-| :----------   | :-------------             | :----------------- |
-| Grade:        | ***Exceeds Expectations*** | |  
-| App Version:  | 2.0                        |2.3&nbsp;&nbsp;(GH tag v2.3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[changelog](./Paperwork/READMEFiles/ChangeLog.md)|
+|               | Project Submission         | Current State
+| :----------   | :-------------             | :-----------------  |
+| Grade:        | ***Exceeds Expectations*** |                     |  
+| GitHub Tag    | v2.0                       | v2.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[changelog](./Paperwork/READMEFiles/ChangeLog.md) |
+| App Version:  | 2.0                        | 2.3                 |
 | Environment:  | Xcode 7.1 / iOS 9.1        | Xcode 7.3 / iOS 9.3 |
-| Devices:      | iPhone only                | No Change |
-| Orientations: | All except Upside Down     | No Change |
+| Devices:      | iPhone only                | same                |
+| Orientations: | All except Upside Down     | same                |
 
 ## Design
 
@@ -33,26 +34,12 @@ Upon app launch, the initial view is the Sent Memes Tabbed View  with the **Tabl
     - Tap the **Add** button (&nbsp;![](./Paperwork/images/AddButtonIcon_15.png), right side, always visible) to present an [empty Meme Editor View](./Paperwork/READMEFiles/MemeEditorView.md), in order to create and send a meme.
     - Tap the **Edit** button (left side, visible for **Table** tab only) to present an [interface](./Paperwork/READMEFiles/TableEditMode.md) for deleting and reordering sent memes.
  
-### iOS Developer Libraries In Use
+### iOS Frameworks
 
-* [CoreGraphics](./Paperwork/READMEFiles/CoreGraphics.md)
 * [Foundation](./Paperwork/READMEFiles/Foundation.md)
 * [UIKit](./Paperwork/READMEFiles/UIKit.md)
 
-### Protocols Implemented
-
-```
-UIApplicationDelegate
-UICollectionViewDataSource
-UICollectionViewDelegate
-UIImagePickerControllerDelegate
-UINavigationControllerDelegate
-UITableViewDataSource
-UITableViewDelegate
-UITextFieldDelegate
-```
-
-## 3rd-Party
+### 3rd-Party
 
 * *GitHub Swift Style Guide* lives in this [repo](https://github.com/github/swift-style-guide).
 * `Swift.gitignore`, the template used to create the local `.gitignore` file, lives in this [repo](https://github.com/github/gitignore).

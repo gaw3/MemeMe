@@ -10,7 +10,7 @@
 | :---: | :---: |
 | ![](../images/MemeEditorEmptyPT.png) | ![](../images/MemeEditorEmptyLS.png) | 
 
-* At any time, tap the **Cancel** button to return to the Sent Memes Tabbed View.
+* At any time, tap the **Cancel** button to return to the **Sent Memes Tabbed View**.
 * **TOP** & **BOTTOM** fields cannot be edited until an image has been chosen for the meme.
 * The **Share** button is unavailable until an image has been chosen for the meme.
 * Tap the **Camera** button to activate the device camera and acquire image.
@@ -54,8 +54,8 @@
 
 * At this point, the meme has been placed in the local memory store, even if the **Cancel** button is tapped.
 * Control returns to the Meme Editor View after the activity is completed.  At this point:
-  - Tap the **Cancel** button to return to the Sent Memes Tabbed View;  or,
-  - Continue to use the Meme Editor as before.
+  - Tap the **Cancel** button to return to the **Sent Memes Tabbed View**;  or,
+  - Continue to use the **Meme Editor** as before.
 
 ##### Saved Meme
 | | |
