@@ -3,12 +3,12 @@
 ##### Buttons
 | Share | Camera |
 | :---: | :---: |
-| ![](../images/ShareButtonIcon_50.png) | ![](../images/CameraButtonIcon_50.png) | 
+| ![][ShareButton] | ![][CameraButton] | 
 
 ##### Editor is Empty
 | | |
 | :---: | :---: |
-| ![](../images/MemeEditorEmptyPT.png) | ![](../images/MemeEditorEmptyLS.png) | 
+| ![][EmptyPT] | ![][EmptyLS] | 
 
 * At any time, tap the **Cancel** button to return to the **Sent Memes Tabbed View**.
 * **TOP** & **BOTTOM** fields cannot be edited until an image has been chosen for the meme.
@@ -19,7 +19,7 @@
 ##### Editor has Selected Image
 | | |
 | :---: | :---: |
-| ![](../images/MemeEditorNewMemePT.png) | ![](../images/MemeEditorNewMemeLS.png) | 
+| ![][NewMemePT] | ![][NewMemeLS] | 
 
 * The **Share** button is now available.
 * The image has been scaled to fit the editor view.
@@ -29,12 +29,12 @@
 ##### Editing Top Field
 | | |
 | :---: | :---: |
-| ![](../images/MemeEditorEditingTopPT.png) | ![](../images/MemeEditorEditingTopLS.png) | 
+| ![][EditingTopPT] | ![][EditingTopLS] | 
 
 ##### Editing Bottom Field
 | | |
 | :---: | :---: |
-| ![](../images/MemeEditorEditingBottomPT.png) | ![](../images/MemeEditorEditingBottomLS.png) | 
+| ![][EditingBottomPT] | ![][EditingBottomLS] | 
 
 * When editing the **TOP** text field, the **BOTTOM** text field is obscured by the keyboard.
 * When editing the **BOTTOM** text field, the editor view slides up so that the field is not obscured.
@@ -43,23 +43,46 @@
 ##### Completed Meme
 | | |
 | :---: | :---: |
-| ![](../images/MemeEditorFinishedMemePT.png) | ![](../images/MemeEditorFinishedMemeLS.png) | 
+| ![][FinishedMemePT] | ![][FinishedMemeLS] | 
 
 * Tap the **Share** button to present distribution options (such an email and text).
 
 ##### Activity View
 | | |
 | :---: | :---: |
-| ![](../images/MemeEditorActivityViewPT.png) | ![](../images/MemeEditorActivityViewLS.png) | 
+| ![][ActivityViewPT] | ![][ActivityViewLS] | 
 
 * At this point, the meme has been placed in the local memory store, even if the **Cancel** button is tapped.
-* Control returns to the Meme Editor View after the activity is completed.  At this point:
+* Control returns to the **Meme Editor View** after the activity is completed.  At this point:
   - Tap the **Cancel** button to return to the **Sent Memes Tabbed View**;  or,
   - Continue to use the **Meme Editor** as before.
 
 ##### Saved Meme
 | | |
 | :---: | :---: |
-| ![](../images/SentMemesNewMemeTablePT.png)      | ![](../images/SentMemesNewMemeTableLS.png) | 
+| ![][NewMemeTablePT] | ![][NewMemeTableLS] | 
 | | |
-| ![](../images/SentMemesNewMemeCollectionPT.png) | ![](../images/SentMemesNewMemeCollectionLS.png) | 
+| ![][NewMemeCollectionPT] | ![][NewMemeCollectionLS] | 
+
+
+
+
+
+[ActivityViewLS]:      ../images/MemeEditorActivityViewLS.png
+[ActivityViewPT]:      ../images/MemeEditorActivityViewPT.png
+[CameraButton]:        ../images/CameraButtonIcon_50.png
+[EditingBottomLS]:     ../images/MemeEditorEditingBottomLS.png
+[EditingBottomPT]:     ../images/MemeEditorEditingBottomPT.png
+[EditingTopLS]:        ../images/MemeEditorEditingTopLS.png
+[EditingTopPT]:        ../images/MemeEditorEditingTopPT.png
+[EmptyLS]:             ../images/MemeEditorEmptyLS.png
+[EmptyPT]:             ../images/MemeEditorEmptyPT.png
+[FinishedMemeLS]:      ../images/MemeEditorFinishedMemeLS.png
+[FinishedMemePT]:      ../images/MemeEditorFinishedMemePT.png
+[NewMemeCollectionLS]: ../images/SentMemesNewMemeCollectionLS.png
+[NewMemeCollectionPT]: ../images/SentMemesNewMemeCollectionPT.png
+[NewMemeLS]:           ../images/MemeEditorNewMemeLS.png
+[NewMemePT]:           ../images/MemeEditorNewMemePT.png
+[NewMemeTableLS]:      ../images/SentMemesNewMemeTableLS.png
+[NewMemeTablePT]:      ../images/SentMemesNewMemeTablePT.png
+[ShareButton]:         ../images/ShareButtonIcon_50.png

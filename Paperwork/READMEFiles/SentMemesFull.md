@@ -1,13 +1,25 @@
 # Sent Memes Tabbed View w/ Memes
 
-##### Table Tab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](../images/TableTabIcon.png)
+##### Table Tab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![][TableIcon]
 
 | | |
 | :---: | :---: |
-| ![](../images/SentMemesTableFullPT.png) | ![](../images/SentMemesTableFullLS.png) |
+| ![][TableFullPT] | ![][TableFullLS] |
 
-##### Collection Tab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![](../images/CollectionTabIcon.png)
+##### Collection Tab&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![][CollectionIcon]
 
 | | |
 | :---: | :---: |
-| ![](../images/SentMemesCollectionFullPT.png) | ![](../images/SentMemesCollectionFullLS.png) |
+| ![][CollectionFullPT] | ![][CollectionFullLS] |
+
+
+
+
+
+[CollectionIcon]:    ../images/CollectionTabIcon.png
+[TableIcon]:         ../images/TableTabIcon.png
+
+[CollectionFullLS]:  ../images/SentMemesCollectionFullLS.png
+[CollectionFullPT]:  ../images/SentMemesCollectionFullPT.png
+[TableFullLS]:       ../images/SentMemesTableFullLS.png
+[TableFullPT]:       ../images/SentMemesTableFullPT.png

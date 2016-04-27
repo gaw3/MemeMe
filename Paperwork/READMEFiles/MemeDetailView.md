@@ -1,11 +1,11 @@
 # Meme Detail View
 
-Please read [Meme Editor View](./MemeEditorView.md) before reading this page.
+Please read [Meme Editor View][MEV] before reading this page.
 
 ##### Sent Meme Detail
 | | |
 | :---: | :---: |
-| ![](../images/MemeDetailPT.png) | ![](../images/MemeDetailLS.png) | 
+| ![][DetailPT] | ![][DetailLS] | 
 
 * Tap the **< Sent Memes** button to return to the **Sent Memes Tabbed View**.
 * Tap the **Edit** button to modify this meme in the **Meme Editor View**. 
@@ -13,7 +13,7 @@ Please read [Meme Editor View](./MemeEditorView.md) before reading this page.
 ##### Meme Editor w/ Edited Meme
 | | |
 | :---: | :---: |
-| ![](../images/MemeEditorEditedMemePT.png) | ![](../images/MemeEditorEditedMemeLS.png) | 
+| ![][EditedMemePT] | ![][EditedMemeLS] | 
 
 * Use the **Meme Editor View** to edit and distribute this new meme.
 * A new meme is saved in the memory store;  the original meme is not overwritten.
@@ -23,7 +23,21 @@ Please read [Meme Editor View](./MemeEditorView.md) before reading this page.
 ##### Meme w/ Edits is Saved
 | | |
 | :---: | :---: |
-| ![](../images/SentMemes2MemesTablePT.png)      | ![](../images/SentMemes2MemesTableLS.png) | 
+| ![][2MemesTablePT] | ![][2MemesTableLS] | 
 | | |
-| ![](../images/SentMemes2MemesCollectionPT.png) | ![](../images/SentMemes2MemesCollectionLS.png) | 
+| ![][2MemesCollectionPT] | ![][2MemesCollectionLS] | 
 
+
+
+
+
+[2MemesCollectionLS]: ../images/SentMemes2MemesCollectionLS.png
+[2MemesCollectionPT]: ../images/SentMemes2MemesCollectionPT.png
+[2MemesTableLS]:      ../images/SentMemes2MemesTableLS.png
+[2MemesTablePT]:      ../images/SentMemes2MemesTablePT.png
+[DetailLS]:           ../images/MemeDetailLS.png
+[DetailPT]:           ../images/MemeDetailPT.png
+[EditedMemeLS]:       ../images/MemeEditorEditedMemeLS.png
+[EditedMemePT]:       ../images/MemeEditorEditedMemePT.png
+
+[MEV]:                ./MemeEditorView.md
