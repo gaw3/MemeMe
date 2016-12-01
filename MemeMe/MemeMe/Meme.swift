@@ -8,9 +8,9 @@
 
 import UIKit
 
-internal struct Meme {
-	let originalImage: UIImage!
-	let topPhrase:     String!
-	let bottomPhrase:  String!
-	let memedImage:    UIImage!
+struct Meme {
+    let originalImage: UIImage!
+    let topPhrase:     String!
+    let bottomPhrase:  String!
+    let memedImage:    UIImage!
 }

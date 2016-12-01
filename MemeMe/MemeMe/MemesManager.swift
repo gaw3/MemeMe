@@ -13,60 +13,60 @@ private let _sharedInstance = MemesManager()
 
 final class MemesManager: NSObject {
 
-	class var sharedInstance: MemesManager {
-		return _sharedInstance
-	}
+    class var sharedInstance: MemesManager {
+        return _sharedInstance
+    }
 
-	// MARK: - Internal Constants
+    // MARK: - Internal Constants
 
-	struct Notification {
-		static let MemeWasAdded   = "MemesManagerMemeWasAddedNotification"
-		static let MemeWasDeleted = "MemesManagerMemeWadDeletedNotification"
-		static let MemeWasMoved   = "MemesManagerMemeWasMovedNotification"
-	}
+    struct Notification {
+        static let MemeWasAdded   = "MemesManagerMemeWasAddedNotification"
+        static let MemeWasDeleted = "MemesManagerMemeWadDeletedNotification"
+        static let MemeWasMoved   = "MemesManagerMemeWasMovedNotification"
+    }
 
-	// MARK: - Private Stored Variables
+    // MARK: - Private Stored Variables
 
-	fileprivate var memes: [Meme]
+    fileprivate var memes: [Meme]
 
-	// MARK: - Internal Computed Variables
+    // MARK: - Internal Computed Variables
 
-	var count: Int {
-		return memes.count
-	}
+    var count: Int {
+        return memes.count
+    }
 
-	// MARK: - API
+    // MARK: - API
 
-	func add(_ newMeme: Meme) {
-		memes.append(newMeme)
-		postNotification(Notification.MemeWasAdded)
-	}
+    func add(_ newMeme: Meme) {
+        memes.append(newMeme)
+        postNotification(Notification.MemeWasAdded)
+    }
 
-	func deleteMemeAtIndexPath(_ indexPath: IndexPath) {
-		memes.remove(at: indexPath.row)
-		postNotification(Notification.MemeWasDeleted)
-	}
+    func deleteMemeAtIndexPath(_ indexPath: IndexPath) {
+        memes.remove(at: indexPath.row)
+        postNotification(Notification.MemeWasDeleted)
+    }
 
-	func memeAtIndexPath(_ indexPath: IndexPath) -> Meme {
-		return memes[indexPath.row]
-	}
+    func memeAtIndexPath(_ indexPath: IndexPath) -> Meme {
+        return memes[indexPath.row]
+    }
 
-	func moveMemeAtIndexPath(_ indexPath: IndexPath, toIndexPath: IndexPath)
-	{
-		let meme = memes.remove(at: indexPath.row)
-		memes.insert(meme, at: toIndexPath.row)
-		postNotification(Notification.MemeWasMoved)
-	}
+    func moveMemeAtIndexPath(_ indexPath: IndexPath, toIndexPath: IndexPath)
+    {
+        let meme = memes.remove(at: indexPath.row)
+        memes.insert(meme, at: toIndexPath.row)
+        postNotification(Notification.MemeWasMoved)
+    }
 
-	// MARK: - Private
+    // MARK: - Private
 
-	fileprivate override init() {
-		memes = [Meme]()
-		super.init()
-	}
-
-	fileprivate func postNotification(_ name: String) {
-		NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: name), object: nil)
-	}
-	
+    fileprivate override init() {
+        memes = [Meme]()
+        super.init()
+    }
+    
+    fileprivate func postNotification(_ name: String) {
+        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: name), object: nil)
+    }
+    
 }

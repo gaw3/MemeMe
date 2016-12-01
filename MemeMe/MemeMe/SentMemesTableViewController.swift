@@ -11,137 +11,137 @@ import UIKit
 
 final class SentMemesTableViewController: UITableViewController {
 
-	// MARK: - Private Constants
+    // MARK: - Private Constants
 
-	fileprivate struct ActionTitle {
-		static let Cancel = "Cancel"
-		static let Delete = "Delete"
-	}
+    fileprivate struct ActionTitle {
+        static let Cancel = "Cancel"
+        static let Delete = "Delete"
+    }
 
-	fileprivate struct SEL {
-		static let MemeWasAdded = #selector(memeWasAdded(_:))
-	}
+    fileprivate struct SEL {
+        static let MemeWasAdded = #selector(memeWasAdded(_:))
+    }
 
-	// MARK: - View Events
+    // MARK: - View Events
 
-	override func viewDidLoad() {
-		super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-		addNotificationObservers()
-		navigationItem.leftBarButtonItem = self.editButtonItem
-	}
+        addNotificationObservers()
+        navigationItem.leftBarButtonItem = self.editButtonItem
+    }
 
-	// MARK: - IB Actions
+    // MARK: - IB Actions
 
-	@IBAction func addButtonWasTapped(_ sender: UIBarButtonItem) {
-		let memeEditor = storyboard?.instantiateViewController(withIdentifier: StoryboardID.MemeEditorNavCtlr) as! UINavigationController
-		present(memeEditor, animated: true, completion: nil)
-	}
+    @IBAction func addButtonWasTapped(_ sender: UIBarButtonItem) {
+        let memeEditor = storyboard?.instantiateViewController(withIdentifier: StoryboardID.MemeEditorNavCtlr) as! UINavigationController
+        present(memeEditor, animated: true, completion: nil)
+    }
 
-	// MARK: - Environment Changes
+    // MARK: - Environment Changes
 
-	override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-		super.willTransition(to: newCollection, with: coordinator)
-		tableView.reloadData()
-	}
-	
-	// MARK: - NSNotifications
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        tableView.reloadData()
+    }
 
-	internal func memeWasAdded(_ notification: Notification) {
-		assert(notification.name.rawValue == MemesManager.Notification.MemeWasAdded, "received unexpected NSNotification")
+    // MARK: - NSNotifications
 
-		tableView.reloadData()
-	}
+    internal func memeWasAdded(_ notification: Notification) {
+        assert(notification.name.rawValue == MemesManager.Notification.MemeWasAdded, "received unexpected NSNotification")
 
-	// MARK: - UITableViewDataSource
+        tableView.reloadData()
+    }
 
-	override func numberOfSections(in tableView: UITableView) -> Int {
-		assert(tableView == self.tableView, "Unexpected table view requesting number of sections in table view")
-		
-		return 1
-	}
+    // MARK: - UITableViewDataSource
 
-	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-		assert(tableView == self.tableView, "Unexpected table view requesting cell can be edited")
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        assert(tableView == self.tableView, "Unexpected table view requesting number of sections in table view")
 
-		return true
-	}
+        return 1
+    }
 
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		assert(tableView == self.tableView, "Unexpected table view requesting cell for row at index path")
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        assert(tableView == self.tableView, "Unexpected table view requesting cell can be edited")
 
-		let meme = memesMgr.memeAtIndexPath(indexPath)
-		let cell = tableView.dequeueReusableCell(withIdentifier: SentMemesTableViewCell.UI.ReuseID, for: indexPath) as! SentMemesTableViewCell
+        return true
+    }
 
-		cell.topPhraseRegularCompact!.text    = meme.topPhrase
-		cell.bottomPhraseRegularCompact!.text = meme.bottomPhrase
-		cell.memeViewRegularCompact!.image    = meme.memedImage
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        assert(tableView == self.tableView, "Unexpected table view requesting cell for row at index path")
 
-		if view.traitCollection.horizontalSizeClass == .regular && view.traitCollection.verticalSizeClass == .compact {
-			cell.topPhraseCompactRegular!.text    = meme.topPhrase
-			cell.bottomPhraseCompactRegular!.text = meme.bottomPhrase
-			cell.memeViewCompactRegular!.image    = meme.memedImage
-		}
+        let meme = memesMgr.memeAtIndexPath(indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: SentMemesTableViewCell.UI.ReuseID, for: indexPath) as! SentMemesTableViewCell
 
-		return cell
-	}
+        cell.topPhraseRegularCompact!.text    = meme.topPhrase
+        cell.bottomPhraseRegularCompact!.text = meme.bottomPhrase
+        cell.memeViewRegularCompact!.image    = meme.memedImage
 
-	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-		assert(tableView == self.tableView, "Unexpected table view committing editing style")
+        if view.traitCollection.horizontalSizeClass == .regular && view.traitCollection.verticalSizeClass == .compact {
+            cell.topPhraseCompactRegular!.text    = meme.topPhrase
+            cell.bottomPhraseCompactRegular!.text = meme.bottomPhrase
+            cell.memeViewCompactRegular!.image    = meme.memedImage
+        }
 
-		if editingStyle == .delete {
-			memesMgr.deleteMemeAtIndexPath(indexPath)
-			tableView.deleteRows(at: [indexPath], with: .fade)
-		}
+        return cell
+    }
 
-	}
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        assert(tableView == self.tableView, "Unexpected table view committing editing style")
 
-	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-		assert(tableView == self.tableView, "Unexpected table view requesting edit actions")
+        if editingStyle == .delete {
+            memesMgr.deleteMemeAtIndexPath(indexPath)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
 
-		let deleteAction = UITableViewRowAction(style: .default, title: ActionTitle.Delete) { (action, indexPath) -> Void in
-			self.memesMgr.deleteMemeAtIndexPath(indexPath)
-			tableView.deleteRows(at: [indexPath], with: .fade)
-			self.isEditing = false
-		}
+    }
 
-		let cancelAction = UITableViewRowAction(style: .default, title: ActionTitle.Cancel) { (action, indexPath) -> Void in
-			self.isEditing = false
-		}
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        assert(tableView == self.tableView, "Unexpected table view requesting edit actions")
 
-		cancelAction.backgroundColor = UIColor.blue
+        let deleteAction = UITableViewRowAction(style: .default, title: ActionTitle.Delete) { (action, indexPath) -> Void in
+            self.memesMgr.deleteMemeAtIndexPath(indexPath)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            self.isEditing = false
+        }
 
-		return [cancelAction, deleteAction]
-	}
-	
-	override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-		assert(tableView == self.tableView, "Unexpected table view commanding move row")
+        let cancelAction = UITableViewRowAction(style: .default, title: ActionTitle.Cancel) { (action, indexPath) -> Void in
+            self.isEditing = false
+        }
 
-		memesMgr.moveMemeAtIndexPath(sourceIndexPath, toIndexPath: destinationIndexPath)
-      tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
-	}
+        cancelAction.backgroundColor = UIColor.blue
 
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		assert(tableView == self.tableView, "Unexpected table view requesting number of rows in section")
+        return [cancelAction, deleteAction]
+    }
 
-		return memesMgr.count
-	}
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        assert(tableView == self.tableView, "Unexpected table view commanding move row")
 
-	// MARK: - UITableViewDelegate
+        memesMgr.moveMemeAtIndexPath(sourceIndexPath, toIndexPath: destinationIndexPath)
+        tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
+    }
 
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		assert(tableView == self.tableView, "Unexpected table view selected a row")
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        assert(tableView == self.tableView, "Unexpected table view requesting number of rows in section")
 
-		let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: MemeDetailViewController.UI.StoryboardID) as! MemeDetailViewController
-		memeDetailVC.memeToDisplay = memesMgr.memeAtIndexPath(indexPath)
+        return memesMgr.count
+    }
 
-		navigationController?.pushViewController(memeDetailVC, animated: true)
-	}
+    // MARK: - UITableViewDelegate
 
-	fileprivate func addNotificationObservers() {
-		NotificationCenter.default.addObserver(self, selector: SEL.MemeWasAdded,
-																					  name: NSNotification.Name(rawValue: MemesManager.Notification.MemeWasAdded),
-																					object: nil)
-	}
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        assert(tableView == self.tableView, "Unexpected table view selected a row")
 
+        let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: MemeDetailViewController.UI.StoryboardID) as! MemeDetailViewController
+        memeDetailVC.memeToDisplay = memesMgr.memeAtIndexPath(indexPath)
+
+        navigationController?.pushViewController(memeDetailVC, animated: true)
+    }
+
+    fileprivate func addNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: SEL.MemeWasAdded,
+                                               name: NSNotification.Name(rawValue: MemesManager.Notification.MemeWasAdded),
+                                               object: nil)
+    }
+    
 }

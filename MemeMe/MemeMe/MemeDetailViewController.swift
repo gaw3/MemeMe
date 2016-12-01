@@ -10,66 +10,66 @@ import UIKit
 
 final class MemeDetailViewController: UIViewController {
 
-	// MARK: - Internal Constants
+    // MARK: - Internal Constants
 
-	struct UI {
-		static let StoryboardID = "MemeDetailViewController"
-	}
+    struct UI {
+        static let StoryboardID = "MemeDetailViewController"
+    }
 
-	// MARK: - Internal Stored Variables
+    // MARK: - Internal Stored Variables
 
-	var memeToDisplay: Meme!
-	
-	// MARK: - Private Stored Variables
+    var memeToDisplay: Meme!
 
-	fileprivate var memeDetailView: UIImageView!
+    // MARK: - Private Stored Variables
 
-	// MARK: - View Events
+    fileprivate var memeDetailView: UIImageView!
 
-	override func viewDidLoad() {
-		super.viewDidLoad()
+    // MARK: - View Events
 
-		memeDetailView = UIImageView()
-		memeDetailView.contentMode = .scaleAspectFit
-		memeDetailView.isHidden      = false
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-		view.addSubview(memeDetailView)
-	}
+        memeDetailView = UIImageView()
+        memeDetailView.contentMode = .scaleAspectFit
+        memeDetailView.isHidden      = false
 
-	// MARK: - View Layout
+        view.addSubview(memeDetailView)
+    }
 
-	override func updateViewConstraints() {
-		super.updateViewConstraints()
+    // MARK: - View Layout
 
-		resetMemeDetailView()
-	}
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
 
-	// MARK: - IB Actions
+        resetMemeDetailView()
+    }
 
-	@IBAction func editButtonWasTapped(_ sender: UIBarButtonItem) {
-		let memeEditorNavCtlr = storyboard?.instantiateViewController(withIdentifier: StoryboardID.MemeEditorNavCtlr)
-										as! UINavigationController
-      let memeEditorVC      = memeEditorNavCtlr.viewControllers[0] as! MemeEditorViewController
+    // MARK: - IB Actions
 
-		memeEditorVC.memeToEdit = memeToDisplay
-		present(memeEditorNavCtlr, animated: true, completion: nil)
-	}
+    @IBAction func editButtonWasTapped(_ sender: UIBarButtonItem) {
+        let memeEditorNavCtlr = storyboard?.instantiateViewController(withIdentifier: StoryboardID.MemeEditorNavCtlr)
+            as! UINavigationController
+        let memeEditorVC      = memeEditorNavCtlr.viewControllers[0] as! MemeEditorViewController
 
-	// MARK: - Private
+        memeEditorVC.memeToEdit = memeToDisplay
+        present(memeEditorNavCtlr, animated: true, completion: nil)
+    }
 
-	fileprivate func resetMemeDetailView() {
-		memeDetailView.frame = view.bounds
+    // MARK: - Private
 
-		let widthScale         = view.frame.size.width / memeToDisplay.memedImage.size.width
-		let heightScale        = view.frame.size.height / memeToDisplay.memedImage.size.height
-		let scaleToUse         = min(widthScale, heightScale)
-		let widthAfterScaling  = memeToDisplay.memedImage.size.width * scaleToUse
-		let heightAfterScaling = memeToDisplay.memedImage.size.height * scaleToUse
+    fileprivate func resetMemeDetailView() {
+        memeDetailView.frame = view.bounds
 
-		memeDetailView.image        = memeToDisplay.memedImage
-		memeDetailView.frame.size   = CGSize(width: widthAfterScaling, height: heightAfterScaling)
-		memeDetailView.frame.origin = CGPoint(x: (view.frame.size.width - widthAfterScaling) / 2,
-																y: (view.frame.size.height - heightAfterScaling) / 2)
-	}
+        let widthScale         = view.frame.size.width / memeToDisplay.memedImage.size.width
+        let heightScale        = view.frame.size.height / memeToDisplay.memedImage.size.height
+        let scaleToUse         = min(widthScale, heightScale)
+        let widthAfterScaling  = memeToDisplay.memedImage.size.width * scaleToUse
+        let heightAfterScaling = memeToDisplay.memedImage.size.height * scaleToUse
 
+        memeDetailView.image        = memeToDisplay.memedImage
+        memeDetailView.frame.size   = CGSize(width: widthAfterScaling, height: heightAfterScaling)
+        memeDetailView.frame.origin = CGPoint(x: (view.frame.size.width - widthAfterScaling) / 2,
+                                              y: (view.frame.size.height - heightAfterScaling) / 2)
+    }
+    
 }

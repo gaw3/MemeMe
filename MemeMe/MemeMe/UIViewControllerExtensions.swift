@@ -10,16 +10,16 @@ import UIKit
 
 extension UIViewController {
 
-	// MARK: - Internal Constants
+    // MARK: - Internal Constants
 
-	struct StoryboardID {
-		static let MemeEditorNavCtlr = "MemeEditorNavigationController"
-	}
+    struct StoryboardID {
+        static let MemeEditorNavCtlr = "MemeEditorNavigationController"
+    }
 
-	// MARK: - Internal Computed Variables
+    // MARK: - Internal Computed Variables
 
-	var memesMgr: MemesManager {
-		return MemesManager.sharedInstance
-	}
-
+    var memesMgr: MemesManager {
+        return MemesManager.sharedInstance
+    }
+    
 }
