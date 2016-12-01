@@ -1,11 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="wrT-Oi-053">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wrT-Oi-053">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Sent Memes Table View Controller-->
@@ -13,37 +17,32 @@
             <objects>
                 <tableViewController title="Sent Memes Table View Controller" id="7m3-Bp-nWC" customClass="SentMemesTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="28" sectionFooterHeight="28" id="fg5-7Z-tua">
-                        <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" showsReorderControl="YES" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SentMemesTableViewCell" rowHeight="88" id="XVt-wn-glJ" customClass="SentMemesTableViewCell" customModule="MemeMe" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="88"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="88"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="XVt-wn-glJ" id="C4E-Vd-Vx7">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="87"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="87"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gVI-Wl-6ww">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                            <animations/>
+                                            <rect key="frame" x="0.0" y="0.0" width="136" height="87.5"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rjm-09-DDQ">
-                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                            <animations/>
+                                            <rect key="frame" x="146" y="18" width="188" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOTTOM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Inv-0h-JFi">
-                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                            <animations/>
+                                            <rect key="frame" x="146" y="48.5" width="188" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xee-QO-Uph">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Xee-QO-Uph" secondAttribute="height" multiplier="137:87" id="WUG-w1-pyD"/>
                                             </constraints>
@@ -60,20 +59,17 @@
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAz-MB-NLw">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                            <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOTTOM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9D-2D-eJi">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                            <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="KAz-MB-NLw" firstAttribute="leading" secondItem="Xee-QO-Uph" secondAttribute="trailing" constant="10" id="33F-Fq-ij3"/>
                                         <constraint firstAttribute="trailing" secondItem="KAz-MB-NLw" secondAttribute="trailing" id="5Fy-Be-CPC"/>
@@ -114,22 +110,22 @@
                                             <exclude reference="NAH-4N-oh3"/>
                                             <exclude reference="b0p-sj-3ex"/>
                                             <exclude reference="pd6-hb-c1t"/>
+                                            <exclude reference="33F-Fq-ij3"/>
+                                            <exclude reference="5Fy-Be-CPC"/>
+                                            <exclude reference="NMt-LI-Ldt"/>
                                             <exclude reference="5j0-v0-3HP"/>
                                             <exclude reference="9a3-ul-E8Q"/>
                                             <exclude reference="hI1-Fl-v2O"/>
+                                            <exclude reference="CW7-b6-cs7"/>
+                                            <exclude reference="Vzu-0e-2Ph"/>
+                                            <exclude reference="oBA-mx-yPF"/>
+                                            <exclude reference="Sbl-M6-aHJ"/>
+                                            <exclude reference="gcO-ru-2g7"/>
+                                            <exclude reference="vmo-gy-9KX"/>
                                             <exclude reference="FfP-J1-HWK"/>
                                             <exclude reference="IsD-yf-TSX"/>
                                             <exclude reference="SEe-ov-Aci"/>
                                             <exclude reference="dU9-Uk-sjq"/>
-                                            <exclude reference="Sbl-M6-aHJ"/>
-                                            <exclude reference="gcO-ru-2g7"/>
-                                            <exclude reference="vmo-gy-9KX"/>
-                                            <exclude reference="33F-Fq-ij3"/>
-                                            <exclude reference="5Fy-Be-CPC"/>
-                                            <exclude reference="NMt-LI-Ldt"/>
-                                            <exclude reference="CW7-b6-cs7"/>
-                                            <exclude reference="Vzu-0e-2Ph"/>
-                                            <exclude reference="oBA-mx-yPF"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -158,19 +154,18 @@
                                             <include reference="j9D-2D-eJi"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="Sbl-M6-aHJ"/>
-                                            <include reference="gcO-ru-2g7"/>
-                                            <include reference="vmo-gy-9KX"/>
                                             <include reference="33F-Fq-ij3"/>
                                             <include reference="5Fy-Be-CPC"/>
                                             <include reference="NMt-LI-Ldt"/>
                                             <include reference="CW7-b6-cs7"/>
                                             <include reference="Vzu-0e-2Ph"/>
                                             <include reference="oBA-mx-yPF"/>
+                                            <include reference="Sbl-M6-aHJ"/>
+                                            <include reference="gcO-ru-2g7"/>
+                                            <include reference="vmo-gy-9KX"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
-                                <animations/>
                                 <connections>
                                     <outlet property="bottomPhraseCompactRegular" destination="j9D-2D-eJi" id="Igy-FG-KT9"/>
                                     <outlet property="bottomPhraseRegularCompact" destination="Inv-0h-JFi" id="vMF-GV-z4A"/>
@@ -214,10 +209,9 @@
                         <viewControllerLayoutGuide type="bottom" id="84Y-Gm-DnR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SEV-cs-1Im">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Meme" id="CWJ-Rg-qRY">
@@ -245,19 +239,15 @@
                         <viewControllerLayoutGuide type="bottom" id="60f-iS-Zpu"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="moT-m4-a8h">
-                        <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gah-wQ-ejN">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <animations/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="-21" y="-71" width="38" height="43"/>
-                                </variation>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gah-wQ-ejN">
+                                <rect key="frame" x="-21" y="-71" width="38" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="Gah-wQ-ejN"/>
@@ -320,12 +310,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YVS-eX-n8V">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="qHm-vl-DR0">
-                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </toolbar>
                     <connections>
                         <segue destination="Uf5-U3-BQc" kind="relationship" relationship="rootViewController" id="gSa-sz-Rog"/>
@@ -340,9 +328,8 @@
             <objects>
                 <collectionViewController title="Sent Memes Collection View Controller" id="GoO-jN-1yU" customClass="SentMemesCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="POn-ip-Mi1">
-                        <rect key="frame" x="0.0" y="64" width="600" height="492"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="j5Y-j4-Pk9">
                             <size key="itemSize" width="167" height="121"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -356,10 +343,7 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="167" height="121"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <animations/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <animations/>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -395,7 +379,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="4Bn-2U-WbU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="GoO-jN-1yU" kind="relationship" relationship="rootViewController" id="uwd-hI-gIz"/>
@@ -415,11 +398,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="xN8-cj-U5y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="RSf-XH-1J6">
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </toolbar>
                     <connections>
                         <segue destination="7m3-Bp-nWC" kind="relationship" relationship="rootViewController" id="49v-Ve-SR7"/>
@@ -437,8 +418,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="S9s-1m-i4E">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="UEc-z8-Jst" kind="relationship" relationship="viewControllers" id="OX7-nh-85q"/>

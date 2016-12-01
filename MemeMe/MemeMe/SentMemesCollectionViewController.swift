@@ -14,17 +14,17 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 
 	// MARK: - Private Constants
 
-	private struct Layout {
+	fileprivate struct Layout {
 		static let NumberOfCellsAcrossInPortrait:  CGFloat = 3.0
 		static let NumberOfCellsAcrossInLandscape: CGFloat = 5.0
 		static let MinimumInteritemSpacing:        CGFloat = 3.0
 	}
 
-	private struct SEL {
+	fileprivate struct SEL {
 		static let MemesWereModified = #selector(memesWereModified(_:))
 	}
 
-	private struct UI {
+	fileprivate struct UI {
 		static let CollectionCellReuseID = "SentMemesCollectionViewCell"
 	}
 
@@ -39,8 +39,8 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 
       addNotificationObservers()
 		
-		collectionView?.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: UI.CollectionCellReuseID)
-		collectionView?.backgroundColor = UIColor.whiteColor()
+		collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UI.CollectionCellReuseID)
+		collectionView?.backgroundColor = UIColor.white
 
 		flowLayout.minimumInteritemSpacing = Layout.MinimumInteritemSpacing
 		flowLayout.minimumLineSpacing      = Layout.MinimumInteritemSpacing
@@ -51,50 +51,50 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 	override internal func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 
-		let numOfCellsAcross: CGFloat = UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)
+		let numOfCellsAcross: CGFloat = UIDeviceOrientationIsPortrait(UIDevice.current.orientation)
 			                           ? Layout.NumberOfCellsAcrossInPortrait : Layout.NumberOfCellsAcrossInLandscape
 		let itemWidth: CGFloat = (view.frame.size.width - (flowLayout.minimumInteritemSpacing * (numOfCellsAcross - 1))) / numOfCellsAcross
 
-		flowLayout.itemSize = CGSizeMake(itemWidth, itemWidth) // yes, a square on purpose
+		flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth) // yes, a square on purpose
 	}
 
 	// MARK: - IB Actions
 
-	@IBAction internal func addButtonWasTapped(sender: UIBarButtonItem) {
-		let memeEditor = storyboard?.instantiateViewControllerWithIdentifier(StoryboardID.MemeEditorNavCtlr) as! UINavigationController
-		presentViewController(memeEditor, animated: true, completion: nil)
+	@IBAction internal func addButtonWasTapped(_ sender: UIBarButtonItem) {
+		let memeEditor = storyboard?.instantiateViewController(withIdentifier: StoryboardID.MemeEditorNavCtlr) as! UINavigationController
+		present(memeEditor, animated: true, completion: nil)
 	}
 
 	// MARK: - NSNotifications
 
-	internal func memesWereModified(notification: NSNotification) {
-		assert(notification.name == MemesManager.Notification.MemeWasAdded ||
-			    notification.name == MemesManager.Notification.MemeWasDeleted ||
-			    notification.name == MemesManager.Notification.MemeWasMoved, "received unexpected NSNotification")
+	internal func memesWereModified(_ notification: Notification) {
+		assert(notification.name.rawValue == MemesManager.Notification.MemeWasAdded ||
+               notification.name.rawValue == MemesManager.Notification.MemeWasDeleted ||
+			   notification.name.rawValue == MemesManager.Notification.MemeWasMoved, "received unexpected NSNotification")
 
 		collectionView?.reloadData()
 	}
 
 	// MARK: - UICollectionViewDataSource
 
-	override internal func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+	override internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		assert(collectionView == self.collectionView, "Unexpected collection view reqesting cell of item at index path")
 
 		let meme = memesMgr.memeAtIndexPath(indexPath)
-		let cell = collectionView.dequeueReusableCellWithReuseIdentifier(UI.CollectionCellReuseID, forIndexPath: indexPath)
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UI.CollectionCellReuseID, for: indexPath)
 
       cell.backgroundView = UIImageView(image: meme.memedImage)
 
 		return cell
 	}
 	
-	override internal func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	override internal func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		assert(collectionView == self.collectionView, "Unexpected collection view reqesting number of items in section")
 
 		return memesMgr.count
 	}
 
-	override internal func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+	override internal func numberOfSections(in collectionView: UICollectionView) -> Int {
 		assert(collectionView == self.collectionView, "Unexpected collection view reqesting number of sections in view")
 
 		return 1
@@ -102,10 +102,10 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 
 	// MARK: - UICollectionViewDelegate
 
-	override internal func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+	override internal func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		assert(collectionView == self.collectionView, "Unexpected collection view selected an item")
 
-		let memeDetailVC = storyboard?.instantiateViewControllerWithIdentifier(MemeDetailViewController.UI.StoryboardID) as! MemeDetailViewController
+		let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: MemeDetailViewController.UI.StoryboardID) as! MemeDetailViewController
 		memeDetailVC.memeToDisplay = memesMgr.memeAtIndexPath(indexPath)
 
 		navigationController?.pushViewController(memeDetailVC, animated: true)
@@ -113,15 +113,15 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 
 	// MARK: - Private Helpers
 
-	private func addNotificationObservers() {
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.MemesWereModified,
-																		           name: MemesManager.Notification.MemeWasAdded,
+	fileprivate func addNotificationObservers() {
+		NotificationCenter.default.addObserver(self, selector: SEL.MemesWereModified,
+																		           name: NSNotification.Name(rawValue: MemesManager.Notification.MemeWasAdded),
 																					object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.MemesWereModified,
-																				     name: MemesManager.Notification.MemeWasDeleted,
+		NotificationCenter.default.addObserver(self, selector: SEL.MemesWereModified,
+																				     name: NSNotification.Name(rawValue: MemesManager.Notification.MemeWasDeleted),
 																					object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.MemesWereModified,
-																				     name: MemesManager.Notification.MemeWasMoved,
+		NotificationCenter.default.addObserver(self, selector: SEL.MemesWereModified,
+																				     name: NSNotification.Name(rawValue: MemesManager.Notification.MemeWasMoved),
 																					object: nil)
 	}
 

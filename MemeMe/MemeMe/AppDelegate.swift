@@ -14,7 +14,7 @@ final internal class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	internal var window: UIWindow?
 
-	internal func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+	internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		return true
 	}
 

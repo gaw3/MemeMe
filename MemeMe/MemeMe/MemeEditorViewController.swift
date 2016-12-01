@@ -14,23 +14,23 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 
 	// MARK: - Private Constants
 
-	private struct ImpactFont {
+	fileprivate struct ImpactFont {
 		static let Name = "Impact"
 
 		static let Size:        CGFloat = 40.0
 		static let StrokeWidth: CGFloat = -3.0
 	}
 
-	private struct Scale {
+	fileprivate struct Scale {
 		static let DefaultToMainScreen: CGFloat = 0.0
 	}
 
-	private struct SEL {
+	fileprivate struct SEL {
 		static let KeyboardWillHide = #selector(keyboardWillHide(_:))
 		static let KeyboardWillShow = #selector(keyboardWillShow(_:))
 	}
 
-	private struct TextField {
+	fileprivate struct TextField {
 		static let PlaceholderTextTop    = "TOP"
 		static let PlaceholderTextBottom = "BOTTOM"
 
@@ -46,14 +46,14 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 
 	// MARK: - Private Stored Variables
 
-	private var bottomMemeTextField: UITextField!
-	private var memeImageView:			UIImageView!
-	private var originalImage:			UIImage!
-	private var topMemeTextField:		UITextField!
+	fileprivate var bottomMemeTextField: UITextField!
+	fileprivate var memeImageView:			UIImageView!
+	fileprivate var originalImage:			UIImage!
+	fileprivate var topMemeTextField:		UITextField!
 
-	private var amountToShiftMainViewOnYAxis:             CGFloat = 0.0
-	private var originTopMemeTextFieldInMainViewSpace:    CGPoint = CGPointZero
-	private var originBottomMemeTextFieldInMainViewSpace: CGPoint = CGPointZero
+	fileprivate var amountToShiftMainViewOnYAxis:             CGFloat = 0.0
+	fileprivate var originTopMemeTextFieldInMainViewSpace:    CGPoint = CGPoint.zero
+	fileprivate var originBottomMemeTextFieldInMainViewSpace: CGPoint = CGPoint.zero
 
 	// MARK: - IB Outlets
 
@@ -67,9 +67,9 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 	override internal func viewDidLoad() {
 		super.viewDidLoad()
 
-		cancelButton.enabled = true
-		cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-		photosButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
+		cancelButton.isEnabled = true
+		cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
+		photosButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary)
 
 		memeImageView = initMemeImageView()
 		view.addSubview(memeImageView)
@@ -88,16 +88,16 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 		view.addSubview(bottomMemeTextField)
 	}
 
-	override internal func viewWillAppear(animated: Bool) {
+	override internal func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-		actionButton.enabled = (originalImage != nil)
+		actionButton.isEnabled = (originalImage != nil)
 		resetMemeImageView()
 		resetMemeTextFields()
 		subscribeToKeyboardNotifications()
 	}
 
-	override internal func viewWillDisappear(animated: Bool) {
+	override internal func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 
 		unsubscribeFromKeyboardNotifications()
@@ -114,7 +114,7 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 
 	// MARK: - IB Actions
 
-	@IBAction internal func actionButtonWasTapped(sender: UIBarButtonItem) {
+	@IBAction internal func actionButtonWasTapped(_ sender: UIBarButtonItem) {
 		assert(sender == actionButton, "received action from unexpected UIBarButtonItem")
 
 		let memedImage = generateMemedImage()
@@ -122,32 +122,32 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 		let meme       = Meme(originalImage: originalImage, topPhrase: topMemeTextField.text!,
 			                   bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
 
-		presentViewController(activityVC, animated: true, completion: {() -> Void in
+		present(activityVC, animated: true, completion: {() -> Void in
 			self.memesMgr.add(meme)})
 	}
 
-	@IBAction internal func cameraButtonWasTapped(sender: UIBarButtonItem) {
+	@IBAction internal func cameraButtonWasTapped(_ sender: UIBarButtonItem) {
 		assert(sender == cameraButton, "received action from unexpected UIBarButtonItem")
 
-		pickImageFromSource(UIImagePickerControllerSourceType.Camera)
+		pickImageFromSource(UIImagePickerControllerSourceType.camera)
 	}
 
-	@IBAction internal func cancelButtonWasTapped(sender: UIBarButtonItem) {
+	@IBAction internal func cancelButtonWasTapped(_ sender: UIBarButtonItem) {
 		assert(sender == cancelButton, "received action from unexpected UIBarButtonItem")
 
-		dismissViewControllerAnimated(true, completion: nil)
+		dismiss(animated: true, completion: nil)
 	}
 
-	@IBAction internal func photosButtonWasTapped(sender: UIBarButtonItem) {
+	@IBAction internal func photosButtonWasTapped(_ sender: UIBarButtonItem) {
 		assert(sender == photosButton, "received action from unexpected UIBarButtonItem")
 
-		pickImageFromSource(UIImagePickerControllerSourceType.PhotoLibrary)
+		pickImageFromSource(UIImagePickerControllerSourceType.photoLibrary)
 	}
 
 	// MARK: - NSNotifications
 
-	internal func keyboardWillHide(notification: NSNotification) {
-		assert(notification.name == UIKeyboardWillHideNotification, "received unexpected NSNotification")
+	internal func keyboardWillHide(_ notification: Notification) {
+		assert(notification.name == NSNotification.Name.UIKeyboardWillHide, "received unexpected NSNotification")
 
 		if amountToShiftMainViewOnYAxis > 0.0 {
 			view.frame.origin.y += amountToShiftMainViewOnYAxis
@@ -156,13 +156,13 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 		
 	}
 
-	internal func keyboardWillShow(notification: NSNotification) {
-		assert(notification.name == UIKeyboardWillShowNotification, "received unexpected NSNotification")
+	internal func keyboardWillShow(_ notification: Notification) {
+		assert(notification.name == NSNotification.Name.UIKeyboardWillShow, "received unexpected NSNotification")
 
-		if (bottomMemeTextField.isFirstResponder()) {
+		if (bottomMemeTextField.isFirstResponder) {
 			let keyboardSize                    = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-			let originOfKeyboardInWindow        = CGPointMake(0, view.window!.frame.size.height - keyboardSize.CGRectValue().height)
-			let originOfKeyboardInMemeImageView = memeImageView.convertPoint(originOfKeyboardInWindow, fromView: view.window!)
+			let originOfKeyboardInWindow        = CGPoint(x: 0, y: view.window!.frame.size.height - keyboardSize.cgRectValue.height)
+			let originOfKeyboardInMemeImageView = memeImageView.convert(originOfKeyboardInWindow, from: view.window!)
 			let amountOfKeyboardOverlapInYDim   = memeImageView.bounds.size.height - originOfKeyboardInMemeImageView.y
 
 			if amountOfKeyboardOverlapInYDim > 0 {
@@ -176,22 +176,22 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 
 	// MARK: - UIImagePickerControllerDelegate
 
-	func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 
 		if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
 			originalImage = image
-			dismissViewControllerAnimated(true, completion: nil)
+			dismiss(animated: true, completion: nil)
 		}
 
 	}
 
-	func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-		dismissViewControllerAnimated(true, completion: nil)
+	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+		dismiss(animated: true, completion: nil)
 	}
 
 	// MARK: - UITextFieldDelegate
 
-	func textFieldShouldReturn(textField: UITextField) -> Bool {
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 		assert(textField == topMemeTextField || textField == bottomMemeTextField,
 				 "received notification from unexpected UITextField")
 
@@ -201,12 +201,12 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 
 	// MARK: - Private:  Images
 
-	private func generateMemedImage() -> UIImage {
+	fileprivate func generateMemedImage() -> UIImage {
 		prepareViewHierarchyForGraphicsImageContext()
 
 		UIGraphicsBeginImageContextWithOptions(memeImageView.frame.size, true, Scale.DefaultToMainScreen)
-		memeImageView.drawViewHierarchyInRect(memeImageView.bounds, afterScreenUpdates: true)
-		let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+		memeImageView.drawHierarchy(in: memeImageView.bounds, afterScreenUpdates: true)
+		let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
 		UIGraphicsEndImageContext()
 
       restoreViewHierarchyFromGraphicsImageContext()
@@ -214,16 +214,16 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 		return memedImage
 	}
 
-	private func pickImageFromSource(sourceType: UIImagePickerControllerSourceType) {
+	fileprivate func pickImageFromSource(_ sourceType: UIImagePickerControllerSourceType) {
 		let imagePicker = UIImagePickerController()
 
 		imagePicker.delegate   = self
 		imagePicker.sourceType = sourceType
 
-		presentViewController(imagePicker, animated: true, completion: nil)
+		present(imagePicker, animated: true, completion: nil)
 	}
 	
-	private func prepareViewHierarchyForGraphicsImageContext() {
+	fileprivate func prepareViewHierarchyForGraphicsImageContext() {
 		topMemeTextField.removeFromSuperview()
 		bottomMemeTextField.removeFromSuperview()
 
@@ -233,11 +233,11 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 		originTopMemeTextFieldInMainViewSpace    = topMemeTextField.frame.origin
 		originBottomMemeTextFieldInMainViewSpace = bottomMemeTextField.frame.origin
 
-		topMemeTextField.frame.origin    = view.convertPoint(originTopMemeTextFieldInMainViewSpace, toView: memeImageView)
-		bottomMemeTextField.frame.origin = view.convertPoint(originBottomMemeTextFieldInMainViewSpace, toView: memeImageView)
+		topMemeTextField.frame.origin    = view.convert(originTopMemeTextFieldInMainViewSpace, to: memeImageView)
+		bottomMemeTextField.frame.origin = view.convert(originBottomMemeTextFieldInMainViewSpace, to: memeImageView)
 	}
 
-	private func restoreViewHierarchyFromGraphicsImageContext() {
+	fileprivate func restoreViewHierarchyFromGraphicsImageContext() {
 		topMemeTextField.removeFromSuperview()
 		bottomMemeTextField.removeFromSuperview()
 
@@ -247,61 +247,61 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 		topMemeTextField.frame.origin    = originTopMemeTextFieldInMainViewSpace
 		bottomMemeTextField.frame.origin = originBottomMemeTextFieldInMainViewSpace
 
-		originTopMemeTextFieldInMainViewSpace    = CGPointZero
-		originBottomMemeTextFieldInMainViewSpace = CGPointZero
+		originTopMemeTextFieldInMainViewSpace    = CGPoint.zero
+		originBottomMemeTextFieldInMainViewSpace = CGPoint.zero
 	}
 	
 	// MARK: - Private:  Initialization
 
-	private func initMemeImageView() -> UIImageView {
+	fileprivate func initMemeImageView() -> UIImageView {
 		let imageView = UIImageView()
 
-		imageView.backgroundColor = UIColor.blackColor()
-		imageView.contentMode     = .ScaleAspectFit
-		imageView.hidden          = false
+		imageView.backgroundColor = UIColor.black
+		imageView.contentMode     = .scaleAspectFit
+		imageView.isHidden          = false
 
 		return imageView
 	}
 
-	private func initMemeTextField(text: String) -> UITextField {
+	fileprivate func initMemeTextField(_ text: String) -> UITextField {
 		let textField          = UITextField()
-		let memeTextAttributes = [NSStrokeColorAttributeName:     UIColor.blackColor(),
-			                       NSForegroundColorAttributeName: UIColor.whiteColor(),
+		let memeTextAttributes = [NSStrokeColorAttributeName:     UIColor.black,
+			                       NSForegroundColorAttributeName: UIColor.white,
 			                       NSFontAttributeName:            UIFont(name: ImpactFont.Name, size: ImpactFont.Size)!,
-			                       NSStrokeWidthAttributeName:     ImpactFont.StrokeWidth]
+			                       NSStrokeWidthAttributeName:     ImpactFont.StrokeWidth] as [String : Any]
 
 		textField.adjustsFontSizeToFitWidth = true
-		textField.autocapitalizationType    = .AllCharacters
-		textField.borderStyle               = .None
-		textField.clearButtonMode           = .Never
+		textField.autocapitalizationType    = .allCharacters
+		textField.borderStyle               = .none
+		textField.clearButtonMode           = .never
 		textField.clearsOnBeginEditing      = true
 		textField.defaultTextAttributes     = memeTextAttributes
 		textField.delegate                  = self
 		textField.frame.size.height         = TextField.Height
-		textField.hidden                    = false
-		textField.keyboardType              = .Default
+		textField.isHidden                    = false
+		textField.keyboardType              = .default
 		textField.minimumFontSize           = TextField.MinSizeFont
 		textField.text                      = text
-		textField.textAlignment             = .Center
+		textField.textAlignment             = .center
 
 		return textField
 	}
 
 	// MARK: - Private:  Keyboards
 
-	private func subscribeToKeyboardNotifications() {
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.KeyboardWillHide, name: UIKeyboardWillHideNotification, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: SEL.KeyboardWillShow, name: UIKeyboardWillShowNotification, object: nil)
+	fileprivate func subscribeToKeyboardNotifications() {
+		NotificationCenter.default.addObserver(self, selector: SEL.KeyboardWillHide, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+		NotificationCenter.default.addObserver(self, selector: SEL.KeyboardWillShow, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 	}
 
-	private func unsubscribeFromKeyboardNotifications() {
-		NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
-		NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+	fileprivate func unsubscribeFromKeyboardNotifications() {
+		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+		NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
 	}
 	
 	// MARK: - Private:  Resetting Views
 
-	private func resetMemeImageView() {
+	fileprivate func resetMemeImageView() {
 
 		if let originalImage = originalImage {
 			let widthScale         = view.frame.size.width / originalImage.size.width
@@ -311,27 +311,27 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 			let heightAfterScaling = originalImage.size.height * scaleToUse
 
 			memeImageView.image        = originalImage
-			memeImageView.frame.size   = CGSizeMake(widthAfterScaling, heightAfterScaling)
-			memeImageView.frame.origin = CGPointMake((view.frame.size.width - widthAfterScaling) / 2,
-															     (view.frame.size.height - heightAfterScaling) / 2)
+			memeImageView.frame.size   = CGSize(width: widthAfterScaling, height: heightAfterScaling)
+			memeImageView.frame.origin = CGPoint(x: (view.frame.size.width - widthAfterScaling) / 2,
+															     y: (view.frame.size.height - heightAfterScaling) / 2)
 		} else {
 			memeImageView.frame = view.bounds
 		}
 		
 	}
 
-	private func resetMemeTextFields() {
+	fileprivate func resetMemeTextFields() {
 		let textFieldWidth: CGFloat = memeImageView.frame.size.width - (2 * TextField.InsetX)
 
-		topMemeTextField.enabled          = (originalImage != nil)
+		topMemeTextField.isEnabled          = (originalImage != nil)
 		topMemeTextField.frame.size.width = textFieldWidth
-		topMemeTextField.frame.origin     = CGPointMake(memeImageView.frame.origin.x + TextField.InsetX,
-																		memeImageView.frame.origin.y + TextField.InsetY)
+		topMemeTextField.frame.origin     = CGPoint(x: memeImageView.frame.origin.x + TextField.InsetX,
+																		y: memeImageView.frame.origin.y + TextField.InsetY)
 
-		bottomMemeTextField.enabled          = (originalImage != nil)
+		bottomMemeTextField.isEnabled          = (originalImage != nil)
 		bottomMemeTextField.frame.size.width = textFieldWidth
-		bottomMemeTextField.frame.origin     = CGPointMake(memeImageView.frame.origin.x + TextField.InsetX,
-																			memeImageView.frame.origin.y + memeImageView.frame.size.height -
+		bottomMemeTextField.frame.origin     = CGPoint(x: memeImageView.frame.origin.x + TextField.InsetX,
+																			y: memeImageView.frame.origin.y + memeImageView.frame.size.height -
 																			TextField.InsetY - bottomMemeTextField.frame.height)
 	}
 

@@ -22,7 +22,7 @@ final internal class MemeDetailViewController: UIViewController {
 	
 	// MARK: - Private Stored Variables
 
-	private var memeDetailView: UIImageView!
+	fileprivate var memeDetailView: UIImageView!
 
 	// MARK: - View Events
 
@@ -30,8 +30,8 @@ final internal class MemeDetailViewController: UIViewController {
 		super.viewDidLoad()
 
 		memeDetailView = UIImageView()
-		memeDetailView.contentMode = .ScaleAspectFit
-		memeDetailView.hidden      = false
+		memeDetailView.contentMode = .scaleAspectFit
+		memeDetailView.isHidden      = false
 
 		view.addSubview(memeDetailView)
 	}
@@ -46,18 +46,18 @@ final internal class MemeDetailViewController: UIViewController {
 
 	// MARK: - IB Actions
 
-	@IBAction internal func editButtonWasTapped(sender: UIBarButtonItem) {
-		let memeEditorNavCtlr = storyboard?.instantiateViewControllerWithIdentifier(StoryboardID.MemeEditorNavCtlr)
+	@IBAction internal func editButtonWasTapped(_ sender: UIBarButtonItem) {
+		let memeEditorNavCtlr = storyboard?.instantiateViewController(withIdentifier: StoryboardID.MemeEditorNavCtlr)
 										as! UINavigationController
       let memeEditorVC      = memeEditorNavCtlr.viewControllers[0] as! MemeEditorViewController
 
 		memeEditorVC.memeToEdit = memeToDisplay
-		presentViewController(memeEditorNavCtlr, animated: true, completion: nil)
+		present(memeEditorNavCtlr, animated: true, completion: nil)
 	}
 
 	// MARK: - Private
 
-	private func resetMemeDetailView() {
+	fileprivate func resetMemeDetailView() {
 		memeDetailView.frame = view.bounds
 
 		let widthScale         = view.frame.size.width / memeToDisplay.memedImage.size.width
@@ -67,9 +67,9 @@ final internal class MemeDetailViewController: UIViewController {
 		let heightAfterScaling = memeToDisplay.memedImage.size.height * scaleToUse
 
 		memeDetailView.image        = memeToDisplay.memedImage
-		memeDetailView.frame.size   = CGSizeMake(widthAfterScaling, heightAfterScaling)
-		memeDetailView.frame.origin = CGPointMake((view.frame.size.width - widthAfterScaling) / 2,
-																(view.frame.size.height - heightAfterScaling) / 2)
+		memeDetailView.frame.size   = CGSize(width: widthAfterScaling, height: heightAfterScaling)
+		memeDetailView.frame.origin = CGPoint(x: (view.frame.size.width - widthAfterScaling) / 2,
+																y: (view.frame.size.height - heightAfterScaling) / 2)
 	}
 
 }

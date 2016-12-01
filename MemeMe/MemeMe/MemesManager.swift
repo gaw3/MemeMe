@@ -27,7 +27,7 @@ final internal class MemesManager: NSObject {
 
 	// MARK: - Private Stored Variables
 
-	private var memes: [Meme]
+	fileprivate var memes: [Meme]
 
 	// MARK: - Internal Computed Variables
 
@@ -37,36 +37,36 @@ final internal class MemesManager: NSObject {
 
 	// MARK: - API
 
-	internal func add(newMeme: Meme) {
+	internal func add(_ newMeme: Meme) {
 		memes.append(newMeme)
 		postNotification(Notification.MemeWasAdded)
 	}
 
-	internal func deleteMemeAtIndexPath(indexPath: NSIndexPath) {
-		memes.removeAtIndex(indexPath.row)
+	internal func deleteMemeAtIndexPath(_ indexPath: IndexPath) {
+		memes.remove(at: indexPath.row)
 		postNotification(Notification.MemeWasDeleted)
 	}
 
-	internal func memeAtIndexPath(indexPath: NSIndexPath) -> Meme {
+	internal func memeAtIndexPath(_ indexPath: IndexPath) -> Meme {
 		return memes[indexPath.row]
 	}
 
-	internal func moveMemeAtIndexPath(indexPath: NSIndexPath, toIndexPath: NSIndexPath)
+	internal func moveMemeAtIndexPath(_ indexPath: IndexPath, toIndexPath: IndexPath)
 	{
-		let meme = memes.removeAtIndex(indexPath.row)
-		memes.insert(meme, atIndex: toIndexPath.row)
+		let meme = memes.remove(at: indexPath.row)
+		memes.insert(meme, at: toIndexPath.row)
 		postNotification(Notification.MemeWasMoved)
 	}
 
 	// MARK: - Private
 
-	private override init() {
+	fileprivate override init() {
 		memes = [Meme]()
 		super.init()
 	}
 
-	private func postNotification(name: String) {
-		NSNotificationCenter.defaultCenter().postNotificationName(name, object: nil)
+	fileprivate func postNotification(_ name: String) {
+		NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: name), object: nil)
 	}
 	
 }
