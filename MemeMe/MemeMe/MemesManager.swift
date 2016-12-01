@@ -11,15 +11,15 @@ import UIKit
 
 private let _sharedInstance = MemesManager()
 
-final internal class MemesManager: NSObject {
+final class MemesManager: NSObject {
 
-	class internal var sharedInstance: MemesManager {
+	class var sharedInstance: MemesManager {
 		return _sharedInstance
 	}
 
 	// MARK: - Internal Constants
 
-	internal struct Notification {
+	struct Notification {
 		static let MemeWasAdded   = "MemesManagerMemeWasAddedNotification"
 		static let MemeWasDeleted = "MemesManagerMemeWadDeletedNotification"
 		static let MemeWasMoved   = "MemesManagerMemeWasMovedNotification"
@@ -31,27 +31,27 @@ final internal class MemesManager: NSObject {
 
 	// MARK: - Internal Computed Variables
 
-	internal var count: Int {
+	var count: Int {
 		return memes.count
 	}
 
 	// MARK: - API
 
-	internal func add(_ newMeme: Meme) {
+	func add(_ newMeme: Meme) {
 		memes.append(newMeme)
 		postNotification(Notification.MemeWasAdded)
 	}
 
-	internal func deleteMemeAtIndexPath(_ indexPath: IndexPath) {
+	func deleteMemeAtIndexPath(_ indexPath: IndexPath) {
 		memes.remove(at: indexPath.row)
 		postNotification(Notification.MemeWasDeleted)
 	}
 
-	internal func memeAtIndexPath(_ indexPath: IndexPath) -> Meme {
+	func memeAtIndexPath(_ indexPath: IndexPath) -> Meme {
 		return memes[indexPath.row]
 	}
 
-	internal func moveMemeAtIndexPath(_ indexPath: IndexPath, toIndexPath: IndexPath)
+	func moveMemeAtIndexPath(_ indexPath: IndexPath, toIndexPath: IndexPath)
 	{
 		let meme = memes.remove(at: indexPath.row)
 		memes.insert(meme, at: toIndexPath.row)

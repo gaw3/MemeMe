@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-final internal class SentMemesTableViewController: UITableViewController {
+final class SentMemesTableViewController: UITableViewController {
 
 	// MARK: - Private Constants
 
@@ -24,7 +24,7 @@ final internal class SentMemesTableViewController: UITableViewController {
 
 	// MARK: - View Events
 
-	override internal func viewDidLoad() {
+	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		addNotificationObservers()
@@ -33,14 +33,14 @@ final internal class SentMemesTableViewController: UITableViewController {
 
 	// MARK: - IB Actions
 
-	@IBAction internal func addButtonWasTapped(_ sender: UIBarButtonItem) {
+	@IBAction func addButtonWasTapped(_ sender: UIBarButtonItem) {
 		let memeEditor = storyboard?.instantiateViewController(withIdentifier: StoryboardID.MemeEditorNavCtlr) as! UINavigationController
 		present(memeEditor, animated: true, completion: nil)
 	}
 
 	// MARK: - Environment Changes
 
-	override internal func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+	override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
 		super.willTransition(to: newCollection, with: coordinator)
 		tableView.reloadData()
 	}
@@ -55,19 +55,19 @@ final internal class SentMemesTableViewController: UITableViewController {
 
 	// MARK: - UITableViewDataSource
 
-	override internal func numberOfSections(in tableView: UITableView) -> Int {
+	override func numberOfSections(in tableView: UITableView) -> Int {
 		assert(tableView == self.tableView, "Unexpected table view requesting number of sections in table view")
 		
 		return 1
 	}
 
-	override internal func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
 		assert(tableView == self.tableView, "Unexpected table view requesting cell can be edited")
 
 		return true
 	}
 
-	override internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		assert(tableView == self.tableView, "Unexpected table view requesting cell for row at index path")
 
 		let meme = memesMgr.memeAtIndexPath(indexPath)
@@ -86,7 +86,7 @@ final internal class SentMemesTableViewController: UITableViewController {
 		return cell
 	}
 
-	override internal func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		assert(tableView == self.tableView, "Unexpected table view committing editing style")
 
 		if editingStyle == .delete {
@@ -96,7 +96,7 @@ final internal class SentMemesTableViewController: UITableViewController {
 
 	}
 
-	override internal func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+	override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
 		assert(tableView == self.tableView, "Unexpected table view requesting edit actions")
 
 		let deleteAction = UITableViewRowAction(style: .default, title: ActionTitle.Delete) { (action, indexPath) -> Void in
@@ -114,14 +114,14 @@ final internal class SentMemesTableViewController: UITableViewController {
 		return [cancelAction, deleteAction]
 	}
 	
-	override internal func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+	override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 		assert(tableView == self.tableView, "Unexpected table view commanding move row")
 
 		memesMgr.moveMemeAtIndexPath(sourceIndexPath, toIndexPath: destinationIndexPath)
       tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
 	}
 
-	override internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		assert(tableView == self.tableView, "Unexpected table view requesting number of rows in section")
 
 		return memesMgr.count
@@ -129,7 +129,7 @@ final internal class SentMemesTableViewController: UITableViewController {
 
 	// MARK: - UITableViewDelegate
 
-	override internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		assert(tableView == self.tableView, "Unexpected table view selected a row")
 
 		let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: MemeDetailViewController.UI.StoryboardID) as! MemeDetailViewController

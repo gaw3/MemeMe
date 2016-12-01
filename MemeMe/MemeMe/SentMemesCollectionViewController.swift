@@ -10,7 +10,7 @@ import CoreGraphics
 import Foundation
 import UIKit
 
-final internal class SentMemesCollectionViewController: UICollectionViewController {
+final class SentMemesCollectionViewController: UICollectionViewController {
 
 	// MARK: - Private Constants
 
@@ -30,11 +30,11 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 
 	// MARK: - IB Outlets
 
-	@IBOutlet weak internal var flowLayout: UICollectionViewFlowLayout!
+	@IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
 
 	// MARK: - View Events
 
-	override internal func viewDidLoad() {
+	override func viewDidLoad() {
 		super.viewDidLoad()
 
       addNotificationObservers()
@@ -48,7 +48,7 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 
 	// MARK: - View Layout
 
-	override internal func viewWillLayoutSubviews() {
+	override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
 
 		let numOfCellsAcross: CGFloat = UIDeviceOrientationIsPortrait(UIDevice.current.orientation)
@@ -60,14 +60,14 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 
 	// MARK: - IB Actions
 
-	@IBAction internal func addButtonWasTapped(_ sender: UIBarButtonItem) {
+	@IBAction func addButtonWasTapped(_ sender: UIBarButtonItem) {
 		let memeEditor = storyboard?.instantiateViewController(withIdentifier: StoryboardID.MemeEditorNavCtlr) as! UINavigationController
 		present(memeEditor, animated: true, completion: nil)
 	}
 
 	// MARK: - NSNotifications
 
-	internal func memesWereModified(_ notification: Notification) {
+	func memesWereModified(_ notification: Notification) {
 		assert(notification.name.rawValue == MemesManager.Notification.MemeWasAdded ||
                notification.name.rawValue == MemesManager.Notification.MemeWasDeleted ||
 			   notification.name.rawValue == MemesManager.Notification.MemeWasMoved, "received unexpected NSNotification")
@@ -77,7 +77,7 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 
 	// MARK: - UICollectionViewDataSource
 
-	override internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+	override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		assert(collectionView == self.collectionView, "Unexpected collection view reqesting cell of item at index path")
 
 		let meme = memesMgr.memeAtIndexPath(indexPath)
@@ -88,13 +88,13 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 		return cell
 	}
 	
-	override internal func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+	override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		assert(collectionView == self.collectionView, "Unexpected collection view reqesting number of items in section")
 
 		return memesMgr.count
 	}
 
-	override internal func numberOfSections(in collectionView: UICollectionView) -> Int {
+	override func numberOfSections(in collectionView: UICollectionView) -> Int {
 		assert(collectionView == self.collectionView, "Unexpected collection view reqesting number of sections in view")
 
 		return 1
@@ -102,7 +102,7 @@ final internal class SentMemesCollectionViewController: UICollectionViewControll
 
 	// MARK: - UICollectionViewDelegate
 
-	override internal func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+	override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		assert(collectionView == self.collectionView, "Unexpected collection view selected an item")
 
 		let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: MemeDetailViewController.UI.StoryboardID) as! MemeDetailViewController

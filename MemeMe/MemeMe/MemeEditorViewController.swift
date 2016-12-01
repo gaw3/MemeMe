@@ -9,7 +9,7 @@
 import CoreGraphics
 import UIKit
 
-final internal class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate,
+final class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate,
 										                 UINavigationControllerDelegate, UITextFieldDelegate {
 
 	// MARK: - Private Constants
@@ -42,7 +42,7 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 
 	// MARK: - Internal Stored Variables
 
-	internal var memeToEdit: Meme!
+	var memeToEdit: Meme!
 
 	// MARK: - Private Stored Variables
 
@@ -64,7 +64,7 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 	
 	// MARK: - View Events
 
-	override internal func viewDidLoad() {
+	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		cancelButton.isEnabled = true
@@ -88,7 +88,7 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 		view.addSubview(bottomMemeTextField)
 	}
 
-	override internal func viewWillAppear(_ animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
 		actionButton.isEnabled = (originalImage != nil)
@@ -97,7 +97,7 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 		subscribeToKeyboardNotifications()
 	}
 
-	override internal func viewWillDisappear(_ animated: Bool) {
+	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 
 		unsubscribeFromKeyboardNotifications()
@@ -105,7 +105,7 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 
 	// MARK: - View Layout
 
-	override internal func updateViewConstraints() {
+	override func updateViewConstraints() {
 		super.updateViewConstraints()
 
 		resetMemeImageView()
@@ -114,7 +114,7 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 
 	// MARK: - IB Actions
 
-	@IBAction internal func actionButtonWasTapped(_ sender: UIBarButtonItem) {
+	@IBAction func actionButtonWasTapped(_ sender: UIBarButtonItem) {
 		assert(sender == actionButton, "received action from unexpected UIBarButtonItem")
 
 		let memedImage = generateMemedImage()
@@ -126,19 +126,19 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 			self.memesMgr.add(meme)})
 	}
 
-	@IBAction internal func cameraButtonWasTapped(_ sender: UIBarButtonItem) {
+	@IBAction func cameraButtonWasTapped(_ sender: UIBarButtonItem) {
 		assert(sender == cameraButton, "received action from unexpected UIBarButtonItem")
 
 		pickImageFromSource(UIImagePickerControllerSourceType.camera)
 	}
 
-	@IBAction internal func cancelButtonWasTapped(_ sender: UIBarButtonItem) {
+	@IBAction func cancelButtonWasTapped(_ sender: UIBarButtonItem) {
 		assert(sender == cancelButton, "received action from unexpected UIBarButtonItem")
 
 		dismiss(animated: true, completion: nil)
 	}
 
-	@IBAction internal func photosButtonWasTapped(_ sender: UIBarButtonItem) {
+	@IBAction func photosButtonWasTapped(_ sender: UIBarButtonItem) {
 		assert(sender == photosButton, "received action from unexpected UIBarButtonItem")
 
 		pickImageFromSource(UIImagePickerControllerSourceType.photoLibrary)
@@ -146,7 +146,7 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 
 	// MARK: - NSNotifications
 
-	internal func keyboardWillHide(_ notification: Notification) {
+	func keyboardWillHide(_ notification: Notification) {
 		assert(notification.name == NSNotification.Name.UIKeyboardWillHide, "received unexpected NSNotification")
 
 		if amountToShiftMainViewOnYAxis > 0.0 {
@@ -156,7 +156,7 @@ final internal class MemeEditorViewController: UIViewController, UIImagePickerCo
 		
 	}
 
-	internal func keyboardWillShow(_ notification: Notification) {
+	func keyboardWillShow(_ notification: Notification) {
 		assert(notification.name == NSNotification.Name.UIKeyboardWillShow, "received unexpected NSNotification")
 
 		if (bottomMemeTextField.isFirstResponder) {
