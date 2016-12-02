@@ -105,7 +105,7 @@ final class SentMemesCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         assert(collectionView == self.collectionView, "Unexpected collection view selected an item")
 
-        let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: MemeDetailViewController.UI.StoryboardID) as! MemeDetailViewController
+        let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: IB.StoryboardID.MemeDetailViewController) as! MemeDetailViewController
         memeDetailVC.memeToDisplay = MemesManager.shared.memeAtIndexPath(indexPath)
 
         navigationController?.pushViewController(memeDetailVC, animated: true)

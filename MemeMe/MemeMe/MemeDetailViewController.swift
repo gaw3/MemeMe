@@ -10,33 +10,35 @@ import UIKit
 
 final class MemeDetailViewController: UIViewController {
 
-    // MARK: - Internal Constants
+    // MARK: --IB Actions--
 
-    struct UI {
-        static let StoryboardID = "MemeDetailViewController"
+    @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
+
+        switch barButtonItem.title! {
+        case "Edit": editButtonWasTapped()
+        default:     fatalError("received action from unknown bar button item = \(barButtonItem)")
+        }
+
     }
 
-    // MARK: - Internal Stored Variables
+    // MARK: --Variables--
 
     var memeToDisplay: Meme!
-
-    // MARK: - Private Stored Variables
-
     fileprivate var memeDetailView: UIImageView!
 
-    // MARK: - View Events
+    // MARK: --View Events--
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         memeDetailView = UIImageView()
         memeDetailView.contentMode = .scaleAspectFit
-        memeDetailView.isHidden      = false
+        memeDetailView.isHidden    = false
 
         view.addSubview(memeDetailView)
     }
 
-    // MARK: - View Layout
+    // MARK: --View Layout--
 
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -44,20 +46,23 @@ final class MemeDetailViewController: UIViewController {
         resetMemeDetailView()
     }
 
-    // MARK: - IB Actions
+}
 
-    @IBAction func editButtonWasTapped(_ sender: UIBarButtonItem) {
-        let memeEditorNavCtlr = storyboard?.instantiateViewController(withIdentifier: StoryboardID.MemeEditorNavCtlr)
-            as! UINavigationController
+
+
+// MARK: - Private Helpers
+
+private extension MemeDetailViewController {
+
+    func editButtonWasTapped() {
+        let memeEditorNavCtlr = storyboard?.instantiateViewController(withIdentifier: IB.StoryboardID.MemeEditorNavigationController) as! UINavigationController
         let memeEditorVC      = memeEditorNavCtlr.viewControllers[0] as! MemeEditorViewController
 
         memeEditorVC.memeToEdit = memeToDisplay
         present(memeEditorNavCtlr, animated: true, completion: nil)
     }
 
-    // MARK: - Private
-
-    fileprivate func resetMemeDetailView() {
+    func resetMemeDetailView() {
         memeDetailView.frame = view.bounds
 
         let widthScale         = view.frame.size.width / memeToDisplay.memedImage.size.width
@@ -71,5 +76,5 @@ final class MemeDetailViewController: UIViewController {
         memeDetailView.frame.origin = CGPoint(x: (view.frame.size.width - widthAfterScaling) / 2,
                                               y: (view.frame.size.height - heightAfterScaling) / 2)
     }
-    
+
 }

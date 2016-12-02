@@ -132,7 +132,7 @@ final class SentMemesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         assert(tableView == self.tableView, "Unexpected table view selected a row")
 
-        let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: MemeDetailViewController.UI.StoryboardID) as! MemeDetailViewController
+        let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: IB.StoryboardID.MemeDetailViewController) as! MemeDetailViewController
         memeDetailVC.memeToDisplay = MemesManager.shared.memeAtIndexPath(indexPath)
 
         navigationController?.pushViewController(memeDetailVC, animated: true)
