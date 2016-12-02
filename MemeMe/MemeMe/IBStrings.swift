@@ -10,8 +10,12 @@ import Foundation
 
 struct IB {
 
+    struct ReuseID {
+        static let SentMemesCollectionViewCell = "SentMemesCollectionViewCell"
+    }
+
     struct StoryboardID {
-        static let MemeDetailViewController = "MemeDetailViewController"
+        static let MemeDetailViewController       = "MemeDetailViewController"
         static let MemeEditorNavigationController = "MemeEditorNavigationController"
     }
 

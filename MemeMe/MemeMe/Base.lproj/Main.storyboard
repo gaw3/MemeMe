@@ -29,15 +29,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gVI-Wl-6ww">
-                                            <rect key="frame" x="0.0" y="0.0" width="136" height="87.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="135" height="88"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rjm-09-DDQ">
-                                            <rect key="frame" x="146" y="18" width="188" height="21"/>
+                                            <rect key="frame" x="145" y="18" width="189" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="highlightedColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOTTOM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Inv-0h-JFi">
-                                            <rect key="frame" x="146" y="48.5" width="188" height="21"/>
+                                            <rect key="frame" x="145" y="49" width="189" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="highlightedColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </label>
@@ -352,16 +352,16 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Sent Memes" id="ahn-KX-iUg">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="QIa-nU-9ci">
+                        <barButtonItem key="rightBarButtonItem" tag="4" systemItem="add" id="QIa-nU-9ci">
                             <connections>
-                                <action selector="addButtonWasTapped:" destination="GoO-jN-1yU" id="Ix0-gE-RpI"/>
+                                <action selector="barButtonWasTapped:" destination="GoO-jN-1yU" id="fWw-Ow-a7x"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
-                        <outlet property="flowLayout" destination="j5Y-j4-Pk9" id="ju5-0B-t8T"/>
+                        <outlet property="flowLayout" destination="j5Y-j4-Pk9" id="kDX-nL-otR"/>
                         <segue destination="mcC-TW-9BR" kind="show" identifier="SegueFromCollectionViewToMemeEditor" id="pQb-qI-uQk"/>
                         <segue destination="QHB-iN-37c" kind="show" identifier="SegueFromCollectionViewToMemeDetail" id="YQO-SP-E3l"/>
                     </connections>
@@ -436,7 +436,7 @@
         <image name="Table Button" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lYm-ve-58p"/>
+        <segue reference="pQb-qI-uQk"/>
         <segue reference="YQO-SP-E3l"/>
     </inferredMetricsTieBreakers>
 </document>
