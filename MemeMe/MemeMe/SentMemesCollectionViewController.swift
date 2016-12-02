@@ -68,9 +68,9 @@ final class SentMemesCollectionViewController: UICollectionViewController {
     // MARK: - NSNotifications
 
     func memesWereModified(_ notification: Notification) {
-        assert(notification.name.rawValue == MemesManager.Notification.MemeWasAdded ||
-            notification.name.rawValue == MemesManager.Notification.MemeWasDeleted ||
-            notification.name.rawValue == MemesManager.Notification.MemeWasMoved, "received unexpected NSNotification")
+        assert(notification.name == NotificationName.MemeWasAdded ||
+               notification.name == NotificationName.MemeWasDeleted ||
+               notification.name == NotificationName.MemeWasMoved, "received unexpected NSNotification")
 
         collectionView?.reloadData()
     }
@@ -80,7 +80,7 @@ final class SentMemesCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         assert(collectionView == self.collectionView, "Unexpected collection view reqesting cell of item at index path")
 
-        let meme = memesMgr.memeAtIndexPath(indexPath)
+        let meme = MemesManager.shared.memeAtIndexPath(indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UI.CollectionCellReuseID, for: indexPath)
 
         cell.backgroundView = UIImageView(image: meme.memedImage)
@@ -91,7 +91,7 @@ final class SentMemesCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         assert(collectionView == self.collectionView, "Unexpected collection view reqesting number of items in section")
 
-        return memesMgr.count
+        return MemesManager.shared.count
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -106,7 +106,7 @@ final class SentMemesCollectionViewController: UICollectionViewController {
         assert(collectionView == self.collectionView, "Unexpected collection view selected an item")
 
         let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: MemeDetailViewController.UI.StoryboardID) as! MemeDetailViewController
-        memeDetailVC.memeToDisplay = memesMgr.memeAtIndexPath(indexPath)
+        memeDetailVC.memeToDisplay = MemesManager.shared.memeAtIndexPath(indexPath)
 
         navigationController?.pushViewController(memeDetailVC, animated: true)
     }
@@ -114,15 +114,9 @@ final class SentMemesCollectionViewController: UICollectionViewController {
     // MARK: - Private Helpers
 
     fileprivate func addNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: SEL.MemesWereModified,
-                                               name: NSNotification.Name(rawValue: MemesManager.Notification.MemeWasAdded),
-                                               object: nil)
-        NotificationCenter.default.addObserver(self, selector: SEL.MemesWereModified,
-                                               name: NSNotification.Name(rawValue: MemesManager.Notification.MemeWasDeleted),
-                                               object: nil)
-        NotificationCenter.default.addObserver(self, selector: SEL.MemesWereModified,
-                                               name: NSNotification.Name(rawValue: MemesManager.Notification.MemeWasMoved),
-                                               object: nil)
+        NotificationCenter.default.addObserver(self, selector: SEL.MemesWereModified, name: NotificationName.MemeWasAdded,   object: nil)
+        NotificationCenter.default.addObserver(self, selector: SEL.MemesWereModified, name: NotificationName.MemeWasDeleted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: SEL.MemesWereModified, name: NotificationName.MemeWasMoved,   object: nil)
     }
     
 }

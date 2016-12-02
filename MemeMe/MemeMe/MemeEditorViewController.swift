@@ -123,7 +123,7 @@ UINavigationControllerDelegate, UITextFieldDelegate {
                               bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
 
         present(activityVC, animated: true, completion: {() -> Void in
-            self.memesMgr.add(meme)})
+            MemesManager.shared.add(meme)})
     }
 
     @IBAction func cameraButtonWasTapped(_ sender: UIBarButtonItem) {

@@ -16,10 +16,4 @@ extension UIViewController {
         static let MemeEditorNavCtlr = "MemeEditorNavigationController"
     }
 
-    // MARK: - Internal Computed Variables
-
-    var memesMgr: MemesManager {
-        return MemesManager.sharedInstance
-    }
-    
 }

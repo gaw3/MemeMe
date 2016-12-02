@@ -6,45 +6,44 @@
 //  Copyright © 2015 Gregory White. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 private let _sharedInstance = MemesManager()
 
-final class MemesManager: NSObject {
+final class MemesManager {
 
-    class var sharedInstance: MemesManager {
+    class var shared: MemesManager {
         return _sharedInstance
     }
 
-    // MARK: - Internal Constants
-
-    struct Notification {
-        static let MemeWasAdded   = "MemesManagerMemeWasAddedNotification"
-        static let MemeWasDeleted = "MemesManagerMemeWadDeletedNotification"
-        static let MemeWasMoved   = "MemesManagerMemeWasMovedNotification"
-    }
-
-    // MARK: - Private Stored Variables
-
     fileprivate var memes: [Meme]
 
-    // MARK: - Internal Computed Variables
+    fileprivate init() {
+        memes = [Meme]()
+    }
+    
+}
+
+
+
+// MARK: - Class API
+
+extension MemesManager {
 
     var count: Int {
         return memes.count
     }
 
-    // MARK: - API
-
     func add(_ newMeme: Meme) {
         memes.append(newMeme)
-        postNotification(Notification.MemeWasAdded)
+//        postNotification(NotificationName.MemeWasAdded)
+        NotificationCenter.default.post(name: NotificationName.MemeWasAdded, object: nil)
     }
 
     func deleteMemeAtIndexPath(_ indexPath: IndexPath) {
         memes.remove(at: indexPath.row)
-        postNotification(Notification.MemeWasDeleted)
+//        postNotification(NotificationName.MemeWasDeleted)
+        NotificationCenter.default.post(name: NotificationName.MemeWasDeleted, object: nil)
     }
 
     func memeAtIndexPath(_ indexPath: IndexPath) -> Meme {
@@ -55,18 +54,19 @@ final class MemesManager: NSObject {
     {
         let meme = memes.remove(at: indexPath.row)
         memes.insert(meme, at: toIndexPath.row)
-        postNotification(Notification.MemeWasMoved)
+//        postNotification(NotificationName.MemeWasMoved)
+        NotificationCenter.default.post(name: NotificationName.MemeWasMoved, object: nil)
     }
 
-    // MARK: - Private
+}
 
-    fileprivate override init() {
-        memes = [Meme]()
-        super.init()
+
+// MARK: - Private Helpers
+
+private extension MemesManager {
+
+    func postNotification(_ name: Notification.Name) {
+        NotificationCenter.default.post(name: name, object: nil)
     }
-    
-    fileprivate func postNotification(_ name: String) {
-        NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: name), object: nil)
-    }
-    
+
 }
