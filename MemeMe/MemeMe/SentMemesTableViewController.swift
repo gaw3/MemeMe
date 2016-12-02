@@ -11,18 +11,23 @@ import UIKit
 
 final class SentMemesTableViewController: UITableViewController {
 
-    // MARK: - Private Constants
+    // MARK: --IB Actions--
 
-    fileprivate struct ActionTitle {
-        static let Cancel = "Cancel"
-        static let Delete = "Delete"
+    @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
+        let systemItem = UIBarButtonSystemItem(rawValue: barButtonItem.tag)
+
+        guard systemItem != nil else {
+            fatalError("Received action from unknown bar button item = \(barButtonItem)")
+        }
+
+        switch systemItem! {
+        case .add: addButtonWasTapped()
+        default:   fatalError("Received action from bar button \(systemItem) is not processed")
+        }
+
     }
 
-    fileprivate struct SEL {
-        static let MemeWasAdded = #selector(memeWasAdded(_:))
-    }
-
-    // MARK: - View Events
+    // MARK: --View Events--
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,30 +35,38 @@ final class SentMemesTableViewController: UITableViewController {
         addNotificationObservers()
         navigationItem.leftBarButtonItem = self.editButtonItem
     }
-
-    // MARK: - IB Actions
-
-    @IBAction func addButtonWasTapped(_ sender: UIBarButtonItem) {
-        let memeEditor = storyboard?.instantiateViewController(withIdentifier: StoryboardID.MemeEditorNavCtlr) as! UINavigationController
-        present(memeEditor, animated: true, completion: nil)
-    }
-
-    // MARK: - Environment Changes
+    
+    // MARK: --Transitions--
 
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
         tableView.reloadData()
     }
 
-    // MARK: - NSNotifications
+}
 
-    internal func memeWasAdded(_ notification: Notification) {
-        assert(notification.name == NotificationName.MemeWasAdded, "received unexpected Notification")
 
-        tableView.reloadData()
+
+// MARK: - Notifications
+
+extension SentMemesTableViewController {
+
+    func processNotification(_ notification: Notification) {
+
+        switch notification.name {
+        case NotificationName.MemeWasAdded: tableView.reloadData()
+        default: fatalError("Received unknown notification = \(notification)")
+        }
+        
     }
+    
+}
 
-    // MARK: - UITableViewDataSource
+
+
+// MARK: - Table View Data Source
+
+extension SentMemesTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         assert(tableView == self.tableView, "Unexpected table view requesting number of sections in table view")
@@ -123,11 +136,17 @@ final class SentMemesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         assert(tableView == self.tableView, "Unexpected table view requesting number of rows in section")
-
+        
         return MemesManager.shared.count
     }
 
-    // MARK: - UITableViewDelegate
+}
+
+
+
+// MARK: - Table View Delegate
+
+extension SentMemesTableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         assert(tableView == self.tableView, "Unexpected table view selected a row")
@@ -138,8 +157,30 @@ final class SentMemesTableViewController: UITableViewController {
         navigationController?.pushViewController(memeDetailVC, animated: true)
     }
 
-    fileprivate func addNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: SEL.MemeWasAdded, name: NotificationName.MemeWasAdded, object: nil)
+}
+
+
+
+// MARK: - Private Helpers
+
+private extension SentMemesTableViewController {
+
+    struct ActionTitle {
+        static let Cancel = "Cancel"
+        static let Delete = "Delete"
     }
-    
+
+    struct SEL {
+        static let ProcessNotification = #selector(processNotification(_:))
+    }
+
+    func addButtonWasTapped() {
+        let memeEditor = storyboard?.instantiateViewController(withIdentifier: IB.StoryboardID.MemeEditorNavigationController) as! UINavigationController
+        present(memeEditor, animated: true, completion: nil)
+    }
+
+    func addNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: SEL.ProcessNotification, name: NotificationName.MemeWasAdded, object: nil)
+    }
+
 }

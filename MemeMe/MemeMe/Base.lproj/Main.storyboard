@@ -183,9 +183,9 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Sent Memes" id="ops-J1-NPK">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="svW-lT-IC8">
+                        <barButtonItem key="rightBarButtonItem" tag="4" systemItem="add" id="svW-lT-IC8">
                             <connections>
-                                <action selector="addButtonWasTapped:" destination="7m3-Bp-nWC" id="e6L-Fh-WR7"/>
+                                <action selector="barButtonWasTapped:" destination="7m3-Bp-nWC" id="cqI-c1-I0q"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -307,7 +307,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="YVS-eX-n8V">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YVS-eX-n8V">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -327,7 +327,7 @@
         <scene sceneID="qKa-gK-3O8">
             <objects>
                 <collectionViewController title="Sent Memes Collection View Controller" id="GoO-jN-1yU" customClass="SentMemesCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="POn-ip-Mi1">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="POn-ip-Mi1">
                         <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="j5Y-j4-Pk9">
@@ -376,7 +376,7 @@
                 <navigationController title="Sent Memes Collection View Nav Controller" id="Jif-Wd-Iwj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Collection Button" selectedImage="Collection Button" id="Z46-5T-p6q"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="4Bn-2U-WbU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="4Bn-2U-WbU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -395,7 +395,7 @@
                     <tabBarItem key="tabBarItem" title="" image="Table Button" selectedImage="Table Button" id="26j-yK-IPe"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="xN8-cj-U5y">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="xN8-cj-U5y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -436,7 +436,7 @@
         <image name="Table Button" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pQb-qI-uQk"/>
-        <segue reference="YQO-SP-E3l"/>
+        <segue reference="6bz-dO-xJf"/>
+        <segue reference="vWA-u7-LTD"/>
     </inferredMetricsTieBreakers>
 </document>

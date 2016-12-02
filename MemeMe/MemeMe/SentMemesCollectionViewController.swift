@@ -19,15 +19,15 @@ final class SentMemesCollectionViewController: UICollectionViewController {
 
     @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
 
-        if let systemItem = UIBarButtonSystemItem(rawValue: barButtonItem.tag) {
+        let systemItem = UIBarButtonSystemItem(rawValue: barButtonItem.tag)
 
-            switch systemItem {
-            case .add: addButtonWasTapped()
-            default:   fatalError("Received action from system item \(systemItem) is not processed")
-            }
-
-        } else {
+        guard systemItem != nil else {
             fatalError("Received action from unknown bar button item = \(barButtonItem)")
+        }
+
+        switch systemItem! {
+        case .add: addButtonWasTapped()
+        default:   fatalError("Received action from system item \(systemItem) is not processed")
         }
 
     }
