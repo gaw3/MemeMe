@@ -107,25 +107,25 @@
                                             <exclude reference="j9D-2D-eJi"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="NAH-4N-oh3"/>
-                                            <exclude reference="b0p-sj-3ex"/>
-                                            <exclude reference="pd6-hb-c1t"/>
                                             <exclude reference="33F-Fq-ij3"/>
                                             <exclude reference="5Fy-Be-CPC"/>
                                             <exclude reference="NMt-LI-Ldt"/>
-                                            <exclude reference="5j0-v0-3HP"/>
-                                            <exclude reference="9a3-ul-E8Q"/>
-                                            <exclude reference="hI1-Fl-v2O"/>
                                             <exclude reference="CW7-b6-cs7"/>
                                             <exclude reference="Vzu-0e-2Ph"/>
                                             <exclude reference="oBA-mx-yPF"/>
-                                            <exclude reference="Sbl-M6-aHJ"/>
-                                            <exclude reference="gcO-ru-2g7"/>
-                                            <exclude reference="vmo-gy-9KX"/>
                                             <exclude reference="FfP-J1-HWK"/>
                                             <exclude reference="IsD-yf-TSX"/>
                                             <exclude reference="SEe-ov-Aci"/>
                                             <exclude reference="dU9-Uk-sjq"/>
+                                            <exclude reference="Sbl-M6-aHJ"/>
+                                            <exclude reference="gcO-ru-2g7"/>
+                                            <exclude reference="vmo-gy-9KX"/>
+                                            <exclude reference="5j0-v0-3HP"/>
+                                            <exclude reference="9a3-ul-E8Q"/>
+                                            <exclude reference="hI1-Fl-v2O"/>
+                                            <exclude reference="NAH-4N-oh3"/>
+                                            <exclude reference="b0p-sj-3ex"/>
+                                            <exclude reference="pd6-hb-c1t"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -135,16 +135,16 @@
                                             <include reference="Inv-0h-JFi"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="NAH-4N-oh3"/>
-                                            <include reference="b0p-sj-3ex"/>
-                                            <include reference="pd6-hb-c1t"/>
-                                            <include reference="5j0-v0-3HP"/>
-                                            <include reference="9a3-ul-E8Q"/>
-                                            <include reference="hI1-Fl-v2O"/>
                                             <include reference="FfP-J1-HWK"/>
                                             <include reference="IsD-yf-TSX"/>
                                             <include reference="SEe-ov-Aci"/>
                                             <include reference="dU9-Uk-sjq"/>
+                                            <include reference="5j0-v0-3HP"/>
+                                            <include reference="9a3-ul-E8Q"/>
+                                            <include reference="hI1-Fl-v2O"/>
+                                            <include reference="NAH-4N-oh3"/>
+                                            <include reference="b0p-sj-3ex"/>
+                                            <include reference="pd6-hb-c1t"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=compact-widthClass=regular">
@@ -264,13 +264,13 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Jfm-ED-1Tx"/>
                         <barButtonItem systemItem="camera" id="anR-4T-Ko2">
                             <connections>
-                                <action selector="cameraButtonWasTapped:" destination="Uf5-U3-BQc" id="Pdh-7a-NOz"/>
+                                <action selector="barButtonWasTapped:" destination="Uf5-U3-BQc" id="8sQ-Bp-rbS"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="ZXy-zf-n2h"/>
                         <barButtonItem title="Photos" id="tv2-ZJ-MAO">
                             <connections>
-                                <action selector="photosButtonWasTapped:" destination="Uf5-U3-BQc" id="ZUv-US-iVg"/>
+                                <action selector="barButtonWasTapped:" destination="Uf5-U3-BQc" id="hkV-3s-PiI"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="xGp-aa-dO5"/>
@@ -278,22 +278,22 @@
                     <navigationItem key="navigationItem" title="Meme Editor" id="wOP-aT-xQF">
                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="S4c-k4-xZy">
                             <connections>
-                                <action selector="actionButtonWasTapped:" destination="Uf5-U3-BQc" id="iUZ-SX-efM"/>
+                                <action selector="barButtonWasTapped:" destination="Uf5-U3-BQc" id="DMi-jX-hrp"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="i6M-cl-U5V">
                             <connections>
-                                <action selector="cancelButtonWasTapped:" destination="Uf5-U3-BQc" id="fh0-Qf-yWs"/>
+                                <action selector="barButtonWasTapped:" destination="Uf5-U3-BQc" id="xgp-bi-ebE"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <connections>
-                        <outlet property="actionButton" destination="S4c-k4-xZy" id="TpM-sO-Mr7"/>
-                        <outlet property="cameraButton" destination="anR-4T-Ko2" id="ckF-Aj-xew"/>
-                        <outlet property="cancelButton" destination="i6M-cl-U5V" id="jRn-bl-bwx"/>
-                        <outlet property="photosButton" destination="tv2-ZJ-MAO" id="t1Q-fi-bvF"/>
+                        <outlet property="actionButton" destination="S4c-k4-xZy" id="Db3-gR-aM1"/>
+                        <outlet property="cameraButton" destination="anR-4T-Ko2" id="DNV-o1-e66"/>
+                        <outlet property="cancelButton" destination="i6M-cl-U5V" id="9WO-sg-P9H"/>
+                        <outlet property="photosButton" destination="tv2-ZJ-MAO" id="6ud-bP-rly"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7B-WW-Qj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -307,7 +307,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YVS-eX-n8V">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="YVS-eX-n8V">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -327,7 +327,7 @@
         <scene sceneID="qKa-gK-3O8">
             <objects>
                 <collectionViewController title="Sent Memes Collection View Controller" id="GoO-jN-1yU" customClass="SentMemesCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="POn-ip-Mi1">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="POn-ip-Mi1">
                         <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="j5Y-j4-Pk9">
@@ -376,7 +376,7 @@
                 <navigationController title="Sent Memes Collection View Nav Controller" id="Jif-Wd-Iwj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Collection Button" selectedImage="Collection Button" id="Z46-5T-p6q"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="4Bn-2U-WbU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="4Bn-2U-WbU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -395,11 +395,12 @@
                     <tabBarItem key="tabBarItem" title="" image="Table Button" selectedImage="Table Button" id="26j-yK-IPe"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="xN8-cj-U5y">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="xN8-cj-U5y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="RSf-XH-1J6">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
