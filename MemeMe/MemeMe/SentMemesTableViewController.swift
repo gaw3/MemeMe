@@ -84,7 +84,7 @@ extension SentMemesTableViewController {
         assert(tableView == self.tableView, "Unexpected table view requesting cell for row at index path")
 
         let meme = MemesManager.shared.memeAtIndexPath(indexPath)
-        let cell = tableView.dequeueReusableCell(withIdentifier: SentMemesTableViewCell.UI.ReuseID, for: indexPath) as! SentMemesTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: IB.ReuseID.SentMemesTableViewCell, for: indexPath) as! SentMemesTableViewCell
 
         cell.topPhraseRegularCompact!.text    = meme.topPhrase
         cell.bottomPhraseRegularCompact!.text = meme.bottomPhrase

@@ -18,7 +18,6 @@ final class SentMemesCollectionViewController: UICollectionViewController {
     // MARK: --IB Actions--
 
     @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
-
         let systemItem = UIBarButtonSystemItem(rawValue: barButtonItem.tag)
 
         guard systemItem != nil else {

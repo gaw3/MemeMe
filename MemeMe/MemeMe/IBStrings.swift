@@ -12,6 +12,7 @@ struct IB {
 
     struct ReuseID {
         static let SentMemesCollectionViewCell = "SentMemesCollectionViewCell"
+        static let SentMemesTableViewCell      = "SentMemesTableViewCell"
     }
 
     struct StoryboardID {

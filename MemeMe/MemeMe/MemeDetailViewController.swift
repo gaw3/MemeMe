@@ -14,9 +14,15 @@ final class MemeDetailViewController: UIViewController {
 
     @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
 
-        switch barButtonItem.title! {
-        case "Edit": editButtonWasTapped()
-        default:     fatalError("received action from unknown bar button item = \(barButtonItem)")
+        let systemItem = UIBarButtonSystemItem(rawValue: barButtonItem.tag)
+
+        guard systemItem != nil else {
+            fatalError("Received action from unknown bar button item = \(barButtonItem)")
+        }
+
+        switch systemItem! {
+        case .edit: editButtonWasTapped()
+        default:   fatalError("Received action from system item \(systemItem) is not processed")
         }
 
     }

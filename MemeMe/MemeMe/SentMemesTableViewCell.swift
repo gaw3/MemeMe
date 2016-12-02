@@ -8,26 +8,20 @@
 
 import UIKit
 
-final internal class SentMemesTableViewCell: UITableViewCell {
-
-    // MARK: - Internal Constants
-
-    internal struct UI {
-        static let ReuseID = "SentMemesTableViewCell"
-    }
+final class SentMemesTableViewCell: UITableViewCell {
 
     // for vertSizeClass = Regular && horizSizeClass = Compact
     // iPhone 6+ / 6s+ in Portrait
     // Remaining iPhones in Portrait & Landscape
 
-    @IBOutlet weak internal var topPhraseRegularCompact:    UILabel!
-    @IBOutlet weak internal var bottomPhraseRegularCompact: UILabel!
-    @IBOutlet weak internal var memeViewRegularCompact:     UIImageView!
+    @IBOutlet weak var topPhraseRegularCompact:    UILabel!
+    @IBOutlet weak var bottomPhraseRegularCompact: UILabel!
+    @IBOutlet weak var memeViewRegularCompact:     UIImageView!
 
     // for vertSizeClass = Compact && horizSizeClass = Regular
     // iPhone 6+ / 6s+ in Landscape
 
-    @IBOutlet weak internal var topPhraseCompactRegular:    UILabel!
-    @IBOutlet weak internal var bottomPhraseCompactRegular: UILabel!
-    @IBOutlet weak internal var memeViewCompactRegular:     UIImageView!
+    @IBOutlet weak var topPhraseCompactRegular:    UILabel!
+    @IBOutlet weak var bottomPhraseCompactRegular: UILabel!
+    @IBOutlet weak var memeViewCompactRegular:     UIImageView!
 }

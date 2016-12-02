@@ -345,7 +345,7 @@ private extension MemeEditorViewController {
     }
     
     func resetMemeTextFields() {
-        let textFieldWidth: CGFloat = memeImageView.frame.size.width - (2 * TextField.InsetX)
+        let textFieldWidth = CGFloat(memeImageView.frame.size.width - (2 * TextField.InsetX))
         
         topMemeTextField.isEnabled        = (originalImage != nil)
         topMemeTextField.frame.size.width = textFieldWidth
@@ -355,8 +355,7 @@ private extension MemeEditorViewController {
         bottomMemeTextField.isEnabled        = (originalImage != nil)
         bottomMemeTextField.frame.size.width = textFieldWidth
         bottomMemeTextField.frame.origin     = CGPoint(x: memeImageView.frame.origin.x + TextField.InsetX,
-                                                       y: memeImageView.frame.origin.y + memeImageView.frame.size.height -
-                                                        TextField.InsetY - bottomMemeTextField.frame.height)
+                                                       y: memeImageView.frame.origin.y + memeImageView.frame.size.height - TextField.InsetY - bottomMemeTextField.frame.height)
     }
     
 }
