@@ -123,17 +123,19 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate {
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            originalImage = image
-            dismiss(animated: true, completion: nil)
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            if let pickedImagePNGData = UIImagePNGRepresentation(pickedImage) {
+                originalImage = UIImage(data: pickedImagePNGData)
+            }
         }
 
+        dismiss(animated: true, completion: nil)
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
+
 }
 
 
@@ -187,27 +189,41 @@ private extension MemeEditorViewController {
     // MARK: --Actions--
 
     func actionButtonWasTapped() {
-        let memedImage = generateMemedImage()
-        let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        let meme       = Meme(originalImage: originalImage, topPhrase: topMemeTextField.text!,
-                              bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
 
-        present(activityVC, animated: true, completion: {() -> Void in MemesManager.shared.add(meme)})
+        if let memedImage = generateMemedImage() {
+            let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+            let meme       = Meme(originalImage: originalImage, topPhrase: topMemeTextField.text!,
+                                  bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
+
+            present(activityVC, animated: true, completion: {() -> Void in MemesManager.shared.add(meme)})
+        } else {
+            fatalError("Unable to generate meme")
+        }
+
     }
 
     // MARK: --Image Processing--
 
-    func generateMemedImage() -> UIImage {
+    func generateMemedImage() -> UIImage? {
         prepareViewHierarchyForGraphicsImageContext()
 
         UIGraphicsBeginImageContextWithOptions(memeImageView.frame.size, true, Scale.DefaultToMainScreen)
         memeImageView.drawHierarchy(in: memeImageView.bounds, afterScreenUpdates: true)
-        let memedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
 
+        var memedImagePNG: UIImage? = nil
+
+        if let memedImage = UIGraphicsGetImageFromCurrentImageContext() {
+
+            if let pngData = UIImagePNGRepresentation(memedImage) {
+                memedImagePNG = UIImage(data: pngData)
+            }
+
+        }
+
+        UIGraphicsEndImageContext()
         restoreViewHierarchyFromGraphicsImageContext()
 
-        return memedImage
+        return memedImagePNG
     }
 
     func pickImageFromSource(_ sourceType: UIImagePickerControllerSourceType) {
