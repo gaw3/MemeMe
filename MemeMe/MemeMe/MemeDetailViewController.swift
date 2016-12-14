@@ -38,6 +38,8 @@ final class MemeDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("view did load")
 
         memeDetailView = UIImageView()
         memeDetailView.contentMode = .scaleAspectFit
@@ -45,12 +47,10 @@ final class MemeDetailViewController: UIViewController {
 
         view.addSubview(memeDetailView)
     }
-
-    // MARK: - View Layout
-
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
         resetMemeDetailView()
     }
 
