@@ -34,24 +34,24 @@ extension MemesManager {
         return memes.count
     }
 
-    func add(_ newMeme: Meme) {
-        memes.append(newMeme)
+    func add(_ meme: Meme) {
+        memes.append(meme)
         NotificationCenter.default.post(name: NotificationName.MemeWasAdded, object: nil)
     }
 
-    func deleteMemeAtIndexPath(_ indexPath: IndexPath) {
+    func deleteMeme(at indexPath: IndexPath) {
         memes.remove(at: indexPath.row)
         NotificationCenter.default.post(name: NotificationName.MemeWasDeleted, object: nil)
     }
 
-    func memeAtIndexPath(_ indexPath: IndexPath) -> Meme {
+    func meme(at indexPath: IndexPath) -> Meme {
         return memes[indexPath.row]
     }
 
-    func moveMemeAtIndexPath(_ indexPath: IndexPath, toIndexPath: IndexPath)
+    func moveMeme(from indexPath1: IndexPath, to indexPath2: IndexPath)
     {
-        let meme = memes.remove(at: indexPath.row)
-        memes.insert(meme, at: toIndexPath.row)
+        let meme = memes.remove(at: indexPath1.row)
+        memes.insert(meme, at: indexPath2.row)
         NotificationCenter.default.post(name: NotificationName.MemeWasMoved, object: nil)
     }
 

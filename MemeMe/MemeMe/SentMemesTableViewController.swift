@@ -81,7 +81,7 @@ extension SentMemesTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         assert(tableView == self.tableView, "Unexpected table view requesting cell for row at index path")
 
-        let meme = MemesManager.shared.memeAtIndexPath(indexPath)
+        let meme = MemesManager.shared.meme(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: IB.ReuseID.SentMemesTableViewCell, for: indexPath) as! SentMemesTableViewCell
 
         cell.topPhrase!.text    = meme.topPhrase
@@ -95,7 +95,7 @@ extension SentMemesTableViewController {
         assert(tableView == self.tableView, "Unexpected table view committing editing style")
 
         if editingStyle == .delete {
-            MemesManager.shared.deleteMemeAtIndexPath(indexPath)
+            MemesManager.shared.deleteMeme(at: indexPath)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
 
@@ -105,7 +105,7 @@ extension SentMemesTableViewController {
         assert(tableView == self.tableView, "Unexpected table view requesting edit actions")
 
         let deleteAction = UITableViewRowAction(style: .default, title: ActionTitle.Delete) { (action, indexPath) -> Void in
-            MemesManager.shared.deleteMemeAtIndexPath(indexPath)
+            MemesManager.shared.deleteMeme(at: indexPath)
             tableView.deleteRows(at: [indexPath], with: .fade)
             self.isEditing = false
         }
@@ -122,7 +122,7 @@ extension SentMemesTableViewController {
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         assert(tableView == self.tableView, "Unexpected table view commanding move row")
 
-        MemesManager.shared.moveMemeAtIndexPath(sourceIndexPath, toIndexPath: destinationIndexPath)
+        MemesManager.shared.moveMeme(from: sourceIndexPath, to: destinationIndexPath)
         tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
     }
 
@@ -144,7 +144,7 @@ extension SentMemesTableViewController {
         assert(tableView == self.tableView, "Unexpected table view selected a row")
 
         let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: IB.StoryboardID.MemeDetailViewController) as! MemeDetailViewController
-        memeDetailVC.memeToDisplay = MemesManager.shared.memeAtIndexPath(indexPath)
+        memeDetailVC.memeToDisplay = MemesManager.shared.meme(at: indexPath)
 
         navigationController?.pushViewController(memeDetailVC, animated: true)
     }

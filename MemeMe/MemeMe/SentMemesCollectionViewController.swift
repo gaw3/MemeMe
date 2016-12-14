@@ -91,7 +91,7 @@ extension SentMemesCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         assert(collectionView == self.collectionView, "Unexpected collection view reqesting cell of item at index path")
 
-        let meme = MemesManager.shared.memeAtIndexPath(indexPath)
+        let meme = MemesManager.shared.meme(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IB.ReuseID.SentMemesCollectionViewCell, for: indexPath)
 
         cell.backgroundView = UIImageView(image: meme.memedImage)
@@ -123,7 +123,7 @@ extension SentMemesCollectionViewController {
         assert(collectionView == self.collectionView, "Unexpected collection view selected an item")
 
         let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: IB.StoryboardID.MemeDetailViewController) as! MemeDetailViewController
-        memeDetailVC.memeToDisplay = MemesManager.shared.memeAtIndexPath(indexPath)
+        memeDetailVC.memeToDisplay = MemesManager.shared.meme(at: indexPath)
 
         navigationController?.pushViewController(memeDetailVC, animated: true)
     }
