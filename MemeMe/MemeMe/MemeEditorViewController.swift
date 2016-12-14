@@ -11,28 +11,30 @@ import UIKit
 
 final class MemeEditorViewController: UIViewController, UINavigationControllerDelegate {
 
-    // MARK: --IB Outlets--
+    // MARK: - IB Outlets
 
     @IBOutlet weak var actionButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var photosButton: UIBarButtonItem!
     
-    // MARK: -IB Actions--
+    // MARK: - IB Actions
 
     @IBAction func barButtonWasTapped(_ barButton: UIBarButtonItem) {
 
         switch barButton {
+
         case actionButton: actionButtonWasTapped()
         case cameraButton: pickImageFromSource(UIImagePickerControllerSourceType.camera)
         case cancelButton: dismiss(animated: true, completion: nil)
         case photosButton: pickImageFromSource(UIImagePickerControllerSourceType.photoLibrary)
-        default:           fatalError("Received action from unknown bar button = \(barButton)")
+
+        default: fatalError("Received action from unknown bar button = \(barButton)")
         }
         
     }
 
-    // MARK: -Variables--
+    // MARK: - Variables
 
     var memeToEdit: Meme!
 
@@ -45,7 +47,7 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
     fileprivate var originTopMemeTextFieldInMainViewSpace    = CGPoint.zero
     fileprivate var originBottomMemeTextFieldInMainViewSpace = CGPoint.zero
 
-    // MARK: --View Events--
+    // MARK: - View Events
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +88,7 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
         unsubscribeFromKeyboardNotifications()
     }
 
-    // MARK: --View Layout--
+    // MARK: - View Layout
 
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -99,6 +101,7 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
 
 
 
+// MARK: -
 // MARK: - Notifications
 
 extension MemeEditorViewController {
@@ -106,8 +109,10 @@ extension MemeEditorViewController {
     func processNotification(_ notification: Notification) {
 
         switch notification.name {
+
         case Notification.Name.UIKeyboardWillHide: keyboardWillHide()
         case Notification.Name.UIKeyboardWillShow: keyboardWillShow(notification)
+            
         default: fatalError("Received unknown notification = \(notification)")
         }
 

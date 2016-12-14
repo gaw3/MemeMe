@@ -36,13 +36,11 @@ extension MemesManager {
 
     func add(_ newMeme: Meme) {
         memes.append(newMeme)
-//        postNotification(NotificationName.MemeWasAdded)
         NotificationCenter.default.post(name: NotificationName.MemeWasAdded, object: nil)
     }
 
     func deleteMemeAtIndexPath(_ indexPath: IndexPath) {
         memes.remove(at: indexPath.row)
-//        postNotification(NotificationName.MemeWasDeleted)
         NotificationCenter.default.post(name: NotificationName.MemeWasDeleted, object: nil)
     }
 
@@ -54,19 +52,7 @@ extension MemesManager {
     {
         let meme = memes.remove(at: indexPath.row)
         memes.insert(meme, at: toIndexPath.row)
-//        postNotification(NotificationName.MemeWasMoved)
         NotificationCenter.default.post(name: NotificationName.MemeWasMoved, object: nil)
-    }
-
-}
-
-
-// MARK: - Private Helpers
-
-private extension MemesManager {
-
-    func postNotification(_ name: Notification.Name) {
-        NotificationCenter.default.post(name: name, object: nil)
     }
 
 }

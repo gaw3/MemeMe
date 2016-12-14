@@ -10,7 +10,7 @@ import UIKit
 
 final class MemeDetailViewController: UIViewController {
 
-    // MARK: --IB Actions--
+    // MARK: - IB Actions
 
     @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
 
@@ -21,18 +21,20 @@ final class MemeDetailViewController: UIViewController {
         }
 
         switch systemItem! {
+
         case .edit: editButtonWasTapped()
-        default:   fatalError("Received action from system item \(systemItem) is not processed")
+
+        default: fatalError("Received action from system item \(systemItem) is not processed")
         }
 
     }
 
-    // MARK: --Variables--
+    // MARK: - Variables
 
     var memeToDisplay: Meme!
     fileprivate var memeDetailView: UIImageView!
 
-    // MARK: --View Events--
+    // MARK: - View Events
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +46,7 @@ final class MemeDetailViewController: UIViewController {
         view.addSubview(memeDetailView)
     }
 
-    // MARK: --View Layout--
+    // MARK: - View Layout
 
     override func updateViewConstraints() {
         super.updateViewConstraints()
@@ -56,6 +58,7 @@ final class MemeDetailViewController: UIViewController {
 
 
 
+// MARK: -
 // MARK: - Private Helpers
 
 private extension MemeDetailViewController {

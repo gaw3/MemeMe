@@ -11,11 +11,11 @@ import UIKit
 
 final class SentMemesCollectionViewController: UICollectionViewController {
 
-    // MARK: --IB Outlets--
+    // MARK: - IB Outlets
 
     @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
 
-    // MARK: --IB Actions--
+    // MARK: - IB Actions
 
     @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
         let systemItem = UIBarButtonSystemItem(rawValue: barButtonItem.tag)
@@ -25,13 +25,15 @@ final class SentMemesCollectionViewController: UICollectionViewController {
         }
 
         switch systemItem! {
+
         case .add: addButtonWasTapped()
-        default:   fatalError("Received action from system item \(systemItem) is not processed")
+
+        default: fatalError("Received action from system item \(systemItem) is not processed")
         }
 
     }
 
-    // MARK: --View Events--
+    // MARK: - View Events
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +47,7 @@ final class SentMemesCollectionViewController: UICollectionViewController {
         flowLayout.minimumLineSpacing      = Layout.MinimumInteritemSpacing
     }
 
-    // MARK: --View Layout--
+    // MARK: - View Layout
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -60,6 +62,7 @@ final class SentMemesCollectionViewController: UICollectionViewController {
 
 
 
+// MARK: - 
 // MARK: - Notifications
 
 extension SentMemesCollectionViewController {

@@ -11,7 +11,7 @@ import UIKit
 
 final class SentMemesTableViewController: UITableViewController {
 
-    // MARK: --IB Actions--
+    // MARK: - IB Actions
 
     @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
         let systemItem = UIBarButtonSystemItem(rawValue: barButtonItem.tag)
@@ -21,13 +21,15 @@ final class SentMemesTableViewController: UITableViewController {
         }
 
         switch systemItem! {
+
         case .add: addButtonWasTapped()
-        default:   fatalError("Received action from bar button \(systemItem) is not processed")
+
+        default: fatalError("Received action from bar button \(systemItem) is not processed")
         }
 
     }
 
-    // MARK: --View Events--
+    // MARK: - View Events
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +38,7 @@ final class SentMemesTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
-    // MARK: --Transitions--
+    // MARK: - Transitions
 
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
@@ -47,6 +49,7 @@ final class SentMemesTableViewController: UITableViewController {
 
 
 
+// MARK: - 
 // MARK: - Notifications
 
 extension SentMemesTableViewController {
@@ -54,7 +57,9 @@ extension SentMemesTableViewController {
     func processNotification(_ notification: Notification) {
 
         switch notification.name {
+
         case NotificationName.MemeWasAdded: tableView.reloadData()
+            
         default: fatalError("Received unknown notification = \(notification)")
         }
         
