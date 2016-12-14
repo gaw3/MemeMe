@@ -38,13 +38,6 @@ final class SentMemesTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
-    // MARK: - Transitions
-
-//    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.willTransition(to: newCollection, with: coordinator)
-//        tableView.reloadData()
-//    }
-
 }
 
 
