@@ -39,8 +39,6 @@ final class MemeDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("view did load")
-
         memeDetailView = UIImageView()
         memeDetailView.contentMode = .scaleAspectFit
         memeDetailView.isHidden    = false
