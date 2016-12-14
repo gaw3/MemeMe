@@ -40,10 +40,10 @@ final class SentMemesTableViewController: UITableViewController {
     
     // MARK: - Transitions
 
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        tableView.reloadData()
-    }
+//    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.willTransition(to: newCollection, with: coordinator)
+//        tableView.reloadData()
+//    }
 
 }
 
@@ -91,15 +91,9 @@ extension SentMemesTableViewController {
         let meme = MemesManager.shared.memeAtIndexPath(indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: IB.ReuseID.SentMemesTableViewCell, for: indexPath) as! SentMemesTableViewCell
 
-        cell.topPhraseRegularCompact!.text    = meme.topPhrase
-        cell.bottomPhraseRegularCompact!.text = meme.bottomPhrase
-        cell.memeViewRegularCompact!.image    = meme.memedImage
-
-        if view.traitCollection.horizontalSizeClass == .regular && view.traitCollection.verticalSizeClass == .compact {
-            cell.topPhraseCompactRegular!.text    = meme.topPhrase
-            cell.bottomPhraseCompactRegular!.text = meme.bottomPhrase
-            cell.memeViewCompactRegular!.image    = meme.memedImage
-        }
+        cell.topPhrase!.text    = meme.topPhrase
+        cell.bottomPhrase!.text = meme.bottomPhrase
+        cell.memeView!.image    = meme.memedImage
 
         return cell
     }
