@@ -25,9 +25,9 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
         switch barButton {
 
         case actionButton: actionButtonWasTapped()
-        case cameraButton: pickImageFromSource(UIImagePickerControllerSourceType.camera)
+        case cameraButton: pickImage(from: UIImagePickerControllerSourceType.camera)
         case cancelButton: dismiss(animated: true, completion: nil)
-        case photosButton: pickImageFromSource(UIImagePickerControllerSourceType.photoLibrary)
+        case photosButton: pickImage(from: UIImagePickerControllerSourceType.photoLibrary)
 
         default: fatalError("Received action from unknown bar button = \(barButton)")
         }
@@ -88,11 +88,9 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
         unsubscribeFromKeyboardNotifications()
     }
 
-    // MARK: - View Layout
-
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
         resetMemeImageView()
         resetMemeTextFields()
     }
@@ -128,10 +126,8 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate {
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            if let pickedImagePNGData = UIImagePNGRepresentation(pickedImage) {
-                originalImage = UIImage(data: pickedImagePNGData)
-            }
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage, let pickedImagePNGData = UIImagePNGRepresentation(pickedImage) {
+            originalImage = UIImage(data: pickedImagePNGData)
         }
 
         dismiss(animated: true, completion: nil)
@@ -217,12 +213,8 @@ private extension MemeEditorViewController {
 
         var memedImagePNG: UIImage? = nil
 
-        if let memedImage = UIGraphicsGetImageFromCurrentImageContext() {
-
-            if let pngData = UIImagePNGRepresentation(memedImage) {
-                memedImagePNG = UIImage(data: pngData)
-            }
-
+        if let memedImage = UIGraphicsGetImageFromCurrentImageContext(), let pngData = UIImagePNGRepresentation(memedImage) {
+            memedImagePNG = UIImage(data: pngData)
         }
 
         UIGraphicsEndImageContext()
@@ -231,7 +223,7 @@ private extension MemeEditorViewController {
         return memedImagePNG
     }
 
-    func pickImageFromSource(_ sourceType: UIImagePickerControllerSourceType) {
+    func pickImage(from sourceType: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
 
         imagePicker.delegate   = self
