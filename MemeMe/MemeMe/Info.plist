@@ -31,7 +31,9 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photos will be used to start the meme design</string>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
