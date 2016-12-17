@@ -9,6 +9,7 @@
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="88"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" tableViewCell="XVt-wn-glJ" id="C4E-Vd-Vx7">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="87"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="88"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gVI-Wl-6ww">
@@ -206,14 +207,21 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="xGp-aa-dO5"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Meme Editor" id="wOP-aT-xQF">
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="S4c-k4-xZy">
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="action" id="S4c-k4-xZy">
+                                <connections>
+                                    <action selector="barButtonWasTapped:" destination="Uf5-U3-BQc" id="DMi-jX-hrp"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="save" id="oK2-Bm-4N4">
+                                <connections>
+                                    <action selector="barButtonWasTapped:" destination="Uf5-U3-BQc" id="Rup-DA-alu"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="qBV-Gg-gDH">
                             <connections>
-                                <action selector="barButtonWasTapped:" destination="Uf5-U3-BQc" id="DMi-jX-hrp"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="i6M-cl-U5V">
-                            <connections>
-                                <action selector="barButtonWasTapped:" destination="Uf5-U3-BQc" id="xgp-bi-ebE"/>
+                                <action selector="barButtonWasTapped:" destination="Uf5-U3-BQc" id="fy5-xM-oS9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -222,8 +230,9 @@
                     <connections>
                         <outlet property="actionButton" destination="S4c-k4-xZy" id="Db3-gR-aM1"/>
                         <outlet property="cameraButton" destination="anR-4T-Ko2" id="DNV-o1-e66"/>
-                        <outlet property="cancelButton" destination="i6M-cl-U5V" id="9WO-sg-P9H"/>
+                        <outlet property="cancelButton" destination="qBV-Gg-gDH" id="5db-8j-aYt"/>
                         <outlet property="photosButton" destination="tv2-ZJ-MAO" id="6ud-bP-rly"/>
+                        <outlet property="saveButton" destination="oK2-Bm-4N4" id="no0-AO-qKq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7B-WW-Qj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -304,7 +313,7 @@
         <scene sceneID="ehM-go-5Lj">
             <objects>
                 <navigationController title="Sent Memes Collection View Nav Controller" id="Jif-Wd-Iwj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Collection Button" selectedImage="Collection Button" id="Z46-5T-p6q"/>
+                    <tabBarItem key="tabBarItem" title="" image="CollectionButton" selectedImage="CollectionButton" id="Z46-5T-p6q"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="4Bn-2U-WbU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -322,7 +331,7 @@
         <scene sceneID="iFX-wc-JXb">
             <objects>
                 <navigationController title="Sent Memes Table View Nav Controller" id="UEc-z8-Jst" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Table Button" selectedImage="Table Button" id="26j-yK-IPe"/>
+                    <tabBarItem key="tabBarItem" title="" image="TableButton" selectedImage="TableButton" id="26j-yK-IPe"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="xN8-cj-U5y">
@@ -362,8 +371,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Collection Button" width="30" height="30"/>
-        <image name="Table Button" width="30" height="30"/>
+        <image name="CollectionButton" width="30" height="30"/>
+        <image name="TableButton" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="6bz-dO-xJf"/>
