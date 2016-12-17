@@ -29,7 +29,7 @@ final class SentMemesTableViewController: UITableViewController {
 
     }
 
-    // MARK: - View Events
+    // MARK: - View Management
 
     override func viewDidLoad() {
         super.viewDidLoad()

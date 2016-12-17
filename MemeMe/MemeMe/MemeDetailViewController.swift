@@ -34,17 +34,7 @@ final class MemeDetailViewController: UIViewController {
     var memeToDisplay: Meme!
     fileprivate var memeDetailView: UIImageView!
 
-    // MARK: - View Events
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        memeDetailView = UIImageView()
-        memeDetailView.contentMode = .scaleAspectFit
-        memeDetailView.isHidden    = false
-
-        view.addSubview(memeDetailView)
-    }
+    // MARK: - View Layout
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -52,6 +42,18 @@ final class MemeDetailViewController: UIViewController {
         resetMemeDetailView()
     }
 
+    // MARK: - View Management
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        memeDetailView = UIImageView()
+        memeDetailView.contentMode = .scaleAspectFit
+        memeDetailView.isHidden    = false
+        
+        view.addSubview(memeDetailView)
+    }
+    
 }
 
 

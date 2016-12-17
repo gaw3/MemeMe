@@ -33,20 +33,6 @@ final class SentMemesCollectionViewController: UICollectionViewController {
 
     }
 
-    // MARK: - View Events
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        addNotificationObservers()
-
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: IB.ReuseID.SentMemesCollectionViewCell)
-        collectionView?.backgroundColor = UIColor.white
-
-        flowLayout.minimumInteritemSpacing = Layout.MinimumInteritemSpacing
-        flowLayout.minimumLineSpacing      = Layout.MinimumInteritemSpacing
-    }
-
     // MARK: - View Layout
 
     override func viewWillLayoutSubviews() {
@@ -56,6 +42,20 @@ final class SentMemesCollectionViewController: UICollectionViewController {
         let itemWidth        = CGFloat((view.frame.size.width - (flowLayout.minimumInteritemSpacing * (numOfCellsAcross - 1))) / numOfCellsAcross)
 
         flowLayout.itemSize  = CGSize(width: itemWidth, height: itemWidth) // yes, a square on purpose
+    }
+    
+    // MARK: - View Management
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addNotificationObservers()
+        
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: IB.ReuseID.SentMemesCollectionViewCell)
+        collectionView?.backgroundColor = UIColor.white
+        
+        flowLayout.minimumInteritemSpacing = Layout.MinimumInteritemSpacing
+        flowLayout.minimumLineSpacing      = Layout.MinimumInteritemSpacing
     }
     
 }
