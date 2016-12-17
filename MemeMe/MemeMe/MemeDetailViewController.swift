@@ -10,6 +10,10 @@ import UIKit
 
 final class MemeDetailViewController: UIViewController {
 
+    // MARK: - IB Outlets
+    
+    @IBOutlet weak var detailImage: UIImageView!
+
     // MARK: - IB Actions
 
     @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
@@ -32,26 +36,12 @@ final class MemeDetailViewController: UIViewController {
     // MARK: - Variables
 
     var memeToDisplay: Meme!
-    fileprivate var memeDetailView: UIImageView!
-
-    // MARK: - View Layout
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        resetMemeDetailView()
-    }
 
     // MARK: - View Management
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        memeDetailView = UIImageView()
-        memeDetailView.contentMode = .scaleAspectFit
-        memeDetailView.isHidden    = false
-        
-        view.addSubview(memeDetailView)
+        detailImage.image = memeToDisplay.memedImage
     }
     
 }
@@ -69,21 +59,6 @@ private extension MemeDetailViewController {
 
         memeEditorVC.memeToEdit = memeToDisplay
         present(memeEditorNavCtlr, animated: true, completion: nil)
-    }
-
-    func resetMemeDetailView() {
-        memeDetailView.frame = view.bounds
-
-        let widthScale         = view.frame.size.width / memeToDisplay.memedImage.size.width
-        let heightScale        = view.frame.size.height / memeToDisplay.memedImage.size.height
-        let scaleToUse         = min(widthScale, heightScale)
-        let widthAfterScaling  = memeToDisplay.memedImage.size.width * scaleToUse
-        let heightAfterScaling = memeToDisplay.memedImage.size.height * scaleToUse
-
-        memeDetailView.image        = memeToDisplay.memedImage
-        memeDetailView.frame.size   = CGSize(width: widthAfterScaling, height: heightAfterScaling)
-        memeDetailView.frame.origin = CGPoint(x: (view.frame.size.width - widthAfterScaling) / 2,
-                                              y: (view.frame.size.height - heightAfterScaling) / 2)
     }
 
 }
