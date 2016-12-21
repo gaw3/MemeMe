@@ -77,22 +77,14 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
         super.viewWillAppear(animated)
 
         actionButton.isEnabled = (originalImage != nil)
-        resetMemeImageView()
-        resetMemeTextFields()
-        subscribeToKeyboardNotifications()
+        reset()
+        addNotificationObservers()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        unsubscribeFromKeyboardNotifications()
-    }
-
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        
-        resetMemeImageView()
-        resetMemeTextFields()
+        removeNotificationObservers()
     }
 
 }
@@ -108,8 +100,9 @@ extension MemeEditorViewController {
 
         switch notification.name {
 
-        case Notification.Name.UIKeyboardWillHide: keyboardWillHide()
-        case Notification.Name.UIKeyboardWillShow: keyboardWillShow(notification)
+        case Notification.Name.UIKeyboardWillHide:           keyboardWillHide()
+        case Notification.Name.UIKeyboardWillShow:           keyboardWillShow(notification)
+        case Notification.Name.UIDeviceOrientationDidChange: reset()
             
         default: fatalError("Received unknown notification = \(notification)")
         }
@@ -173,8 +166,7 @@ private extension MemeEditorViewController {
     }
 
     struct SEL {
-        static let KeyboardWillHide = #selector(processNotification(_:))
-        static let KeyboardWillShow = #selector(processNotification(_:))
+        static let ProcessNotification = #selector(processNotification(_:))
     }
 
     struct TextField {
@@ -296,25 +288,32 @@ private extension MemeEditorViewController {
         return textField
     }
 
-    // MARK: --Keyboards--
+    // MARK: --Notifications--
 
+    func addNotificationObservers() {
+        NotificationCenter.default.addObserver(self, selector: SEL.ProcessNotification, name: .UIKeyboardWillHide,           object: nil)
+        NotificationCenter.default.addObserver(self, selector: SEL.ProcessNotification, name: .UIKeyboardWillShow,           object: nil)
+        NotificationCenter.default.addObserver(self, selector: SEL.ProcessNotification, name: .UIDeviceOrientationDidChange, object: nil)
+
+    }
+    
     func keyboardWillHide() {
-
+        
         if amountToShiftMainViewOnYAxis > 0.0 {
             view.frame.origin.y += amountToShiftMainViewOnYAxis
             amountToShiftMainViewOnYAxis = 0.0
         }
-
+        
     }
-
+    
     func keyboardWillShow(_ notification: Notification) {
-
+        
         if (bottomMemeTextField.isFirstResponder) {
             let keyboardSize                    = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
             let originOfKeyboardInWindow        = CGPoint(x: 0, y: view.window!.frame.size.height - keyboardSize.cgRectValue.height)
             let originOfKeyboardInMemeImageView = memeImageView.convert(originOfKeyboardInWindow, from: view.window!)
             let amountOfKeyboardOverlapInYDim   = memeImageView.bounds.size.height - originOfKeyboardInMemeImageView.y
-
+            
             if amountOfKeyboardOverlapInYDim > 0 {
                 amountToShiftMainViewOnYAxis = amountOfKeyboardOverlapInYDim
                 view.frame.origin.y -= amountOfKeyboardOverlapInYDim
@@ -324,19 +323,18 @@ private extension MemeEditorViewController {
         
     }
     
-    // MARK: --Notifications--
-
-    func subscribeToKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: SEL.KeyboardWillHide, name: Notification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: SEL.KeyboardWillShow, name: Notification.Name.UIKeyboardWillShow, object: nil)
-    }
-
-    func unsubscribeFromKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
+    func removeNotificationObservers() {
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide,           object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow,           object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIDeviceOrientationDidChange, object: nil)
     }
     
     // MARK: --Reset--
+    
+    func reset() {
+        resetMemeImageView()
+        resetMemeTextFields()
+    }
 
     func resetMemeImageView() {
 
