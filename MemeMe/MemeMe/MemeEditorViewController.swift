@@ -15,7 +15,7 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
 
     @IBOutlet weak var actionButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet weak var doneButton:   UIBarButtonItem!
     @IBOutlet weak var photosButton: UIBarButtonItem!
     
     // MARK: - IB Actions
@@ -26,7 +26,7 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
 
         case actionButton: actionButtonWasTapped()
         case cameraButton: pickImage(from: UIImagePickerControllerSourceType.camera)
-        case cancelButton: dismiss(animated: true, completion: nil)
+        case doneButton:   dismiss(animated: true, completion: nil)
         case photosButton: pickImage(from: UIImagePickerControllerSourceType.photoLibrary)
 
         default: fatalError("Received action from unknown bar button = \(barButton)")
@@ -52,7 +52,7 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        cancelButton.isEnabled = true
+        doneButton.isEnabled   = true
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
         photosButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary)
 
@@ -88,8 +88,8 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
         unsubscribeFromKeyboardNotifications()
     }
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
         
         resetMemeImageView()
         resetMemeTextFields()
