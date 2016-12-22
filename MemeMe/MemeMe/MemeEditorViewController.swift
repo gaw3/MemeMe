@@ -299,7 +299,7 @@ private extension MemeEditorViewController {
     
     func keyboardWillShow(_ notification: Notification) {
         
-        if (bottomMemeTextField.isFirstResponder) {
+        if bottomMemeTextField.isFirstResponder {
             let keyboardSize                    = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
             let originOfKeyboardInWindow        = CGPoint(x: 0, y: view.window!.frame.size.height - keyboardSize.cgRectValue.height)
             let originOfKeyboardInMemeImageView = memeImageView.convert(originOfKeyboardInWindow, from: view.window!)

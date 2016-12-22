@@ -62,6 +62,7 @@ extension SentMemesTableViewController {
 
 
 
+// MARK: -
 // MARK: - Table View Data Source
 
 extension SentMemesTableViewController {
@@ -136,6 +137,7 @@ extension SentMemesTableViewController {
 
 
 
+// MARK: -
 // MARK: - Table View Delegate
 
 extension SentMemesTableViewController {
@@ -153,6 +155,7 @@ extension SentMemesTableViewController {
 
 
 
+// MARK: -
 // MARK: - Private Helpers
 
 private extension SentMemesTableViewController {
