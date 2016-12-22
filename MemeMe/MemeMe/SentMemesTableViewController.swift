@@ -162,7 +162,7 @@ private extension SentMemesTableViewController {
         static let Delete = "Delete"
     }
 
-    struct SEL {
+    struct Selector {
         static let ProcessNotification = #selector(processNotification(_:))
     }
 
@@ -172,7 +172,7 @@ private extension SentMemesTableViewController {
     }
 
     func addNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: SEL.ProcessNotification, name: NotificationName.MemeWasAdded, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: NotificationName.MemeWasAdded, object: nil)
     }
 
 }

@@ -84,6 +84,7 @@ extension SentMemesCollectionViewController {
 
 
 
+// MARK: -
 // MARK: - Collection View Data Source
 
 extension SentMemesCollectionViewController {
@@ -115,6 +116,7 @@ extension SentMemesCollectionViewController {
 
 
 
+// MARK: -
 // MARK: - Collection View Delegate
 
 extension SentMemesCollectionViewController {
@@ -132,6 +134,7 @@ extension SentMemesCollectionViewController {
 
 
 
+// MARK: -
 // MARK: - Private Helpers
 
 private extension SentMemesCollectionViewController {
@@ -142,7 +145,7 @@ private extension SentMemesCollectionViewController {
         static let MinimumInteritemSpacing        = CGFloat(3.0)
     }
 
-    struct SEL {
+    struct Selector {
         static let ProcessNotification = #selector(processNotification(_:))
     }
 
@@ -152,9 +155,9 @@ private extension SentMemesCollectionViewController {
     }
 
     func addNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: SEL.ProcessNotification, name: NotificationName.MemeWasAdded,   object: nil)
-        NotificationCenter.default.addObserver(self, selector: SEL.ProcessNotification, name: NotificationName.MemeWasDeleted, object: nil)
-        NotificationCenter.default.addObserver(self, selector: SEL.ProcessNotification, name: NotificationName.MemeWasMoved,   object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: NotificationName.MemeWasAdded,   object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: NotificationName.MemeWasDeleted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: NotificationName.MemeWasMoved,   object: nil)
     }
 
 }

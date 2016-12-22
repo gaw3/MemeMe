@@ -113,6 +113,7 @@ extension MemeEditorViewController {
 
 
 
+// MARK: -
 // MARK: - Image Picker Controller Delegate
 
 extension MemeEditorViewController: UIImagePickerControllerDelegate {
@@ -134,6 +135,7 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate {
 
 
 
+// MARK: -
 // MARK: - Text Field Delegate
 
 extension MemeEditorViewController: UITextFieldDelegate {
@@ -149,37 +151,12 @@ extension MemeEditorViewController: UITextFieldDelegate {
 
 
 
+// MARK: -
 // MARK: - Private Helpers
 
 private extension MemeEditorViewController {
 
-    // MARK: --Constants--
-
-    struct ImpactFont {
-        static let Name        = "Impact"
-        static let Size        = CGFloat(40.0)
-        static let StrokeWidth = CGFloat(-3.0)
-    }
-
-    struct Scale {
-        static let DefaultToMainScreen = CGFloat(0.0)
-    }
-
-    struct SEL {
-        static let ProcessNotification = #selector(processNotification(_:))
-    }
-
-    struct TextField {
-        static let PlaceholderTextTop    = "TOP"
-        static let PlaceholderTextBottom = "BOTTOM"
-
-        static let Height      = CGFloat(50.0)
-        static let MinSizeFont = CGFloat(12.0)
-        static let InsetX      = CGFloat(5.0) // dist(x) between leading edges or trailing edges of meme image view & text fields
-        static let InsetY      = CGFloat(5.0) // dist(y) between top edges or bottom edges of meme image view & text fields
-    }
-
-    // MARK: --Actions--
+    // MARK: - Actions
 
     func actionButtonWasTapped() {
 
@@ -195,8 +172,12 @@ private extension MemeEditorViewController {
 
     }
 
-    // MARK: --Image Processing--
+    // MARK: - Image Processing
 
+    struct Scale {
+        static let DefaultToMainScreen = CGFloat(0.0)
+    }
+    
     func generateMemedImage() -> UIImage? {
         prepareViewHierarchyForGraphicsImageContext()
 
@@ -252,8 +233,14 @@ private extension MemeEditorViewController {
         originBottomMemeTextFieldInMainViewSpace = CGPoint.zero
     }
 
-    // MARK: --Initialization--
-
+    // MARK: - Initialization
+    
+    struct ImpactFont {
+        static let Name        = "Impact"
+        static let Size        = CGFloat(40.0)
+        static let StrokeWidth = CGFloat(-3.0)
+    }
+    
     func initMemeImageView() -> UIImageView {
         let imageView = UIImageView()
 
@@ -288,12 +275,16 @@ private extension MemeEditorViewController {
         return textField
     }
 
-    // MARK: --Notifications--
+    // MARK: - Notifications
 
+    struct Selector {
+        static let ProcessNotification = #selector(processNotification(_:))
+    }
+    
     func addNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: SEL.ProcessNotification, name: .UIKeyboardWillHide,           object: nil)
-        NotificationCenter.default.addObserver(self, selector: SEL.ProcessNotification, name: .UIKeyboardWillShow,           object: nil)
-        NotificationCenter.default.addObserver(self, selector: SEL.ProcessNotification, name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: .UIKeyboardWillHide,           object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: .UIKeyboardWillShow,           object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: .UIDeviceOrientationDidChange, object: nil)
 
     }
     
@@ -329,7 +320,17 @@ private extension MemeEditorViewController {
         NotificationCenter.default.removeObserver(self, name: .UIDeviceOrientationDidChange, object: nil)
     }
     
-    // MARK: --Reset--
+    // MARK: - Reset
+    
+    struct TextField {
+        static let PlaceholderTextTop    = "TOP"
+        static let PlaceholderTextBottom = "BOTTOM"
+        
+        static let Height      = CGFloat(50.0)
+        static let MinSizeFont = CGFloat(12.0)
+        static let InsetX      = CGFloat(5.0) // dist(x) between leading edges or trailing edges of meme image view & text fields
+        static let InsetY      = CGFloat(5.0) // dist(y) between top edges or bottom edges of meme image view & text fields
+    }
     
     func reset() {
         resetMemeImageView()
