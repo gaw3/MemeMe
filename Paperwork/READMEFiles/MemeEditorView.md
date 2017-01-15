@@ -1,4 +1,4 @@
-# Meme Editor View
+# ![][AppIcon]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meme Editor View
 
 ##### Buttons
 | Share | Camera |
@@ -64,25 +64,28 @@
 | | |
 | ![][NewMemeCollectionPT] | ![][NewMemeCollectionLS] | 
 
+---
+**Copyright © 2016-2017 Gregory A. White. All rights reserved.**
 
 
 
+[AppIcon]:              ../images/MemeMeAppIcon_80.png
 
-[ActivityViewLS]:      ../images/MemeEditorActivityViewLS.png
-[ActivityViewPT]:      ../images/MemeEditorActivityViewPT.png
-[CameraButton]:        ../images/CameraButtonIcon_50.png
-[EditingBottomLS]:     ../images/MemeEditorEditingBottomLS.png
-[EditingBottomPT]:     ../images/MemeEditorEditingBottomPT.png
-[EditingTopLS]:        ../images/MemeEditorEditingTopLS.png
-[EditingTopPT]:        ../images/MemeEditorEditingTopPT.png
-[EmptyLS]:             ../images/MemeEditorEmptyLS.png
-[EmptyPT]:             ../images/MemeEditorEmptyPT.png
-[FinishedMemeLS]:      ../images/MemeEditorFinishedMemeLS.png
-[FinishedMemePT]:      ../images/MemeEditorFinishedMemePT.png
-[NewMemeCollectionLS]: ../images/SentMemesNewMemeCollectionLS.png
-[NewMemeCollectionPT]: ../images/SentMemesNewMemeCollectionPT.png
-[NewMemeLS]:           ../images/MemeEditorNewMemeLS.png
-[NewMemePT]:           ../images/MemeEditorNewMemePT.png
-[NewMemeTableLS]:      ../images/SentMemesNewMemeTableLS.png
-[NewMemeTablePT]:      ../images/SentMemesNewMemeTablePT.png
-[ShareButton]:         ../images/ShareButtonIcon_50.png
+[ActivityViewLS]:       ../images/MemeEditorActivityViewLS.png
+[ActivityViewPT]:       ../images/MemeEditorActivityViewPT.png
+[CameraButton]:         ../images/CameraButtonIcon_50.png
+[EditingBottomLS]:      ../images/MemeEditorEditingBottomLS.png
+[EditingBottomPT]:      ../images/MemeEditorEditingBottomPT.png
+[EditingTopLS]:         ../images/MemeEditorEditingTopLS.png
+[EditingTopPT]:         ../images/MemeEditorEditingTopPT.png
+[EmptyLS]:              ../images/MemeEditorEmptyLS.png
+[EmptyPT]:              ../images/MemeEditorEmptyPT.png
+[FinishedMemeLS]:       ../images/MemeEditorFinishedMemeLS.png
+[FinishedMemePT]:       ../images/MemeEditorFinishedMemePT.png
+[NewMemeCollectionLS]:  ../images/SentMemesNewMemeCollectionLS.png
+[NewMemeCollectionPT]:  ../images/SentMemesNewMemeCollectionPT.png
+[NewMemeLS]:            ../images/MemeEditorNewMemeLS.png
+[NewMemePT]:            ../images/MemeEditorNewMemePT.png
+[NewMemeTableLS]:       ../images/SentMemesNewMemeTableLS.png
+[NewMemeTablePT]:       ../images/SentMemesNewMemeTablePT.png
+[ShareButton]:          ../images/ShareButtonIcon_50.png

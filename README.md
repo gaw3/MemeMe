@@ -12,14 +12,13 @@ MemeMe is Portfolio Project #2 of the Udacity iOS Developer Nanodegree Program. 
 * [Udacity Git Commit Message Style Guide][CommitMsgStyleGuide]
 * [Udacity Project Review][ProjectReview]<br/><br/>
 
-|               | Project Submission         | Current State
-| :----------   | :-------------             | :-----------------  |
-| Grade:        | ***Exceeds Expectations*** |                     |  
-| GitHub Tag    | v2.0                       | v2.3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[changelog][ChangeLog] |
-| App Version:  | 2.0                        | 2.3                 |
-| Environment:  | Xcode 7.1 / iOS 9.1        | Xcode 7.3 / iOS 9.3 |
-| Devices:      | iPhone only                | same                |
-| Orientations: | All except Upside Down     | same                |
+| [Change Log][ChangeLog] | Current State          | Final iOS 9 Build   | Project Submission - ***Exceeds Expectations*** |
+| :----------             | :-----------------     | :-------------      | :-------------                                  |
+| GitHub Tag              | v3.0                   | v2.3                | v2.0                                            |
+| App Version:            | 3.0                    | 2.3                 | 2.0                                             |
+| Environment:            | Xcode 8.2.1 / iOS 10.2 | Xcode 7.3 / iOS 9.3 | Xcode 7.1 / iOS 9.1                             |
+| Devices:                | iPhone Only            | iPhone Only         | iPhone Only                                     |
+| Orientations:           | All except Upside Down | Portrait Only       | Portrait Only                                   |
 
 ## Design
 
@@ -28,11 +27,11 @@ Upon app launch, the initial view is the **Sent Memes Tabbed View** with the **T
 * The **Table** tab is the default tab, and presents the memes in a table view.  Each row contains a sent meme, with the top & bottom legends appearing to the side.
   - Tap a row to present the meme in the [Meme Detail View][MDV].
   - Left-Swipe a row to present the option to [delete][DeleteMeme] the associated meme from the memory store.<br/><br/>
- * The **Collection** tab presents the memes in a collection view.  Each cell contains only a sent meme.
-   - Tap a cell to present the meme in the [Meme Detail View][MDV].<br/><br/>
- * The tabs share a common navigation bar:
-   - Tap the **Add** button (&nbsp;![][AddButton], right side, always visible) to present an [empty Meme Editor View][EmptyMEV], in order to create and send a meme.
-   - Tap the **Edit** button (left side, visible for **Table** tab only) to present an [interface][TableEdit] for deleting and reordering sent memes.
+* The **Collection** tab presents the memes in a collection view.  Each cell contains only a sent meme.
+  - Tap a cell to present the meme in the [Meme Detail View][MDV].<br/><br/>
+* The tabs share a common navigation bar:
+  - Tap the **Add** button (&nbsp;![][AddButton], right side, always visible) to present an [empty Meme Editor View][EmptyMEV], in order to create and send a meme.
+  - Tap the **Edit** button (left side, visible for **Table** tab only) to present an [interface][TableEdit] for deleting and reordering sent memes.
  
 ### iOS Frameworks
 
@@ -45,7 +44,7 @@ Upon app launch, the initial view is the **Sent Memes Tabbed View** with the **T
 * `Swift.gitignore`, the template used to create the local `.gitignore` file, lives in this [repo][GitIgnoreRepo].
 
 ---
-**Copyright © 2016 Gregory White. All rights reserved.**
+**Copyright © 2016-2017 Gregory A. White. All rights reserved.**
 
 
 

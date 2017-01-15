@@ -1,4 +1,4 @@
-# Meme Detail View
+# ![][AppIcon]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Meme Detail View
 
 Please read [Meme Editor View][MEV] before reading this page.
 
@@ -27,17 +27,20 @@ Please read [Meme Editor View][MEV] before reading this page.
 | | |
 | ![][2MemesCollectionPT] | ![][2MemesCollectionLS] | 
 
+---
+**Copyright © 2016-2017 Gregory A. White. All rights reserved.**
+
+[AppIcon]:             ../images/MemeMeAppIcon_80.png
 
 
 
+[2MemesCollectionLS]:  ../images/SentMemes2MemesCollectionLS.png
+[2MemesCollectionPT]:  ../images/SentMemes2MemesCollectionPT.png
+[2MemesTableLS]:       ../images/SentMemes2MemesTableLS.png
+[2MemesTablePT]:       ../images/SentMemes2MemesTablePT.png
+[DetailLS]:            ../images/MemeDetailLS.png
+[DetailPT]:            ../images/MemeDetailPT.png
+[EditedMemeLS]:        ../images/MemeEditorEditedMemeLS.png
+[EditedMemePT]:        ../images/MemeEditorEditedMemePT.png
 
-[2MemesCollectionLS]: ../images/SentMemes2MemesCollectionLS.png
-[2MemesCollectionPT]: ../images/SentMemes2MemesCollectionPT.png
-[2MemesTableLS]:      ../images/SentMemes2MemesTableLS.png
-[2MemesTablePT]:      ../images/SentMemes2MemesTablePT.png
-[DetailLS]:           ../images/MemeDetailLS.png
-[DetailPT]:           ../images/MemeDetailPT.png
-[EditedMemeLS]:       ../images/MemeEditorEditedMemeLS.png
-[EditedMemePT]:       ../images/MemeEditorEditedMemePT.png
-
-[MEV]:                ./MemeEditorView.md
+[MEV]:                 ./MemeEditorView.md

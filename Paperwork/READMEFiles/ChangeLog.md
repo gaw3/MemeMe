@@ -1,4 +1,4 @@
-# Change Log
+# ![][AppIcon]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change Log
 
 ### v2.3
 * Update to Xcode 7.3 / iOS 9.3
@@ -16,3 +16,10 @@
 * Start the README.
 
 ### v2.0 - Final Project Submission
+
+---
+**Copyright © 2016-2017 Gregory A. White. All rights reserved.**
+
+
+
+[AppIcon]:  ../images/MemeMeAppIcon_80.png

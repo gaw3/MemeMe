@@ -1,19 +1,26 @@
-# Foundation Framework
+# ![][AppIcon]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Foundation Entities Used
 
 ```
-NSIndexPath
-NSObject
+IndexPath
+```
+
+```
+Notification
+NotificationCenter
+
+Notification.Name.UIKeyboardWillHide
+Notification.Name.UIKeyboardWillShow
+Notification.Name.UIDeviceOrientationDidChange
+```
+
+```
 NSValue
-```
-
-```
-NSNotification
-NSNotificationCenter
-```
-
-```
 NSFontAttributeName
 NSForegroundColorAttributeName
 NSStrokeColorAttributeName
 NSStrokeWidthAttributeName
 ```
+
+
+
+[AppIcon]:  ../images/MemeMeAppIcon_80.png

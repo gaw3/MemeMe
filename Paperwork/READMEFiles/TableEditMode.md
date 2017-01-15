@@ -1,4 +1,4 @@
-# Sent Memes Tabbed View
+# ![][AppIcon]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sent Memes Tabbed View
 
 * The **Edit** button was tapped to enable table edit mode.
 
@@ -20,9 +20,12 @@
 | :---: | :---: |
 | ![][MoveRowPT] | ![][MoveRow2PT] | 
 
+---
+**Copyright © 2016-2017 Gregory A. White. All rights reserved.**
 
 
 
+[AppIcon]:     ../images/MemeMeAppIcon_80.png
 
 [EditModeLS]:  ../images/TableEditModeLS.png
 [EditModePT]:  ../images/TableEditModePT.png

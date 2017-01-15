@@ -1,8 +1,10 @@
-#  UIKit Framework
+# ![][AppIcon]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UIKit Entities Used
 
 ```
 UIApplication
 UIApplicationDelegate - protocol
+UIDevice
+UIDeviceOrientationIsPortrait
 UIResponder
 UIView
 UIViewController
@@ -10,15 +12,9 @@ UIWindow
 ```
 
 ```
-UIDevice
-UIDeviceOrientationIsPortrait
-UITraitCollection
-UIViewControllerTransitionCoordinator
-```
-
-```
 UIActivityViewController
 UIBarButtonItem
+UIBarButtonSystemItem
 UIColor
 UIFont
 UILabel
@@ -43,12 +39,10 @@ UIGraphicsGetImageFromCurrentImageContext
 UIImage
 UIImagePickerController
 UIImagePickerControllerDelegate - protocol
+UIImagePickerControllerOriginalImage
+UIImagePickerControllerSourceType
+UIImagePNGRepresentation
 UIImageView
-```
-
-```
-UIKeyboardWillHideNotification
-UIKeyboardWillShowNotification
 ```
 
 ```
@@ -70,3 +64,7 @@ UITableViewRowAction
 UITextField
 UITextFieldDelegate - protocol
 ```
+
+
+
+[AppIcon]:  ../images/MemeMeAppIcon_80.png
