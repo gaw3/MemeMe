@@ -33,6 +33,10 @@ Upon app launch, the initial view is the **Sent Memes Tabbed View** with the **T
   - Tap the **Add** button (&nbsp;![][AddButton], right side, always visible) to present an [empty Meme Editor View][EmptyMEV], in order to create and send a meme.
   - Tap the **Edit** button (left side, visible for **Table** tab only) to present an [interface][TableEdit] for deleting and reordering sent memes.
  
+### Notes
+
+* [Device Privacy][DevicePrivacy]
+
 ### iOS Frameworks
 
 * [Foundation][FDTN]
@@ -65,6 +69,7 @@ Upon app launch, the initial view is the **Sent Memes Tabbed View** with the **T
 [MDV]:                  ./Paperwork/READMEFiles/MemeDetailView.md
 [Meme]:                 ./Paperwork/READMEFiles/MemeDefinition.md
 [NoMemes]:              ./Paperwork/READMEFiles/SentMemesEmpty.md
+[DevicePrivacy]:        ./Paperwork/READMEFiles/Privacy.md
 [SomeMemes]:            ./Paperwork/READMEFiles/SentMemesFull.md
 [TableEdit]:            ./Paperwork/READMEFiles/TableEditMode.md
 

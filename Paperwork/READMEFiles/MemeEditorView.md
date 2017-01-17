@@ -13,8 +13,9 @@
 * At any time, tap the **Cancel** button to return to the **Sent Memes Tabbed View**.
 * **TOP** & **BOTTOM** fields cannot be edited until an image has been chosen for the meme.
 * The **Share** button is unavailable until an image has been chosen for the meme.
-* Tap the **Camera** button to activate the device camera and acquire image.
-* Tap the **Photos** button to present the Photo Library and select the desired image.
+* Tap the **Camera** button to activate the device **Camera** and acquire image.
+* Tap the **Photos** button to present the **Photo Library** and select the desired image.
+* See these [Device Privacy][DevicePrivacy] notes regarding this app's use of the **Photo Library** and the **Camera**.
 
 ##### Editor has Selected Image
 | | |
@@ -89,3 +90,5 @@
 [NewMemeTableLS]:       ../images/SentMemesNewMemeTableLS.png
 [NewMemeTablePT]:       ../images/SentMemesNewMemeTablePT.png
 [ShareButton]:          ../images/ShareButtonIcon_50.png
+
+[DevicePrivacy]:        ./Privacy.md
