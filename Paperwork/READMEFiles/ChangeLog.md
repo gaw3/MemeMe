@@ -1,5 +1,19 @@
 # ![][AppIcon]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change Log
 
+### v3.0
+* Update to Xcode 8.2.1 / iOS 10.2
+* Update to Swift 3.0
+* Update README
+* Adhere to new "Swifty" conventions: 
+  - extensions handling delegate protocols
+  - API creation
+  - lowerCamelCase for enum elements
+  - indentation</br></br>
+
+* Enable privacy for device Photo Library and Camera
+* App now renders properly in landscape orientation
+* Update .gitignore
+
 ### v2.3
 * Update to Xcode 7.3 / iOS 9.3
 * Fix the deprecated code
