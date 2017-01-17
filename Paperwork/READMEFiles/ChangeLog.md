@@ -8,8 +8,7 @@
   - extensions handling delegate protocols
   - API creation
   - lowerCamelCase for enum elements
-  - indentation</br></br>
-
+  - indentation
 * Enable privacy for device Photo Library and Camera
 * App now renders properly in landscape orientation
 * Update .gitignore
