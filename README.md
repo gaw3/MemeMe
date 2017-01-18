@@ -27,7 +27,7 @@ Upon app launch, the initial view is the **Sent Memes Tabbed View** with the **T
 * The **Table** tab is the default tab, and presents the memes in a table view.  Each row contains a sent meme, with the top & bottom legends appearing to the side.
   - Tap a row to present the meme in the [Meme Detail View][MDV].
   - Left-Swipe a row to present the option to [delete][DeleteMeme] the associated meme from the memory store.<br/><br/>
-* The **Collection** tab presents the memes in a collection view.  Each cell contains only a sent meme.
+* The **Collection** tab presents the memes in a collection view.  Each cell contains a sent meme.
   - Tap a cell to present the meme in the [Meme Detail View][MDV].<br/><br/>
 * The tabs share a common navigation bar:
   - Tap the **Add** button (&nbsp;![][AddButton], right side, always visible) to present an [empty Meme Editor View][EmptyMEV], in order to create and send a meme.
@@ -49,8 +49,6 @@ Upon app launch, the initial view is the **Sent Memes Tabbed View** with the **T
 
 ---
 **Copyright © 2016-2017 Gregory A. White. All rights reserved.**
-
-
 
 
 

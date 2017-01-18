@@ -12,7 +12,7 @@ MemeMe is designed to utilize the device **Photo Library** & the device **Camera
 ![][PhotoLibraryAlert]
 
 * Tapping **OK** allows the main **Photo Library** view to appear.
-* Tapping **Don't Allow** prevents the main **Photo Library** view to appear.  Tapping the **Cancel** button returns app to the [Meme Editor View][MEV].  Subsequent taps of the **Photos** button result in the following display:
+* Tapping **Don't Allow** prevents the main **Photo Library** view from appearing.  Tapping the **Cancel** button returns app to the [Meme Editor View][MEV].  Subsequent taps of the **Photos** button results in the following display:
 
 ##### No Access to Photo Library
 ![][PhotoLibraryNoAccess]
@@ -26,7 +26,7 @@ MemeMe is designed to utilize the device **Photo Library** & the device **Camera
 ##### Camera Usage Request
 ![][CameraAlert]
 
-* Tapping **OK** allows the **Camera app** to appear access the device **Camera**.
+* Tapping **OK** allows the **Camera app** to appear and access the device **Camera**.
 * Tapping **Don't Allow** allows the **Camera app** to appear, but the app cannot access the device **Camera**.  Tapping the **Cancel** button returns app to the [Meme Editor View][MEV].  Subsequent taps of the **Camera** button result in the same behavior minus the alert.
 
 ---
