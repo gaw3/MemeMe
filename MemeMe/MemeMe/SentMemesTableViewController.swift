@@ -24,7 +24,7 @@ final class SentMemesTableViewController: UITableViewController {
 
         case .add: addButtonWasTapped()
 
-        default: fatalError("Received action from bar button \(systemItem) is not processed")
+        default: fatalError("Received action from bar button \(systemItem!) is not processed")
         }
 
     }

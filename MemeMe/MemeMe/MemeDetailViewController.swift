@@ -28,7 +28,7 @@ final class MemeDetailViewController: UIViewController {
 
         case .edit: editButtonWasTapped()
 
-        default: fatalError("Received action from system item \(systemItem) is not processed")
+        default: fatalError("Received action from system item \(systemItem!) is not processed")
         }
 
     }
