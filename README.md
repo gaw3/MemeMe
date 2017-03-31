@@ -16,7 +16,7 @@ MemeMe is Portfolio Project #2 of the Udacity iOS Developer Nanodegree Program. 
 | :----------             | :-----------------     | :-------------      | :-------------                                  |
 | GitHub Tag              | v3.1                   | v2.3                | v2.0                                            |
 | App Version:            | 3.1                    | 2.3                 | 2.0                                             |
-| Environment:            | Xcode 8.2.1 / iOS 10.2 | Xcode 7.3 / iOS 9.3 | Xcode 7.1 / iOS 9.1                             |
+| Environment:            | Xcode 8.3 / iOS 10.3   | Xcode 7.3 / iOS 9.3 | Xcode 7.1 / iOS 9.1                             |
 | Devices:                | iPhone Only            | iPhone Only         | iPhone Only                                     |
 | Orientations:           | All except Upside Down | Portrait Only       | Portrait Only                                   |
 
