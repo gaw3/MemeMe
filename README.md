@@ -12,10 +12,10 @@ MemeMe is Portfolio Project #2 of the Udacity iOS Developer Nanodegree Program. 
 * [Udacity Git Commit Message Style Guide][CommitMsgStyleGuide]
 * [Udacity Project Review][ProjectReview]<br/><br/>
 
-| [Change Log][ChangeLog] | Current State          | Final iOS 9 Build   | Project Submission - ***Exceeds Expectations*** |
+| [Change Log][ChangeLog] | Current iOS 10 Build   | Final iOS 9 Build   | Project Submission - ***Exceeds Expectations*** |
 | :----------             | :-----------------     | :-------------      | :-------------                                  |
-| GitHub Tag              | v3.0                   | v2.3                | v2.0                                            |
-| App Version:            | 3.0                    | 2.3                 | 2.0                                             |
+| GitHub Tag              | v3.1                   | v2.3                | v2.0                                            |
+| App Version:            | 3.1                    | 2.3                 | 2.0                                             |
 | Environment:            | Xcode 8.2.1 / iOS 10.2 | Xcode 7.3 / iOS 9.3 | Xcode 7.1 / iOS 9.1                             |
 | Devices:                | iPhone Only            | iPhone Only         | iPhone Only                                     |
 | Orientations:           | All except Upside Down | Portrait Only       | Portrait Only                                   |
