@@ -18,17 +18,16 @@ final class SentMemesCollectionViewController: UICollectionViewController {
     // MARK: - IB Actions
 
     @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
-        let systemItem = UIBarButtonSystemItem(rawValue: barButtonItem.tag)
+//        let systemItem = UIBarButtonItem.SystemItem(rawValue: barButtonItem.tag)
 
-        guard systemItem != nil else {
-            fatalError("Received action from unknown bar button item = \(barButtonItem)")
+        guard let systemItem = UIBarButtonItem.SystemItem(rawValue: barButtonItem.tag) else {
+            assertionFailure("Received action from unknown bar button item = \(barButtonItem)")
+            return
         }
 
-        switch systemItem! {
-
+        switch systemItem {
         case .add: addButtonWasTapped()
-
-        default: fatalError("Received action from system item \(systemItem!) is not processed")
+        default:   assertionFailure("Received action from system item \(systemItem) is not processed")
         }
 
     }
@@ -38,7 +37,7 @@ final class SentMemesCollectionViewController: UICollectionViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        let numOfCellsAcross = CGFloat(UIDeviceOrientationIsPortrait(UIDevice.current.orientation) ? Layout.NumberOfCellsAcrossInPortrait : Layout.NumberOfCellsAcrossInLandscape)
+        let numOfCellsAcross = CGFloat(UIDevice.current.orientation.isPortrait ? Layout.NumberOfCellsAcrossInPortrait : Layout.NumberOfCellsAcrossInLandscape)
         let itemWidth        = CGFloat((view.frame.size.width - (flowLayout.minimumInteritemSpacing * (numOfCellsAcross - 1))) / numOfCellsAcross)
 
         flowLayout.itemSize  = CGSize(width: itemWidth, height: itemWidth) // yes, a square on purpose
@@ -67,7 +66,7 @@ final class SentMemesCollectionViewController: UICollectionViewController {
 
 extension SentMemesCollectionViewController {
 
-    func processNotification(_ notification: Notification) {
+    @objc func processNotification(_ notification: Notification) {
 
         switch notification.name {
 
@@ -75,7 +74,7 @@ extension SentMemesCollectionViewController {
              NotificationName.MemeWasDeleted,
              NotificationName.MemeWasMoved: collectionView?.reloadData()
 
-        default: fatalError("Received unknown notification = \(notification)")
+        default: assertionFailure("Received unknown notification = \(notification)")
         }
         
     }
@@ -90,8 +89,6 @@ extension SentMemesCollectionViewController {
 extension SentMemesCollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        assert(collectionView == self.collectionView, "Unexpected collection view reqesting cell of item at index path")
-
         let meme = MemesManager.shared.meme(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IB.ReuseID.SentMemesCollectionViewCell, for: indexPath)
 
@@ -101,14 +98,10 @@ extension SentMemesCollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        assert(collectionView == self.collectionView, "Unexpected collection view reqesting number of items in section")
-
         return MemesManager.shared.count
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        assert(collectionView == self.collectionView, "Unexpected collection view reqesting number of sections in view")
-        
         return 1
     }
 
@@ -122,8 +115,6 @@ extension SentMemesCollectionViewController {
 extension SentMemesCollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        assert(collectionView == self.collectionView, "Unexpected collection view selected an item")
-
         let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: IB.StoryboardID.MemeDetailViewController) as! MemeDetailViewController
         memeDetailVC.memeToDisplay = MemesManager.shared.meme(at: indexPath)
 

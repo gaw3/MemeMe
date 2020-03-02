@@ -14,17 +14,15 @@ final class SentMemesTableViewController: UITableViewController {
     // MARK: - IB Actions
 
     @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
-        let systemItem = UIBarButtonSystemItem(rawValue: barButtonItem.tag)
 
-        guard systemItem != nil else {
-            fatalError("Received action from unknown bar button item = \(barButtonItem)")
+        guard let systemItem = UIBarButtonItem.SystemItem(rawValue: barButtonItem.tag) else {
+            assertionFailure("Received action from unknown bar button item = \(barButtonItem)")
+            return
         }
 
-        switch systemItem! {
-
+        switch systemItem {
         case .add: addButtonWasTapped()
-
-        default: fatalError("Received action from bar button \(systemItem!) is not processed")
+        default:   assertionFailure("Received action from bar button \(systemItem) is not processed")
         }
 
     }
@@ -47,13 +45,13 @@ final class SentMemesTableViewController: UITableViewController {
 
 extension SentMemesTableViewController {
 
-    func processNotification(_ notification: Notification) {
+    @objc func processNotification(_ notification: Notification) {
 
         switch notification.name {
 
         case NotificationName.MemeWasAdded: tableView.reloadData()
             
-        default: fatalError("Received unknown notification = \(notification)")
+        default: assertionFailure("Received unknown notification = \(notification)")
         }
         
     }
@@ -68,20 +66,14 @@ extension SentMemesTableViewController {
 extension SentMemesTableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        assert(tableView == self.tableView, "Unexpected table view requesting number of sections in table view")
-
         return 1
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        assert(tableView == self.tableView, "Unexpected table view requesting cell can be edited")
-
         return true
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        assert(tableView == self.tableView, "Unexpected table view requesting cell for row at index path")
-
         let meme = MemesManager.shared.meme(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: IB.ReuseID.SentMemesTableViewCell, for: indexPath) as! SentMemesTableViewCell
 
@@ -92,44 +84,60 @@ extension SentMemesTableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        assert(tableView == self.tableView, "Unexpected table view committing editing style")
-
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             MemesManager.shared.deleteMeme(at: indexPath)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
 
     }
-
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        assert(tableView == self.tableView, "Unexpected table view requesting edit actions")
-
-        let deleteAction = UITableViewRowAction(style: .default, title: ActionTitle.Delete) { (action, indexPath) -> Void in
-            MemesManager.shared.deleteMeme(at: indexPath)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            self.isEditing = false
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: ActionTitle.Delete) {
+            
+            (contextualAction, view, actionPerformed) in
+                
+                MemesManager.shared.deleteMeme(at: indexPath)
+                self.tableView.deleteRows(at: [indexPath], with: .fade)
+                self.isEditing = false
         }
-
-        let cancelAction = UITableViewRowAction(style: .default, title: ActionTitle.Cancel) { (action, indexPath) -> Void in
-            self.isEditing = false
+        
+        let cancelAction = UIContextualAction(style: .normal, title: ActionTitle.Cancel) {
+            
+            (contextualAction, view, actionPerformed) in
+                
+                self.isEditing = false
+            
         }
-
-        cancelAction.backgroundColor = UIColor.blue
-
-        return [cancelAction, deleteAction]
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction, cancelAction])
     }
 
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        assert(tableView == self.tableView, "Unexpected table view commanding move row")
+//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        assert(tableView == self.tableView, "Unexpected table view requesting edit actions")
+//
+//        let deleteAction = UITableViewRowAction(style: .default, title: ActionTitle.Delete) { (action, indexPath) -> Void in
+//            MemesManager.shared.deleteMeme(at: indexPath)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//            self.isEditing = false
+//        }
+//
+//        let cancelAction = UITableViewRowAction(style: .default, title: ActionTitle.Cancel) { (action, indexPath) -> Void in
+//            self.isEditing = false
+//        }
+//
+//        cancelAction.backgroundColor = UIColor.blue
+//
+//        return [cancelAction, deleteAction]
+//    }
 
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         MemesManager.shared.moveMeme(from: sourceIndexPath, to: destinationIndexPath)
         tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        assert(tableView == self.tableView, "Unexpected table view requesting number of rows in section")
-        
         return MemesManager.shared.count
     }
 
@@ -143,8 +151,6 @@ extension SentMemesTableViewController {
 extension SentMemesTableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        assert(tableView == self.tableView, "Unexpected table view selected a row")
-
         let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: IB.StoryboardID.MemeDetailViewController) as! MemeDetailViewController
         memeDetailVC.memeToDisplay = MemesManager.shared.meme(at: indexPath)
 

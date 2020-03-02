@@ -18,17 +18,16 @@ final class MemeDetailViewController: UIViewController {
 
     @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
 
-        let systemItem = UIBarButtonSystemItem(rawValue: barButtonItem.tag)
+//        let systemItem = UIBarButtonItem.SystemItem(rawValue: barButtonItem.tag)
 
-        guard systemItem != nil else {
-            fatalError("Received action from unknown bar button item = \(barButtonItem)")
+        guard let systemItem = UIBarButtonItem.SystemItem(rawValue: barButtonItem.tag) else {
+            assertionFailure("Received action from unknown bar button item = \(barButtonItem)")
+            return
         }
 
-        switch systemItem! {
-
+        switch systemItem {
         case .edit: editButtonWasTapped()
-
-        default: fatalError("Received action from system item \(systemItem!) is not processed")
+        default:    assertionFailure("Received action from system item \(systemItem) is not processed")
         }
 
     }

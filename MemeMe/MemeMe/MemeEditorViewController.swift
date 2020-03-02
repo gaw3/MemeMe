@@ -25,11 +25,11 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
         switch barButton {
 
         case actionButton: actionButtonWasTapped()
-        case cameraButton: pickImage(from: UIImagePickerControllerSourceType.camera)
+        case cameraButton: pickImage(from: UIImagePickerController.SourceType.camera)
         case doneButton:   dismiss(animated: true, completion: nil)
-        case photosButton: pickImage(from: UIImagePickerControllerSourceType.photoLibrary)
+        case photosButton: pickImage(from: UIImagePickerController.SourceType.photoLibrary)
 
-        default: fatalError("Received action from unknown bar button = \(barButton)")
+        default: assertionFailure("Received action from unknown bar button = \(barButton)")
         }
         
     }
@@ -53,8 +53,8 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
         super.viewDidLoad()
 
         doneButton.isEnabled   = true
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)
-        photosButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary)
+        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera)
+        photosButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary)
 
         memeImageView = initMemeImageView()
         view.addSubview(memeImageView)
@@ -96,15 +96,15 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
 
 extension MemeEditorViewController {
 
-    func processNotification(_ notification: Notification) {
+    @objc func processNotification(_ notification: Notification) {
 
         switch notification.name {
 
-        case Notification.Name.UIKeyboardWillHide:           keyboardWillHide()
-        case Notification.Name.UIKeyboardWillShow:           keyboardWillShow(notification)
-        case Notification.Name.UIDeviceOrientationDidChange: reset()
+        case UIResponder.keyboardWillHideNotification:  keyboardWillHide()
+        case UIResponder.keyboardWillShowNotification:  keyboardWillShow(notification)
+        case UIDevice.orientationDidChangeNotification: reset()
             
-        default: fatalError("Received unknown notification = \(notification)")
+        default: assertionFailure("Received unknown notification = \(notification)")
         }
 
     }
@@ -118,10 +118,12 @@ extension MemeEditorViewController {
 
 extension MemeEditorViewController: UIImagePickerControllerDelegate {
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage, let pickedImagePNGData = UIImagePNGRepresentation(pickedImage) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
+            let pickedImagePNGData = pickedImage.pngData() {
             originalImage = UIImage(data: pickedImagePNGData)
+            reset()
         }
 
         dismiss(animated: true, completion: nil)
@@ -141,8 +143,6 @@ extension MemeEditorViewController: UIImagePickerControllerDelegate {
 extension MemeEditorViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        assert(textField == topMemeTextField || textField == bottomMemeTextField, "received notification from unexpected UITextField")
-
         textField.resignFirstResponder()
         return true
     }
@@ -167,7 +167,7 @@ private extension MemeEditorViewController {
 
             present(activityVC, animated: true, completion: {() -> Void in MemesManager.shared.add(meme)})
         } else {
-            fatalError("Unable to generate meme")
+            assertionFailure("Unable to generate meme")
         }
 
     }
@@ -186,7 +186,7 @@ private extension MemeEditorViewController {
 
         var memedImagePNG: UIImage? = nil
 
-        if let memedImage = UIGraphicsGetImageFromCurrentImageContext(), let pngData = UIImagePNGRepresentation(memedImage) {
+        if let memedImage = UIGraphicsGetImageFromCurrentImageContext(), let pngData = memedImage.pngData() {
             memedImagePNG = UIImage(data: pngData)
         }
 
@@ -196,7 +196,7 @@ private extension MemeEditorViewController {
         return memedImagePNG
     }
 
-    func pickImage(from sourceType: UIImagePickerControllerSourceType) {
+    func pickImage(from sourceType: UIImagePickerController.SourceType) {
         let imagePicker = UIImagePickerController()
 
         imagePicker.delegate   = self
@@ -253,10 +253,10 @@ private extension MemeEditorViewController {
 
     func initMemeTextField(_ text: String) -> UITextField {
         let textField          = UITextField()
-        let memeTextAttributes = [NSStrokeColorAttributeName:     UIColor.black,
-                                  NSForegroundColorAttributeName: UIColor.white,
-                                  NSFontAttributeName:            UIFont(name: ImpactFont.Name, size: ImpactFont.Size)!,
-                                  NSStrokeWidthAttributeName:     ImpactFont.StrokeWidth] as [String : Any]
+        let memeTextAttributes = [NSAttributedString.Key.strokeColor:     UIColor.black,
+                                  NSAttributedString.Key.foregroundColor: UIColor.white,
+                                  NSAttributedString.Key.font:            UIFont(name: ImpactFont.Name, size: ImpactFont.Size)!,
+                                  NSAttributedString.Key.strokeWidth:     ImpactFont.StrokeWidth] as [NSAttributedString.Key : Any]
 
         textField.adjustsFontSizeToFitWidth = true
         textField.autocapitalizationType    = .allCharacters
@@ -282,9 +282,9 @@ private extension MemeEditorViewController {
     }
     
     func addNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: .UIKeyboardWillHide,           object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: .UIKeyboardWillShow,           object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: UIResponder.keyboardWillHideNotification,  object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: UIResponder.keyboardWillShowNotification,  object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: UIDevice.orientationDidChangeNotification, object: nil)
 
     }
     
@@ -300,7 +300,7 @@ private extension MemeEditorViewController {
     func keyboardWillShow(_ notification: Notification) {
         
         if bottomMemeTextField.isFirstResponder {
-            let keyboardSize                    = notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+            let keyboardSize                    = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
             let originOfKeyboardInWindow        = CGPoint(x: 0, y: view.window!.frame.size.height - keyboardSize.cgRectValue.height)
             let originOfKeyboardInMemeImageView = memeImageView.convert(originOfKeyboardInWindow, from: view.window!)
             let amountOfKeyboardOverlapInYDim   = memeImageView.bounds.size.height - originOfKeyboardInMemeImageView.y
@@ -315,9 +315,9 @@ private extension MemeEditorViewController {
     }
     
     func removeNotificationObservers() {
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide,           object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow,           object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification,  object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification,  object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     // MARK: - Reset
