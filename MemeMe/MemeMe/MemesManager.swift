@@ -8,51 +8,44 @@
 
 import UIKit
 
-private let _sharedInstance = MemesManager()
+// MARK: -
+// MARK: -
 
 final class MemesManager {
+    
+    // MARK: - Variables
 
-    class var shared: MemesManager {
-        return _sharedInstance
-    }
+    static let shared = MemesManager()
 
-    fileprivate var memes: [Meme]
+    private var memes: [Meme]
 
-    fileprivate init() {
-        memes = [Meme]()
-    }
+    // MARK: - Initializers
+
+    private init() { memes = [Meme]() }
     
 }
 
 
 
-// MARK: - Class API
+// MARK: -
+// MARK: - API
 
 extension MemesManager {
 
-    var count: Int {
-        return memes.count
-    }
+    // MARK: - Variables
 
-    func add(_ meme: Meme) {
-        memes.append(meme)
-        NotificationCenter.default.post(name: NotificationName.MemeWasAdded, object: nil)
-    }
+    var count: Int { return memes.count }
 
-    func deleteMeme(at indexPath: IndexPath) {
-        memes.remove(at: indexPath.row)
-        NotificationCenter.default.post(name: NotificationName.MemeWasDeleted, object: nil)
-    }
+    // MARK: - Methods
 
-    func meme(at indexPath: IndexPath) -> Meme {
-        return memes[indexPath.row]
-    }
+    func add(_ meme: Meme)                     { memes.append(meme) }
+    func deleteMeme(at indexPath: IndexPath)   { memes.remove(at: indexPath.row) }
+    func meme(at indexPath: IndexPath) -> Meme { return memes[indexPath.row] }
 
     func moveMeme(from indexPath1: IndexPath, to indexPath2: IndexPath)
     {
         let meme = memes.remove(at: indexPath1.row)
         memes.insert(meme, at: indexPath2.row)
-        NotificationCenter.default.post(name: NotificationName.MemeWasMoved, object: nil)
     }
 
 }

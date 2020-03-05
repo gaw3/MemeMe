@@ -8,16 +8,22 @@
 
 import Foundation
 
-struct IB {
+enum IB {
 
-    struct ReuseID {
-        static let SentMemesCollectionViewCell = "SentMemesCollectionViewCell"
-        static let SentMemesTableViewCell      = "SentMemesTableViewCell"
+    enum ReuseID {
+        static let sentMemesCollectionViewCell = "SentMemesCollectionViewCell"
+        static let sentMemesTableViewCell      = "SentMemesTableViewCell"
+    }
+    
+    enum SegueID {
+        static let collectionToMemeEditor = "SegueFromCollectionViewToMemeEditor"
+        static let tableToMemeEditor      = "SegueFromTableViewToMemeEditor"
+        static let detailToMemeEditor     = "SegueFromMemeDetailToMemeEditor"
     }
 
-    struct StoryboardID {
-        static let MemeDetailViewController       = "MemeDetailViewController"
-        static let MemeEditorNavigationController = "MemeEditorNavigationController"
+    enum StoryboardID {
+        static let memeDetailViewController       = "MemeDetailViewController"
+        static let memeEditorNavigationController = "MemeEditorNavigationController"
     }
 
 }

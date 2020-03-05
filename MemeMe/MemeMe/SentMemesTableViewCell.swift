@@ -9,6 +9,9 @@
 import UIKit
 
 final class SentMemesTableViewCell: UITableViewCell {
+    
+    // MARK: - IB Actions
+
     @IBOutlet weak var topPhrase:    UILabel!
     @IBOutlet weak var bottomPhrase: UILabel!
     @IBOutlet weak var memeView:     UIImageView!

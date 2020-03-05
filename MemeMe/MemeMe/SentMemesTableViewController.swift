@@ -9,51 +9,41 @@
 import Foundation
 import UIKit
 
+// MARK: -
+// MARK: -
+
 final class SentMemesTableViewController: UITableViewController {
 
+    // MARK: - IB Outlets
+
+    @IBOutlet weak var addButton: UIBarButtonItem!
+    
     // MARK: - IB Actions
 
     @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
 
-        guard let systemItem = UIBarButtonItem.SystemItem(rawValue: barButtonItem.tag) else {
-            assertionFailure("Received action from unknown bar button item = \(barButtonItem)")
-            return
-        }
-
-        switch systemItem {
-        case .add: addButtonWasTapped()
-        default:   assertionFailure("Received action from bar button \(systemItem) is not processed")
+        switch barButtonItem {
+        case addButton: performSegue(withIdentifier: IB.SegueID.tableToMemeEditor, sender: self)
+        default:
+            assertionFailure()
+            log.error("Received event from unknown bar button item = \(barButtonItem)")
         }
 
     }
 
-    // MARK: - View Management
+    // MARK: - View Events
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        logViewDidLoad()
 
-        addNotificationObservers()
         navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
-}
-
-
-
-// MARK: - 
-// MARK: - Notifications
-
-extension SentMemesTableViewController {
-
-    @objc func processNotification(_ notification: Notification) {
-
-        switch notification.name {
-
-        case NotificationName.MemeWasAdded: tableView.reloadData()
-            
-        default: assertionFailure("Received unknown notification = \(notification)")
-        }
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        logViewWillAppear()
+        tableView.reloadData()
     }
     
 }
@@ -75,7 +65,7 @@ extension SentMemesTableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let meme = MemesManager.shared.meme(at: indexPath)
-        let cell = tableView.dequeueReusableCell(withIdentifier: IB.ReuseID.SentMemesTableViewCell, for: indexPath) as! SentMemesTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: IB.ReuseID.sentMemesTableViewCell, for: indexPath) as! SentMemesTableViewCell
 
         cell.topPhrase!.text    = meme.topPhrase
         cell.bottomPhrase!.text = meme.bottomPhrase
@@ -84,55 +74,32 @@ extension SentMemesTableViewController {
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            MemesManager.shared.deleteMeme(at: indexPath)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-
-    }
-    
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        log.verbose("trailing Swipe Actions Configuration For Row At \(indexPath)")
         
-        let deleteAction = UIContextualAction(style: .destructive, title: ActionTitle.Delete) {
+        let deleteAction = UIContextualAction(style: .destructive, title: ActionTitle.delete) {
             
             (contextualAction, view, actionPerformed) in
-                
+                log.verbose("delete action selected")
                 MemesManager.shared.deleteMeme(at: indexPath)
                 self.tableView.deleteRows(at: [indexPath], with: .fade)
-                self.isEditing = false
+                actionPerformed(true)
         }
         
-        let cancelAction = UIContextualAction(style: .normal, title: ActionTitle.Cancel) {
+        let cancelAction = UIContextualAction(style: .normal, title: ActionTitle.cancel) {
             
             (contextualAction, view, actionPerformed) in
-                
-                self.isEditing = false
-            
+                log.verbose("cancel action selected")
+                actionPerformed(false)
         }
+        
+        cancelAction.backgroundColor = .blue
         
         return UISwipeActionsConfiguration(actions: [deleteAction, cancelAction])
     }
 
-//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        assert(tableView == self.tableView, "Unexpected table view requesting edit actions")
-//
-//        let deleteAction = UITableViewRowAction(style: .default, title: ActionTitle.Delete) { (action, indexPath) -> Void in
-//            MemesManager.shared.deleteMeme(at: indexPath)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//            self.isEditing = false
-//        }
-//
-//        let cancelAction = UITableViewRowAction(style: .default, title: ActionTitle.Cancel) { (action, indexPath) -> Void in
-//            self.isEditing = false
-//        }
-//
-//        cancelAction.backgroundColor = UIColor.blue
-//
-//        return [cancelAction, deleteAction]
-//    }
-
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        log.verbose("move row at \(sourceIndexPath) to \(destinationIndexPath)")
         MemesManager.shared.moveMeme(from: sourceIndexPath, to: destinationIndexPath)
         tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
     }
@@ -151,7 +118,7 @@ extension SentMemesTableViewController {
 extension SentMemesTableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: IB.StoryboardID.MemeDetailViewController) as! MemeDetailViewController
+        let memeDetailVC = storyboard?.instantiateViewController(withIdentifier: IB.StoryboardID.memeDetailViewController) as! MemeDetailViewController
         memeDetailVC.memeToDisplay = MemesManager.shared.meme(at: indexPath)
 
         navigationController?.pushViewController(memeDetailVC, animated: true)
@@ -166,22 +133,9 @@ extension SentMemesTableViewController {
 
 private extension SentMemesTableViewController {
 
-    struct ActionTitle {
-        static let Cancel = "Cancel"
-        static let Delete = "Delete"
-    }
-
-    struct Selector {
-        static let ProcessNotification = #selector(processNotification(_:))
-    }
-
-    func addButtonWasTapped() {
-        let memeEditor = storyboard?.instantiateViewController(withIdentifier: IB.StoryboardID.MemeEditorNavigationController) as! UINavigationController
-        present(memeEditor, animated: true, completion: nil)
-    }
-
-    func addNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: NotificationName.MemeWasAdded, object: nil)
+    enum ActionTitle {
+        static let cancel = "Cancel"
+        static let delete = "Delete"
     }
 
 }

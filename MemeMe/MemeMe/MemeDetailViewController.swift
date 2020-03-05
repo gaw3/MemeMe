@@ -8,26 +8,25 @@
 
 import UIKit
 
+// MARK: -
+// MARK: -
+
 final class MemeDetailViewController: UIViewController {
 
     // MARK: - IB Outlets
     
     @IBOutlet weak var detailImage: UIImageView!
-
+    @IBOutlet weak var editButton:  UIBarButtonItem!
+    
     // MARK: - IB Actions
 
     @IBAction func barButtonWasTapped(_ barButtonItem: UIBarButtonItem) {
 
-//        let systemItem = UIBarButtonItem.SystemItem(rawValue: barButtonItem.tag)
-
-        guard let systemItem = UIBarButtonItem.SystemItem(rawValue: barButtonItem.tag) else {
-            assertionFailure("Received action from unknown bar button item = \(barButtonItem)")
-            return
-        }
-
-        switch systemItem {
-        case .edit: editButtonWasTapped()
-        default:    assertionFailure("Received action from system item \(systemItem) is not processed")
+        switch barButtonItem {
+        case editButton: performSegue(withIdentifier: IB.SegueID.detailToMemeEditor, sender: self)
+        default:
+            assertionFailure()
+            log.error("Received action from system item \(barButtonItem) is not processed")
         }
 
     }
@@ -36,7 +35,7 @@ final class MemeDetailViewController: UIViewController {
 
     var memeToDisplay: Meme!
 
-    // MARK: - View Management
+    // MARK: - View Events
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,16 +47,35 @@ final class MemeDetailViewController: UIViewController {
 
 
 // MARK: -
+// MARK: - Navigation
+
+extension MemeDetailViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        switch segue.identifier! {
+        case IB.SegueID.detailToMemeEditor: prepare(forMemeEditor: segue)
+        default:
+            assertionFailure()
+            log.error("for unknown segue ID = \(segue.identifier!)")
+        }
+        
+    }
+    
+}
+
+
+
+// MARK: -
 // MARK: - Private Helpers
 
 private extension MemeDetailViewController {
 
-    func editButtonWasTapped() {
-        let memeEditorNavCtlr = storyboard?.instantiateViewController(withIdentifier: IB.StoryboardID.MemeEditorNavigationController) as! UINavigationController
-        let memeEditorVC      = memeEditorNavCtlr.viewControllers[0] as! MemeEditorViewController
-
-        memeEditorVC.memeToEdit = memeToDisplay
-        present(memeEditorNavCtlr, animated: true, completion: nil)
+    func prepare(forMemeEditor segue: UIStoryboardSegue) {
+        let nc = segue.destination    as! UINavigationController
+        let sc = nc.topViewController as! MemeEditorViewController
+        
+        sc.memeToEdit = memeToDisplay
     }
 
 }

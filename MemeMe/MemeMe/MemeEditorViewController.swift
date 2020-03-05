@@ -9,6 +9,9 @@
 import CoreGraphics
 import UIKit
 
+// MARK: -
+// MARK: - 
+
 final class MemeEditorViewController: UIViewController, UINavigationControllerDelegate {
 
     // MARK: - IB Outlets
@@ -26,10 +29,12 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
 
         case actionButton: actionButtonWasTapped()
         case cameraButton: pickImage(from: UIImagePickerController.SourceType.camera)
-        case doneButton:   dismiss(animated: true, completion: nil)
+        case doneButton:   doneButtonWasTapped()
         case photosButton: pickImage(from: UIImagePickerController.SourceType.photoLibrary)
 
-        default: assertionFailure("Received action from unknown bar button = \(barButton)")
+        default:
+            assertionFailure()
+            log.error("Received action from unknown bar button = \(barButton)")
         }
         
     }
@@ -38,19 +43,20 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
 
     var memeToEdit: Meme!
 
-    fileprivate var bottomMemeTextField: UITextField!
-    fileprivate var memeImageView:		 UIImageView!
-    fileprivate var originalImage:		 UIImage!
-    fileprivate var topMemeTextField:	 UITextField!
+    private var bottomMemeTextField: UITextField!
+    private var memeImageView:		 UIImageView!
+    private var originalImage:		 UIImage!
+    private var topMemeTextField:	 UITextField!
 
-    fileprivate var amountToShiftMainViewOnYAxis             = CGFloat(0.0)
-    fileprivate var originTopMemeTextFieldInMainViewSpace    = CGPoint.zero
-    fileprivate var originBottomMemeTextFieldInMainViewSpace = CGPoint.zero
+    private var amountToShiftMainViewOnYAxis             = CGFloat(0.0)
+    private var originTopMemeTextFieldInMainViewSpace    = CGPoint.zero
+    private var originBottomMemeTextFieldInMainViewSpace = CGPoint.zero
 
     // MARK: - View Events
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        logViewDidLoad()
 
         doneButton.isEnabled   = true
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera)
@@ -65,8 +71,8 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
             bottomMemeTextField = initMemeTextField(memeToEdit.bottomPhrase)
         } else {
             originalImage       = nil
-            topMemeTextField    = initMemeTextField(TextField.PlaceholderTextTop)
-            bottomMemeTextField = initMemeTextField(TextField.PlaceholderTextBottom)
+            topMemeTextField    = initMemeTextField(TextField.placeholderTextTop)
+            bottomMemeTextField = initMemeTextField(TextField.placeholderTextBottom)
         }
 
         view.addSubview(topMemeTextField)
@@ -75,6 +81,7 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        logViewWillAppear()
 
         actionButton.isEnabled = (originalImage != nil)
         reset()
@@ -83,6 +90,7 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        logViewWillDisappear()
 
         removeNotificationObservers()
     }
@@ -96,7 +104,7 @@ final class MemeEditorViewController: UIViewController, UINavigationControllerDe
 
 extension MemeEditorViewController {
 
-    @objc func processNotification(_ notification: Notification) {
+    @objc func process(notification: Notification) {
 
         switch notification.name {
 
@@ -104,7 +112,9 @@ extension MemeEditorViewController {
         case UIResponder.keyboardWillShowNotification:  keyboardWillShow(notification)
         case UIDevice.orientationDidChangeNotification: reset()
             
-        default: assertionFailure("Received unknown notification = \(notification)")
+        default:
+            assertionFailure()
+            log.error("Received unknown notification = \(notification)")
         }
 
     }
@@ -119,18 +129,21 @@ extension MemeEditorViewController {
 extension MemeEditorViewController: UIImagePickerControllerDelegate {
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
+        log.verbose("image picker did finish picking media with info")
+        
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage,
-            let pickedImagePNGData = pickedImage.pngData() {
+           let pickedImagePNGData = pickedImage.pngData() {
             originalImage = UIImage(data: pickedImagePNGData)
             reset()
         }
 
-        dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+        log.verbose("image picker did cancel")
+
+        picker.dismiss(animated: true, completion: nil)
     }
 
 }
@@ -160,28 +173,44 @@ private extension MemeEditorViewController {
 
     func actionButtonWasTapped() {
 
-        if let memedImage = generateMemedImage() {
-            let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-            let meme       = Meme(originalImage: originalImage, topPhrase: topMemeTextField.text!,
-                                  bottomPhrase: bottomMemeTextField.text!, memedImage: memedImage)
-
-            present(activityVC, animated: true, completion: {() -> Void in MemesManager.shared.add(meme)})
-        } else {
-            assertionFailure("Unable to generate meme")
+        guard let memedImage = generateMemedImage() else {
+            assertionFailure()
+            log.error("unable to generate a memed image")
+            return
         }
-
+                
+        let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+        
+        present(activityVC, animated: true, completion: nil)
+    }
+    
+    func doneButtonWasTapped() {
+        
+        guard let memedImage = generateMemedImage() else {
+            assertionFailure()
+            log.error("unable to generate a memed image")
+            return
+        }
+        
+        let meme = Meme(originalImage: originalImage,
+                            topPhrase: topMemeTextField.text!,
+                         bottomPhrase: bottomMemeTextField.text!,
+                           memedImage: memedImage)
+        
+        MemesManager.shared.add(meme)
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Image Processing
 
-    struct Scale {
-        static let DefaultToMainScreen = CGFloat(0.0)
+    enum Scale {
+        static let defaultToMainScreen = CGFloat(0.0)
     }
     
     func generateMemedImage() -> UIImage? {
         prepareViewHierarchyForGraphicsImageContext()
 
-        UIGraphicsBeginImageContextWithOptions(memeImageView.frame.size, true, Scale.DefaultToMainScreen)
+        UIGraphicsBeginImageContextWithOptions(memeImageView.frame.size, true, Scale.defaultToMainScreen)
         memeImageView.drawHierarchy(in: memeImageView.bounds, afterScreenUpdates: true)
 
         var memedImagePNG: UIImage? = nil
@@ -235,10 +264,10 @@ private extension MemeEditorViewController {
 
     // MARK: - Initialization
     
-    struct ImpactFont {
-        static let Name        = "Impact"
-        static let Size        = CGFloat(40.0)
-        static let StrokeWidth = CGFloat(-3.0)
+    enum ImpactFont {
+        static let name        = "Impact"
+        static let size        = CGFloat(40.0)
+        static let strokeWidth = CGFloat(-3.0)
     }
     
     func initMemeImageView() -> UIImageView {
@@ -255,8 +284,8 @@ private extension MemeEditorViewController {
         let textField          = UITextField()
         let memeTextAttributes = [NSAttributedString.Key.strokeColor:     UIColor.black,
                                   NSAttributedString.Key.foregroundColor: UIColor.white,
-                                  NSAttributedString.Key.font:            UIFont(name: ImpactFont.Name, size: ImpactFont.Size)!,
-                                  NSAttributedString.Key.strokeWidth:     ImpactFont.StrokeWidth] as [NSAttributedString.Key : Any]
+                                  NSAttributedString.Key.font:            UIFont(name: ImpactFont.name, size: ImpactFont.size)!,
+                                  NSAttributedString.Key.strokeWidth:     ImpactFont.strokeWidth] as [NSAttributedString.Key : Any]
 
         textField.adjustsFontSizeToFitWidth = true
         textField.autocapitalizationType    = .allCharacters
@@ -265,10 +294,10 @@ private extension MemeEditorViewController {
         textField.clearsOnBeginEditing      = true
         textField.defaultTextAttributes     = memeTextAttributes
         textField.delegate                  = self
-        textField.frame.size.height         = TextField.Height
+        textField.frame.size.height         = TextField.height
         textField.isHidden                  = false
         textField.keyboardType              = .default
-        textField.minimumFontSize           = TextField.MinSizeFont
+        textField.minimumFontSize           = TextField.minSizeFont
         textField.text                      = text
         textField.textAlignment             = .center
 
@@ -277,14 +306,14 @@ private extension MemeEditorViewController {
 
     // MARK: - Notifications
 
-    struct Selector {
-        static let ProcessNotification = #selector(processNotification(_:))
+    enum Selector {
+        static let processNotification = #selector(process(notification:))
     }
     
     func addNotificationObservers() {
-        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: UIResponder.keyboardWillHideNotification,  object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: UIResponder.keyboardWillShowNotification,  object: nil)
-        NotificationCenter.default.addObserver(self, selector: Selector.ProcessNotification, name: UIDevice.orientationDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.processNotification, name: UIResponder.keyboardWillHideNotification,  object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.processNotification, name: UIResponder.keyboardWillShowNotification,  object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector.processNotification, name: UIDevice.orientationDidChangeNotification, object: nil)
 
     }
     
@@ -322,14 +351,14 @@ private extension MemeEditorViewController {
     
     // MARK: - Reset
     
-    struct TextField {
-        static let PlaceholderTextTop    = "TOP"
-        static let PlaceholderTextBottom = "BOTTOM"
+    enum TextField {
+        static let placeholderTextTop    = "TOP"
+        static let placeholderTextBottom = "BOTTOM"
         
-        static let Height      = CGFloat(50.0)
-        static let MinSizeFont = CGFloat(12.0)
-        static let InsetX      = CGFloat(5.0) // dist(x) between leading edges or trailing edges of meme image view & text fields
-        static let InsetY      = CGFloat(5.0) // dist(y) between top edges or bottom edges of meme image view & text fields
+        static let height      = CGFloat(50.0)
+        static let minSizeFont = CGFloat(12.0)
+        static let insetX      = CGFloat(5.0) // dist(x) between leading edges or trailing edges of meme image view & text fields
+        static let insetY      = CGFloat(5.0) // dist(y) between top edges or bottom edges of meme image view & text fields
     }
     
     func reset() {
@@ -357,17 +386,18 @@ private extension MemeEditorViewController {
     }
     
     func resetMemeTextFields() {
-        let textFieldWidth = CGFloat(memeImageView.frame.size.width - (2 * TextField.InsetX))
+        let textFieldWidth = CGFloat(memeImageView.frame.size.width - (2 * TextField.insetX))
         
         topMemeTextField.isEnabled        = (originalImage != nil)
         topMemeTextField.frame.size.width = textFieldWidth
-        topMemeTextField.frame.origin     = CGPoint(x: memeImageView.frame.origin.x + TextField.InsetX,
-                                                    y: memeImageView.frame.origin.y + TextField.InsetY)
+        topMemeTextField.frame.origin     = CGPoint(x: memeImageView.frame.origin.x + TextField.insetX,
+                                                    y: memeImageView.frame.origin.y + TextField.insetY)
         
         bottomMemeTextField.isEnabled        = (originalImage != nil)
         bottomMemeTextField.frame.size.width = textFieldWidth
-        bottomMemeTextField.frame.origin     = CGPoint(x: memeImageView.frame.origin.x + TextField.InsetX,
-                                                       y: memeImageView.frame.origin.y + memeImageView.frame.size.height - TextField.InsetY - bottomMemeTextField.frame.height)
+        bottomMemeTextField.frame.origin     = CGPoint(x: memeImageView.frame.origin.x + TextField.insetX,
+                                                       y: memeImageView.frame.origin.y + memeImageView.frame.size.height -
+                                                          TextField.insetY - bottomMemeTextField.frame.height)
     }
     
 }
