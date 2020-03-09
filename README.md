@@ -39,8 +39,8 @@ Upon app launch, the initial view is the **Sent Memes Tabbed View** with the **T
 
 ### iOS Frameworks
 
-* [Foundation]
-* [UIKit]
+* Foundation
+* UIKit
 
 ### 3rd-Party
 
