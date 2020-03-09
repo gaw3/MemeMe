@@ -30,7 +30,7 @@ MemeMe is designed to utilize the device **Photo Library** & the device **Camera
 * Tapping **Don't Allow** allows the **Camera app** to appear, but the app cannot access the device **Camera**.  Tapping the **Cancel** button returns app to the [Meme Editor View][MEV].  Subsequent taps of the **Camera** button result in the same behavior minus the alert.
 
 ---
-**Copyright © 2016-2017 Gregory A. White. All rights reserved.**
+**Copyright © 2016-2020 Gregory A. White. All rights reserved.**
 
 
 

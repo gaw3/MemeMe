@@ -28,7 +28,7 @@ Please read [Meme Editor View][MEV] before reading this page.
 | ![][2MemesCollectionPT] | ![][2MemesCollectionLS] | 
 
 ---
-**Copyright © 2016-2017 Gregory A. White. All rights reserved.**
+**Copyright © 2016-2020 Gregory A. White. All rights reserved.**
 
 [AppIcon]:             ../images/MemeMeAppIcon_80.png
 

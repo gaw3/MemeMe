@@ -21,7 +21,7 @@
 | ![][MoveRowPT] | ![][MoveRow2PT] | 
 
 ---
-**Copyright © 2016-2017 Gregory A. White. All rights reserved.**
+**Copyright © 2016-2020 Gregory A. White. All rights reserved.**
 
 
 

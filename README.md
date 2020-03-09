@@ -12,13 +12,13 @@ MemeMe is Portfolio Project #2 of the Udacity iOS Developer Nanodegree Program. 
 * [Udacity Git Commit Message Style Guide][CommitMsgStyleGuide]
 * [Udacity Project Review][ProjectReview]<br/><br/>
 
-| [Change Log][ChangeLog] | Current iOS 10 Build   | Final iOS 9 Build   | Project Submission - ***Exceeds Expectations*** |
-| :----------             | :-----------------     | :-------------      | :-------------                                  |
-| GitHub Tag              | v3.1                   | v2.3                | v2.0                                            |
-| App Version:            | 3.1                    | 2.3                 | 2.0                                             |
-| Environment:            | Xcode 8.3 / iOS 10.3   | Xcode 7.3 / iOS 9.3 | Xcode 7.1 / iOS 9.1                             |
-| Devices:                | iPhone Only            | iPhone Only         | iPhone Only                                     |
-| Orientations:           | All except Upside Down | Portrait Only       | Portrait Only                                   |
+| [Change Log][ChangeLog] | Current Build          | Project Submission - ***Exceeds Expectations*** |
+| :----------             | :-----------------     | :-------------                                  |
+| GitHub Tag              | v4.0                   | v2.0                                            |
+| App Version:            | 4.0                    | 2.0                                             |
+| Environment:            | iOS 13 / Swift 5       | iOS 9.1 / Swift 2                               |
+| Devices:                | iPhone Only            | iPhone Only                                     |
+| Orientations:           | All except Upside Down | Portrait Only                                   |
 
 ## Design
 
@@ -39,8 +39,8 @@ Upon app launch, the initial view is the **Sent Memes Tabbed View** with the **T
 
 ### iOS Frameworks
 
-* [Foundation][FDTN]
-* [UIKit][UK]
+* [Foundation]
+* [UIKit]
 
 ### 3rd-Party
 
@@ -48,7 +48,7 @@ Upon app launch, the initial view is the **Sent Memes Tabbed View** with the **T
 * `Swift.gitignore`, the template used to create the local `.gitignore` file, lives in this [repo][GitIgnoreRepo].
 
 ---
-**Copyright © 2016-2017 Gregory A. White. All rights reserved.**
+**Copyright © 2016-2020 Gregory A. White. All rights reserved.**
 
 
 
